@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inquizition Login, ta-da</title>
+<title>Sign Up</title>
 </head>
 <body>
-
+<h1> <% out.print((String) request.getParameter("header1")); %></h1>
+<h2> <% out.print((String) request.getParameter("header2")); %></h2>
+<form action="Login" method="post">
+	Username: <input type="text" name="username"> <br>
+	Password: <input type="password" name="password">
+	<input type="submit" value="Login"> <br>
+</form>
+<a href="signup.html">Register </a>
 </body>
 </html>
