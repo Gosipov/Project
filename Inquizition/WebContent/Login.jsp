@@ -9,7 +9,7 @@
 <body>
 <h1> <% out.print((String) request.getParameter("header1")); %></h1>
 <h2> <% out.print((String) request.getParameter("header2")); %></h2>
-<form action="Login" method="post">
+<form action="LoginRetry" method="post">
 	Username: <input type="text" name="username"> <br>
 	Password: <input type="password" name="password">
 	<input type="submit" value="Login"> <br>
