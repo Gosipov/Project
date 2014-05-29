@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inquizition Sign Up</title>
+<title>Sign Up</title>
 </head>
 <body>
-
+<h1> <% out.print((String) request.getParameter("header1")); %></h1>
+<h2> <% out.print((String) request.getParameter("header2")); %></h2>
+<form action="SignUpRetry" method="post">
+	Username: <input type="text" name="username"> <br>
+	Password: <input type="password" name="password">
+	<input type="submit" value="Login"> <br>
+</form>
 </body>
 </html>
