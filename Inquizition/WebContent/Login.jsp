@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inquizition Login</title>
+<title>Inquizition Login, ta-da</title>
 </head>
 <body>
 
