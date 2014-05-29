@@ -24,30 +24,19 @@ import db.DBConnection;
 public class LoginRetry extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LoginRetry() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String redirect = "login.jsp";
-		String title1 = "Welcome To Inquizition";
-		String title2 = "Please Log In";
-		request.getServletContext().setAttribute("header1", title1);
-		request.getServletContext().setAttribute("header2", title2);
-		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
+		
+		request.getServletContext().setAttribute("header1", "Welcome To Inquizition");
+		request.getServletContext().setAttribute("header2", "Please Log In");
+		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
 		dispatch.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");

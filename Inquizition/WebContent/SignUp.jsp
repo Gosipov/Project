@@ -7,8 +7,8 @@
 <title>Sign Up</title>
 </head>
 <body>
-<h1> <% out.print((String) request.getParameter("header1")); %></h1>
-<h2> <% out.print((String) request.getParameter("header2")); %></h2>
+<h1> <% out.print((String) request.getServletContext().getAttribute("header1")); %></h1>
+<h2> <% out.print((String) request.getServletContext().getAttribute("header2")); %></h2>
 <form action="SignUpRetry" method="post">
 	Username: <input type="text" name="username"> <br>
 	Password: <input type="password" name="password">

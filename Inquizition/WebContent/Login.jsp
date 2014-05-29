@@ -4,16 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sign Up</title>
+<title>Inquizition - Login</title>
 </head>
 <body>
-<h1> <% out.print((String) request.getParameter("header1")); %></h1>
-<h2> <% out.print((String) request.getParameter("header2")); %></h2>
+<h1> <% out.print((String) request.getServletContext().getAttribute("header1")); %></h1>
+<h2> <% out.print((String) request.getServletContext().getAttribute("header2")); %></h2>
 <form action="LoginRetry" method="post">
 	Username: <input type="text" name="username"> <br>
 	Password: <input type="password" name="password">
 	<input type="submit" value="Login"> <br>
 </form>
-<a href="signup.html">Register </a>
+<a href="SignUpRetry">Register </a>
 </body>
 </html>
