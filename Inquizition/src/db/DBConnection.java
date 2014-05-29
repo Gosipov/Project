@@ -2,8 +2,6 @@ package db;
 
 import java.sql.*;
 
-import com.mysql.jdbc.Connection;
-
 
 /*
  * Connects to the database according to data from
