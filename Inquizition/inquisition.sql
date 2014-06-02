@@ -5,7 +5,7 @@ use inquizition;
 create table users(
 	id int not null auto_increment primary key,
 	name varchar(20) unique,
-	password varchar(30)
+	password varchar(40)
 );
 
 create table quizzes(
