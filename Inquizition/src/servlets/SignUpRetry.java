@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -22,37 +23,40 @@ import db.DBConnection;
 public class SignUpRetry extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public SignUpRetry() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getServletContext().setAttribute("header1", "Sign Up");
+		request.getServletContext().setAttribute("header2", "Please enter a username and password");
+		RequestDispatcher dispatch = request.getRequestDispatcher("SignUp.jsp");
+		dispatch.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");
 			Statement stat = db.getStatement();
-			String userName = request.getParameter("username");
+			String userName = "\"" + request.getParameter("username") + "\"";
 			String password = request.getParameter("password");
-			MessageDigest md = MessageDigest.getInstance("SHA");
-			String encryptedPassword = hexToString(md.digest(password.getBytes()));
-			stat.executeUpdate("INSERT INTO users (name, password) VALUES "
-					+ "(" + userName + ", " + encryptedPassword + ")");
-			RequestDispatcher dispatch = request.getRequestDispatcher("welcome");
+			ResultSet rs = stat.executeQuery("SELECT * FROM users where NAME = " + userName);
+			String redirect = "welcome.html";
+			if(rs.next()){ // this means a user with this name already exists
+				request.getServletContext().setAttribute("header1", "Sorry, this username is not available");
+				request.getServletContext().setAttribute("header2", "Please enter another username and password");
+				redirect = "SignUp.jsp";
+			}
+			else{ // registering new user(adding to database)
+				MessageDigest md = (MessageDigest) request.getSession().getAttribute("md");
+				String encryptedPassword = "\"" + hexToString(md.digest(password.getBytes())) + "\"";
+				stat.executeUpdate("INSERT INTO users (name, password) VALUES "
+						+ "(" + userName + ", " + encryptedPassword + ")");
+			}
+			RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 			dispatch.forward(request, response);
-		} catch(SQLException | NoSuchAlgorithmException e){
+		} catch(SQLException  e){
 			e.printStackTrace();
 		}
 	}

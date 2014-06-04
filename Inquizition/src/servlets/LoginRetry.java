@@ -30,8 +30,7 @@ public class LoginRetry extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getServletContext().setAttribute("header1", "Welcome To Inquizition");
+		request.getServletContext().setAttribute("header1", "Welcome to Inquizition");
 		request.getServletContext().setAttribute("header2", "Please Log In");
 		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
 		dispatch.forward(request, response);
@@ -42,25 +41,25 @@ public class LoginRetry extends HttpServlet {
 			DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");
 			Statement stat = db.getStatement();
 			String userName = request.getParameter("username");
+			/// username shouldn't be longer than 20 characters
 			String password = request.getParameter("password");
-			ResultSet result = stat.executeQuery("SELECT password FROM users WHERE name = " + userName);
-			MessageDigest md = MessageDigest.getInstance("SHA");
+			ResultSet result = stat.executeQuery("SELECT password FROM users WHERE name = \"" + userName + "\"");
+			MessageDigest md = (MessageDigest) request.getSession().getAttribute("md");
 			String encryptedPassword = hexToString(md.digest(password.getBytes()));
-			String redirect = "retry.jsp";
-			String title2 = "Username Does Not Exist";
+			String redirect = "Login.jsp";
+			String header2 = "Username does not exist";
 			if(result.next()){
-				redirect = "welcome.java";
-				String takenPassword = result.getString("password");
-				title2 = "";
-				if(!takenPassword.equals(encryptedPassword)){
-					title2 = "Password Is Incorrect";
-					redirect = "retry.jsp";
+				String enteredPassword = result.getString("password");
+				if(enteredPassword.equals(encryptedPassword)){
+					redirect = "welcome.html";
+					header2 = "";
 				}
+				else header2 = "Password does not match";
 			}
-			request.getServletContext().setAttribute("title2", title2);
+			request.getServletContext().setAttribute("header2", header2);
 			RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 			dispatch.forward(request, response);
-		} catch(SQLException | NoSuchAlgorithmException e){
+		} catch(SQLException e){
 			e.printStackTrace();
 		}
 	}
