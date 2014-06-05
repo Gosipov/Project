@@ -5,7 +5,8 @@ use inquizition;
 create table users(
 	id int not null auto_increment primary key,
 	name varchar(20) unique,
-	password varchar(40)
+	password varchar(40),
+	admin boolean default false
 );
 
 create table quizzes(
@@ -54,8 +55,8 @@ create table history(
 	id int not null auto_increment primary key,
 	user_id int,
 	quiz_id int,
-	time time, -- how long did it take user to submit quiz
-	date date,
+	time_elapsed double, -- in milliseconds
+	tdate datetime,
 	foreign key(user_id) 
 		references users(id)
 		on delete cascade,
@@ -69,8 +70,8 @@ create table messages(
 	from_id int,
 	to_id int,
 	message text,
-	datetime time,
-	unread bool,
+	dtime datetime,
+	unread bool default true,
 	foreign key(from_id) 
 		references users(id)
 		on delete cascade,
@@ -81,8 +82,12 @@ create table messages(
 
 create table wall(
 	id int not null auto_increment primary key,
+	adminID int not null,
+	foreign key(adminId)
+		references users(id)
+		on delete cascade,
 	message text,
-	datetime time
+	dtime datetime 
 );
 
 create trigger upd_history after insert on history
