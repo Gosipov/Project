@@ -1,5 +1,10 @@
 package listeners;
 
+import helpers.Message;
+import helpers.Quiz;
+import helpers.User;
+
+import java.security.MessageDigest;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -27,6 +32,9 @@ public class ContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent arg0) {
         arg0.getServletContext().setAttribute("database", db);
+        User.setDB(db);
+        Message.setDB(db);
+        Quiz.setDB(db);
     }
 
     public void contextDestroyed(ServletContextEvent arg0) {

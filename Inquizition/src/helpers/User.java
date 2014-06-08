@@ -3,10 +3,13 @@ package helpers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import db.DBConnection;
+
 public class User {
-	int id;
-	String username;
-	boolean admin;
+	private int id;
+	private String username;
+	private boolean admin;
+	private static DBConnection db;
 	
 	public User(ResultSet rs) {
 		try {
@@ -16,6 +19,10 @@ public class User {
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void setDB(DBConnection connection){
+		db = connection;
 	}
 	
 	public String getUsername() {
@@ -30,4 +37,5 @@ public class User {
 		return admin;
 	}
 
+		
 }

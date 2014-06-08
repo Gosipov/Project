@@ -3,14 +3,17 @@ package helpers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import db.DBConnection;
+
 
 public class Message {
 	
-	int id;
-	String text;
-	String datetime;
-	String sender;
-	boolean unread;
+	private int id;
+	private String text;
+	private String datetime;
+	private String sender;
+	private boolean unread;
+	private static DBConnection db;
 	
 	public Message(ResultSet rs) {
 		try {
@@ -23,6 +26,10 @@ public class Message {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void setDB(DBConnection connection){
+		db = connection;
 	}
 	
 	public int getID() {
