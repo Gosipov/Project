@@ -22,10 +22,10 @@ import db.DBConnection;
  * Servlet implementation class SignUpRetry
  */
 @WebServlet("/SignUpRetry")
-public class SignUpRetry extends HttpServlet {
+public class SignupRetry extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SignUpRetry() {
+    public SignupRetry() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,6 +49,9 @@ public class SignUpRetry extends HttpServlet {
 		case Sign.LONG_USERNAME:
 			header2 = "User name should not be longer than " + Sign.USERNAME_MAX_LENGTH + " characters. " + header2;
 			break;
+		case Sign.USED_USERNAME:
+			header2 = "Sorry, this user name is not available. " + header2;
+			break;
 		case Sign.ERROR:
 			header2 = "An error occured. " + header2;
 			break;
@@ -57,6 +60,7 @@ public class SignUpRetry extends HttpServlet {
 			break;
 		}
 		
+		request.getServletContext().setAttribute("header2", header2);
 		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 		dispatch.forward(request, response);
 	}
