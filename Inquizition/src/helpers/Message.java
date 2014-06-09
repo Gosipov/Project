@@ -12,6 +12,7 @@ public class Message {
 	private String text;
 	private String datetime;
 	private String sender;
+	private String subject;
 	private boolean unread;
 	private static DBConnection db;
 	
@@ -21,6 +22,7 @@ public class Message {
 			this.text = rs.getString("message");
 			this.datetime = rs.getString("dtime");
 			this.sender = rs.getString("username");
+			this.subject = rs.getString("subject");
 			this.unread = rs.getBoolean("unread");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -46,6 +48,10 @@ public class Message {
 	
 	public String getSender() {
 		return sender;
+	}
+	
+	public String getSubject(){
+		return subject;
 	}
 	
 	public boolean unread() {

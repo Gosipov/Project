@@ -69,6 +69,7 @@ create table messages(
 	id int not null auto_increment primary key,
 	from_id int,
 	to_id int,
+	subject text,
 	message text,
 	dtime datetime,
 	unread bool default true,
