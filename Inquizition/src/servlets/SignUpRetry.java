@@ -1,5 +1,7 @@
 package servlets;
 
+import helpers.Sign;
+
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -36,40 +38,27 @@ public class SignUpRetry extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
-			DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");
-			Statement stat = db.getStatement();
-			String userName = "\"" + request.getParameter("username") + "\"";
-			String password = request.getParameter("password");
-			ResultSet rs = stat.executeQuery("SELECT * FROM users where NAME = " + userName);
-			String redirect = "welcome.html";
-			if(rs.next()){ // this means a user with this name already exists
-				request.getServletContext().setAttribute("header1", "Sorry, this username is not available");
-				request.getServletContext().setAttribute("header2", "Please enter another username and password");
-				redirect = "SignUp.jsp";
-			}
-			else{ // registering new user(adding to database)
-				MessageDigest md = (MessageDigest) request.getSession().getAttribute("md");
-				String encryptedPassword = "\"" + hexToString(md.digest(password.getBytes())) + "\"";
-				stat.executeUpdate("INSERT INTO users (name, password) VALUES "
-						+ "(" + userName + ", " + encryptedPassword + ")");
-			}
-			RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
-			dispatch.forward(request, response);
-		} catch(SQLException  e){
-			e.printStackTrace();
+		Sign signup = (Sign) request.getSession().getAttribute("sign");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		String redirect = "SignUp.jsp";
+		String header2 = "Try again.";
+		
+		switch(signup.register(username, password)) {
+		case Sign.LONG_USERNAME:
+			header2 = "User name should not be longer than " + Sign.USERNAME_MAX_LENGTH + " characters. " + header2;
+			break;
+		case Sign.ERROR:
+			header2 = "An error occured. " + header2;
+			break;
+		case Sign.SUCCESS:
+			redirect = "welcome.html";
+			break;
 		}
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
+		dispatch.forward(request, response);
 	}
 	
-	public static String hexToString(byte[] bytes) {
-		StringBuffer buff = new StringBuffer();
-		for (int i=0; i<bytes.length; i++) {
-			int val = bytes[i];
-			val = val & 0xff;  // remove higher bits, sign
-			if (val<16) buff.append('0'); // leading 0
-			buff.append(Integer.toString(val, 16));
-		}
-		return buff.toString();
-	}
-
 }

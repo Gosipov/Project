@@ -1,5 +1,7 @@
 package listeners;
 
+import helpers.Sign;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,18 +16,13 @@ import javax.servlet.http.HttpSessionListener;
 @WebListener
 public class SessionListener implements HttpSessionListener {
 
+	
     public SessionListener() {
-        
+    	
     }
 
     public void sessionCreated(HttpSessionEvent arg0) {
-    	try {
-			arg0.getSession().setAttribute("md", MessageDigest.getInstance("SHA"));
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
+			arg0.getSession().setAttribute("sign", new Sign());    	
     }
 
 	public void sessionDestroyed(HttpSessionEvent arg0) {

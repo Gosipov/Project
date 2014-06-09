@@ -1,5 +1,7 @@
 package servlets;
 
+import helpers.Sign;
+
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -37,42 +39,32 @@ public class LoginRetry extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
-			DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");
-			Statement stat = db.getStatement();
-			String userName = request.getParameter("username");
-			/// username shouldn't be longer than 20 characters
-			String password = request.getParameter("password");
-			ResultSet result = stat.executeQuery("SELECT password FROM users WHERE name = \"" + userName + "\"");
-			MessageDigest md = (MessageDigest) request.getSession().getAttribute("md");
-			String encryptedPassword = hexToString(md.digest(password.getBytes()));
-			String redirect = "Login.jsp";
-			String header2 = "Username does not exist";
-			if(result.next()){
-				String enteredPassword = result.getString("password");
-				if(enteredPassword.equals(encryptedPassword)){
-					redirect = "welcome.html";
-					header2 = "";
-				}
-				else header2 = "Password does not match";
-			}
-			request.getServletContext().setAttribute("header2", header2);
-			RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
-			dispatch.forward(request, response);
-		} catch(SQLException e){
-			e.printStackTrace();
+		Sign signin = (Sign) request.getSession().getAttribute("sign");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		String redirect = "Login.jsp";
+		String header2 = "Try again.";
+		
+		switch(signin.check(username, password)) {
+		case Sign.WRONG_USERNAME:
+			header2 = "No such user found. " + header2;
+			break;
+		case Sign.WRONG_PASSWORD:
+			header2 = "Password did not match. " + header2;
+			break;
+		case Sign.ERROR:
+			header2 = "An error occured while signing in. " + header2;
+			break;
+		case Sign.SUCCESS:
+			redirect = "welcome.html";
+			break;
 		}
+		
+		request.getServletContext().setAttribute("header2", header2);
+		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
+		dispatch.forward(request, response);
 	}
 	
-	public static String hexToString(byte[] bytes) {
-		StringBuffer buff = new StringBuffer();
-		for (int i=0; i<bytes.length; i++) {
-			int val = bytes[i];
-			val = val & 0xff;  // remove higher bits, sign
-			if (val<16) buff.append('0'); // leading 0
-			buff.append(Integer.toString(val, 16));
-		}
-		return buff.toString();
-	}
 
 }
