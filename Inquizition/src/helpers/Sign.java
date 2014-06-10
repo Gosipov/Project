@@ -36,10 +36,11 @@ public class Sign {
 	}
 	
 	public int check(String username, String password) {
+		Statement stat = null;
+		ResultSet rs = null;
 		try {
-			Statement stat = (Statement) db.getStatement();
-			ResultSet rs = stat.executeQuery("SELECT password FROM users WHERE name = \"" + username + "\"");
-			stat.close();
+			stat = (Statement) db.getStatement();
+			rs = stat.executeQuery("SELECT password FROM users WHERE name = \"" + username + "\"");
 			
 			if(!rs.next()) // means no match found in database for this user name
 				return WRONG_USERNAME;
@@ -55,10 +56,13 @@ public class Sign {
 			e.printStackTrace();
 			return ERROR;
 		}
+		finally{
+			if(stat != null) try { stat.close(); } catch (SQLException e) { }
+			if(rs != null) try { stat.close(); } catch (SQLException e) { }
+		}
 	}
 	
 	public int register(String username, String password) {
-		System.out.println(username.length());
 		if(username.length() > USERNAME_MAX_LENGTH) 
 			return LONG_USERNAME;
 		
