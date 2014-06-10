@@ -18,43 +18,42 @@ import javax.servlet.http.HttpServletResponse;
 
 import db.DBConnection;
 
-
 /**
- * Servlet implementation class LoginRetry
+ * Servlet implementation class SignUpRetry
  */
-@WebServlet("/LoginRetry")
-public class LoginRetry extends HttpServlet {
+@WebServlet("/SignUpRetry")
+public class SignupRetry extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public LoginRetry() {
+    public SignupRetry() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getServletContext().setAttribute("header1", "Welcome to Inquizition");
-		request.getServletContext().setAttribute("header2", "Please Log In");
-		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
+		request.getServletContext().setAttribute("header1", "Sign Up");
+		request.getServletContext().setAttribute("header2", "Please enter a username and password");
+		RequestDispatcher dispatch = request.getRequestDispatcher("SignUp.jsp");
 		dispatch.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Sign signin = (Sign) request.getSession().getAttribute("sign");
+		Sign signup = (Sign) request.getSession().getAttribute("sign");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		String redirect = "Login.jsp";
+		String redirect = "SignUp.jsp";
 		String header2 = "Try again.";
 		
-		switch(signin.check(username, password)) {
-		case Sign.WRONG_USERNAME:
-			header2 = "No such user found. " + header2;
+		switch(signup.register(username, password)) {
+		case Sign.LONG_USERNAME:
+			header2 = "User name should not be longer than " + Sign.USERNAME_MAX_LENGTH + " characters. " + header2;
 			break;
-		case Sign.WRONG_PASSWORD:
-			header2 = "Password did not match. " + header2;
+		case Sign.USED_USERNAME:
+			header2 = "Sorry, this user name is not available. " + header2;
 			break;
 		case Sign.ERROR:
-			header2 = "An error occured while signing in. " + header2;
+			header2 = "An error occured. " + header2;
 			break;
 		case Sign.SUCCESS:
 			redirect = "welcome.html";
@@ -66,5 +65,4 @@ public class LoginRetry extends HttpServlet {
 		dispatch.forward(request, response);
 	}
 	
-
 }
