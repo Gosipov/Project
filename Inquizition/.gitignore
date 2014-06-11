@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 /build/
 .project
 .settings
 .classpath
 .metadata
+=======
+/build/
+.project
+.settings
+.classpath
+.metadata
+>>>>>>> branch 'master' of https://github.com/Gosipov/Project.git
