@@ -1,6 +1,7 @@
 package servlets;
 
 import helpers.Sign;
+import helpers.User;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -56,6 +57,7 @@ public class SignupRetry extends HttpServlet {
 			header2 = "An error occured. " + header2;
 			break;
 		case Sign.SUCCESS:
+			request.getSession().setAttribute("user", new User(username, password));
 			redirect = "welcome.html";
 			break;
 		}
