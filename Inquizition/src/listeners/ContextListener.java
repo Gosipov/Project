@@ -2,6 +2,7 @@ package listeners;
 
 import helpers.Message;
 import helpers.Quiz;
+import helpers.Sign;
 import helpers.User;
 
 import java.security.MessageDigest;
@@ -35,6 +36,7 @@ public class ContextListener implements ServletContextListener {
         User.setDB(db);
         Message.setDB(db);
         Quiz.setDB(db);
+        Sign.setDB(db);
     }
 
     public void contextDestroyed(ServletContextEvent arg0) {
