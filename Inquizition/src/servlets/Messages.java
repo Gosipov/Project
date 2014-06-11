@@ -63,7 +63,7 @@ public class Messages extends HttpServlet {
 				out.println("<td>From: " + m.getSender() + "</td>");
 				out.println("<td>Subject :" + m.getSubject() + "</td>");
 				out.println("<td> <a href=show_message.jsp?id=" + 
-				m.getID() + "> Read </a> </td>");
+						m.getID() + "> Read </a> </td>");
 				out.println("</tr>");
 			}
 			out.println("</body>");

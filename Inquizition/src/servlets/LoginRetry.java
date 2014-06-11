@@ -1,6 +1,7 @@
 package servlets;
 
 import helpers.Sign;
+import helpers.User;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -57,6 +58,7 @@ public class LoginRetry extends HttpServlet {
 			header2 = "An error occured while signing in. " + header2;
 			break;
 		case Sign.SUCCESS:
+			request.getSession().setAttribute("user", new User(username));
 			redirect = "welcome.html";
 			break;
 		}
