@@ -20,6 +20,11 @@
 	<p>From: <%m.getSender(); %></p>
 	<p>Subject: <%m.getSubject(); %></p>
 	<p><%m.getText(); %></p>
-	<!-- TODO: replying -->
+	<!--replying prompt: -->
+	<form id="form1" name="form1" method="post" action="sendMessage.java">
+  	<input type="text" name="input" id="textfield" />
+  	<textarea name="text" id="textarea" cols="45" rows="5"></textarea>
+  	<input type="submit" name="button" id="button" value="Send" />
+ 	</form>
 </body>
 </html>
