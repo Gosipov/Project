@@ -1,0 +1,16 @@
+/build/
+<<<<<<< HEAD
+<<<<<<< HEAD
+..classpath
+=======
+.project
+.settings
+.classpath
+.metadata
+>>>>>>> branch 'master' of https://github.com/Gosipov/Project.git
+=======
+.project
+.settings
+.classpath
+.metadata
+>>>>>>> refs/remotes/origin/master
