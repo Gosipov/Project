@@ -40,6 +40,14 @@ public class User {
 		}
 	}
 	
+	// creating new user having full information
+	// no connection needed
+	public User(int id, String username, boolean admin) {
+		this.name = username;
+		this.id = id;
+		this.admin = admin;
+	}
+	
 	private void selectFromDB(Statement stat) {
 		String username = "\""+ name + "\"";
 		ResultSet rs = null;

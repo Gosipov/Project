@@ -1,5 +1,10 @@
 package servlets;
 
+import helpers.Activity;
+import helpers.FriendManager;
+import helpers.MessageManager;
+import helpers.Quiz;
+import helpers.QuizManager;
 import helpers.User;
 
 import java.io.IOException;
@@ -33,20 +38,18 @@ public class HomePage extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		String username = user.getUsername();
 		int id = user.getID();
-		FriendManeger FM = new FriendManeger();
-		MessageManeger MM = new MessageManeger();
-		QuizManeger QM = new QuizManeger();
-		AchievementManeger AM = new AchievementManeger();
-		ArrayList<String> friends = FM.getFriends(id);
-		ArrayList<String> achievements = AM.getAchievements(id);
-		int newMessages = MM.getNewMessages(id);
-		int newChallenges = MM.getNewChallenges(id);
-		int newFriendRequests = MM.getNewFriendRequests(id);
-		ArrayList<String> friendActivity = FM.getFriendActivity(id);
-		ArrayList<String> topQuizzes = QM.getTopQuizzes();
-		ArrayList<String> latestQuizzes = QM.getLatestQuizzes();
-		ArrayList<String> latestCreated = QM.getLatestCreated(id);
-		ArrayList<String> latestSolved = QM.getLatestSolved(id);
+		//AchievementManeger AM = new AchievementManeger();
+		ArrayList<User> friends = FriendManager.getFriends(id);
+		ArrayList<Activity> friendActivity = FriendManager.getFriendActivity(id);
+		//ArrayList<String> achievements = AM.getAchievements(id);
+		int newMessages = MessageManager.countMessages(id);
+		int newChallenges = MessageManager.countChallenges(id);
+		int newFriendRequests = MessageManager.countRequests(id);
+		
+		ArrayList<Quiz> topQuizzes = QuizManager.getTopQuizzes();
+		ArrayList<Quiz> latestQuizzes = QuizManager.getLatestQuizzes();
+		ArrayList<Activity> latestCreated = QuizManager.getLatestCreated(id);
+		ArrayList<Activity> latestSolved = QuizManager.getLatestSolved(id);
 		//ArrayList<String> wall = MC.getWall();
 		response.setContentType("text/html; charset=UTF-8"); 
 		PrintWriter out = response.getWriter(); 
@@ -76,7 +79,7 @@ public class HomePage extends HttpServlet {
 		out.println("</div>");
 		out.println("<div class = \"content\">");
 		out.println("<div class = \"column\" id = \"left\">");
-		box(achievements, false, out);
+		//box(achievements, false, out);
 		box(friends, true, out);
 		box(friendActivity, false, out);
 		out.println("</div>");
@@ -91,12 +94,12 @@ public class HomePage extends HttpServlet {
 		out.println("</div> </div> </body> </html>");
 	}
 	
-	private void box(ArrayList<String> ar, boolean isLink, PrintWriter out){
+	private void box(ArrayList<Activity> ar, boolean isLink, PrintWriter out){
 		if(ar.size() > 0){
 			out.println("<div class = \"box\"> <ul>");
 			for(int i = 0; i < ar.size(); i++){
-				if(!isLink) out.println("<li>" + ar.get(i) + "</li>");
-				else out.println("<li> <a href = \"" + "raghac linki" + "\">" + ar.get(i) + "</a></li>");
+				if(!isLink) out.println("<li>" + ar.get(i).toString() + "</li>");
+				else out.println("<li> <a href = \"" + "raghac linki" + "\">" + ar.get(i).toString() + "</a></li>");
 			}
 			out.println("</ul> </div>");
 		}
@@ -112,6 +115,7 @@ public class HomePage extends HttpServlet {
 		out.println("</form>");
 		out.println("</div>");
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}

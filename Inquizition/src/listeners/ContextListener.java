@@ -1,6 +1,8 @@
 package listeners;
 
+import helpers.FriendManager;
 import helpers.Message;
+import helpers.MessageManager;
 import helpers.Quiz;
 import helpers.Sign;
 import helpers.User;
@@ -37,6 +39,8 @@ public class ContextListener implements ServletContextListener {
         Message.setDB(db);
         Quiz.setDB(db);
         Sign.setDB(db);
+        FriendManager.setDB(db);
+        MessageManager.setDB(db);
     }
 
     public void contextDestroyed(ServletContextEvent arg0) {

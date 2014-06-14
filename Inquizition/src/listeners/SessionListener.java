@@ -1,5 +1,6 @@
 package listeners;
 
+import helpers.FriendManager;
 import helpers.Sign;
 
 import java.security.MessageDigest;
@@ -22,7 +23,7 @@ public class SessionListener implements HttpSessionListener {
     }
 
     public void sessionCreated(HttpSessionEvent arg0) {
-		arg0.getSession().setAttribute("sign", new Sign());    	
+		arg0.getSession().setAttribute("sign", new Sign());
     }
 
 	public void sessionDestroyed(HttpSessionEvent arg0) {

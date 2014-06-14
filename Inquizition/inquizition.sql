@@ -13,7 +13,7 @@ create table quizzes(
 	id int not null auto_increment primary key,
 	name varchar(64),
 	descript text,
-	time_created timestamp,
+	time_created datetime default now(),
 	creator_id int,
 	times_taken int default 0,
 	foreign key(creator_id) 
@@ -55,8 +55,9 @@ create table history(
 	id int not null auto_increment primary key,
 	user_id int,
 	quiz_id int,
-	time_elapsed double, -- in milliseconds
-	tdate datetime,
+	type enum('create', 'solve') default 'solve',
+	time_elapsed int, -- in milliseconds
+	tdate datetime default now(),
 	foreign key(user_id) 
 		references users(id)
 		on delete cascade,
@@ -67,11 +68,12 @@ create table history(
 
 create table messages(
 	id int not null auto_increment primary key,
-	from_id int,
-	to_id int,
+	type enum('message', 'challenge', 'frequest') default 'message', 
+	sender_id int,
+	receiver_id int,
 	subject text,
 	message text,
-	dtime datetime,
+	dtime datetime default now(),
 	unread bool default true,
 	foreign key(from_id) 
 		references users(id)
@@ -88,11 +90,23 @@ create table wall(
 		references users(id)
 		on delete cascade,
 	message text,
-	dtime datetime 
+	dtime datetime default now()
 );
 
+delimiter //
 create trigger upd_history after insert on history
-	for each row
-		update quizzes 
-			set quizzes.times_taken = quizzes.times_taken + 1 
-			where new.quiz_id = quizzes.id;
+	for each row begin
+		if new.type = 'solve' then
+			update quizzes 
+				set quizzes.times_taken = quizzes.times_taken + 1 
+				where new.quiz_id = quizzes.id;
+		end if;
+	end//
+
+create procedure add_quiz(qname varchar(64), qdescript text, creator int)
+	begin
+		insert into quizzes(name, descript, time_created, creator_id)
+			values(qname, qdescript, now(), creator);
+		insert into history(user_id, quiz_id, type, tdate)
+			values(creator, (select id from quizzes order by id desc limit 1), 'create', now());  
+	end//
