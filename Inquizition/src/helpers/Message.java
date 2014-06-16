@@ -2,7 +2,10 @@ package helpers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.mysql.jdbc.Statement;
+
 import db.DBConnection;
 
 
@@ -25,6 +28,8 @@ public class Message {
 		this.read = !rs.getBoolean("unread");
 	}
 	
+	
+
 	public static void setDB(DBConnection connection){
 		db = connection;
 	}

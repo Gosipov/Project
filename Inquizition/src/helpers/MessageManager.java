@@ -1,9 +1,12 @@
 package helpers;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Statement;
+//commenting out this import because two different Statement classes conflict otherwise.
+//import com.mysql.jdbc.Statement;
+
 
 import db.DBConnection;
 
@@ -16,7 +19,7 @@ public class MessageManager {
 	}
 	
 	public static ArrayList<Message> getMessages(int id) {
-		Statement stat = null;
+		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		ArrayList<Message> messages = new ArrayList<Message>();
 		try{
@@ -48,7 +51,7 @@ public class MessageManager {
 	}
 	
 	private static int count(int id, String restrict) {
-		Statement stat = null;
+		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		try{
 			rs = stat.executeQuery("SELECT COUNT(id) FROM messages WHERE id="
