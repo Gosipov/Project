@@ -2,6 +2,7 @@ package helpers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import db.DBConnection;
 
@@ -18,6 +19,19 @@ public class Message {
 	private static DBConnection db;
 	
 	public Message(ResultSet rs) throws SQLException {
+		MessageBuilder(rs);
+	}
+	
+	public Message(int userID) throws SQLException{
+		Statement stat = db.getStatement();
+		ResultSet rs = null;
+		try{
+			rs = stat.executeQuery("SELECT * FROM messages WHERE id=" + userID);
+		}catch(SQLException e){}
+		MessageBuilder(rs);
+	}
+	
+	private void MessageBuilder(ResultSet rs) throws SQLException{
 		this.id = rs.getInt("id");
 		this.text = rs.getString("message");
 		this.datetime = rs.getString("dtime");

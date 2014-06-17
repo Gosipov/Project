@@ -7,10 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <% 
-	String id = request.getParameter("id");
-	Statement db = (Statement) request.getServletContext().getAttribute("database");
-	ResultSet rs = db.executeQuery("SELECT * from messages where id = " + id);
-	Message m = new Message(rs);
+	String idString = request.getParameter("id");
+	int userID = Integer.parseInt(idString);
+	Message m = new Message(userID);
 	m.markAsRead(); //since we're on this page, the message has been read
 %>
 <title><% out.print(m.getSubject()); %></title>
