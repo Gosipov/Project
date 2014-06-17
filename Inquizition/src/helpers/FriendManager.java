@@ -1,9 +1,12 @@
 package helpers;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Statement;
+//commenting this out until tested, refer to MessageManager
+//import com.mysql.jdbc.Statement;
+
 
 import db.DBConnection;
 
@@ -19,7 +22,7 @@ public class FriendManager {
 	}
 	
 	public static ArrayList<User> getFriends(int id) {
-		Statement stat = null;
+		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		ArrayList<User> friends = new ArrayList<User>();
 		try{
@@ -39,7 +42,7 @@ public class FriendManager {
 	}
 	
 	public static ArrayList<Activity> getFriendActivity(int id) {
-		Statement stat = null;
+		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		ArrayList<Activity> result = new ArrayList<>();
 		try{
