@@ -11,7 +11,7 @@
 	Statement db = (Statement) request.getServletContext().getAttribute("database");
 	ResultSet rs = db.executeQuery("SELECT * from messages where id = " + id);
 	Message m = new Message(rs);
-	m.markRead(); //since we're on this page, the message has been read
+	m.markAsRead(); //since we're on this page, the message has been read
 %>
 <title><% out.print(m.getSubject()); %></title>
 </head>

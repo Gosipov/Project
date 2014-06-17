@@ -30,6 +30,13 @@ public class Quiz {
 		
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public int getID() { 
+		return id;
+	}
 	
 	public static void setDB(DBConnection connection){
 		db = connection;

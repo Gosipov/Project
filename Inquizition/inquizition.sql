@@ -75,10 +75,10 @@ create table messages(
 	message text,
 	dtime datetime default now(),
 	unread bool default true,
-	foreign key(from_id) 
+	foreign key(sender_id) 
 		references users(id)
 		on delete cascade,
-	foreign key(to_id) 
+	foreign key(receiver_id) 
 		references users(id)
 		on delete cascade
 );

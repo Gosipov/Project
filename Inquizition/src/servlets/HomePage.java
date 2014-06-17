@@ -80,15 +80,15 @@ public class HomePage extends HttpServlet {
 		out.println("<div class = \"content\">");
 		out.println("<div class = \"column\" id = \"left\">");
 		//box(achievements, false, out);
-		box(friends, true, out);
+//		box(friends, true, out);
 		box(friendActivity, false, out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"wall\">");
 		//box(wall, false, out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"right\">");
-		box(topQuizzes, true, out);
-		box(latestQuizzes, true, out);
+//		box(topQuizzes, true, out);
+//		box(latestQuizzes, true, out);
 		box(latestCreated, true, out);
 		box(latestSolved, true, out);
 		out.println("</div> </div> </body> </html>");

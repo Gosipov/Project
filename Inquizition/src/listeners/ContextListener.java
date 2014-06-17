@@ -31,6 +31,7 @@ public class ContextListener implements ServletContextListener {
     
     public ContextListener() {
     	db = new DBConnection();
+    	System.out.println(db == null);
     }
 
     public void contextInitialized(ServletContextEvent arg0) {

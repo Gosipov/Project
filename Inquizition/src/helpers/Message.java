@@ -2,9 +2,6 @@ package helpers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import com.mysql.jdbc.Statement;
 
 import db.DBConnection;
 
@@ -16,6 +13,7 @@ public class Message {
 	private String datetime;
 	private String sender;
 	private String subject;
+	private String type;
 	private boolean read;
 	private static DBConnection db;
 	
@@ -23,13 +21,12 @@ public class Message {
 		this.id = rs.getInt("id");
 		this.text = rs.getString("message");
 		this.datetime = rs.getString("dtime");
-		this.sender = rs.getString("username");
+		this.sender = rs.getString("name");
 		this.subject = rs.getString("subject");
+		this.type = rs.getString("type");
 		this.read = !rs.getBoolean("unread");
 	}
 	
-	
-
 	public static void setDB(DBConnection connection){
 		db = connection;
 	}
@@ -50,8 +47,12 @@ public class Message {
 		return sender;
 	}
 	
-	public String getSubject(){
+	public String getSubject() {
 		return subject;
+	}
+	
+	public String getType() {
+		return type;
 	}
 	
 	public boolean isRead() {
@@ -60,31 +61,28 @@ public class Message {
 	
 	public void markAsRead() {
 		read = false;
-		Statement stat = null;
 		try { 
-			db.getStatement().executeUpdate("UPDATE messages SET unread = \"false\" WHERE id = " + id); 
+			db.getStatement().executeUpdate("UPDATE messages SET unread = 0 WHERE id = " + id); 
 		}
-		catch(Exception ignored) { }
-		
-		finally{
-			if(stat != null) try{ stat.close(); } catch(Exception e) { };
-		}
+		catch(SQLException ignored) { }
 	}
 
-	public static void sendMessage(int from_id, String to_name, String subject, String text) {
+	public static boolean sendMessage(int from_id, String to_name, String subject, String text) {
 		to_name = "\"" + to_name + "\"";
 		subject = "\"" + subject + "\"";
 		text = "\"" + text + "\"";
-		Statement stat = null;
 		try { 
+			// ???
+			if(db == null) {
+				System.out.println("DB WAS NULL");
+				db = new DBConnection();
+			}
 			db.getStatement().executeUpdate("INSERT INTO messages(sender_id, receiver_id, subject, message) "
 					+ "VALUES(" + from_id + ", (SELECT id FROM USERS WHERE name=" + to_name + "), "
-							+ subject + ", " + text + ");"); 
+							+ subject + ", " + text + ");");
+			return true;
 		}
-		catch(Exception ignored) { }
-		
-		finally{
-			if(stat != null) try{ stat.close(); } catch(Exception e) { };
-		}
+		catch(SQLException e) { return false; }
 	}
+	
 }

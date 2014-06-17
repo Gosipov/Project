@@ -13,6 +13,10 @@ public class User {
 	private boolean admin;
 	private static DBConnection db;
 	
+	public static void setDB(DBConnection connection){
+		db = connection;
+	}
+	
 	// retrieving user info from database
 	public User(String username) {
 		this.name = username;
@@ -63,10 +67,6 @@ public class User {
 		finally{
 			if(rs != null) try{ rs.close(); } catch(Exception e) { };
 		}
-	}
-	
-	public static void setDB(DBConnection connection){
-		db = connection;
 	}
 	
 	public String getUsername() {

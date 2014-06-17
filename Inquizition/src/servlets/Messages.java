@@ -38,9 +38,7 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//assuming the username is stored in the request; may change
-		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
+		User user = (User)request.getSession().getAttribute("user");
 		ArrayList<Message> list = MessageManager.getMessages(user.getID());	
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
