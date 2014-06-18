@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background: #eeeeee;
+}
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    display: block;
+    padding-bottom: 5px;
+    width: 40%;
+    text-align: center;
+    font-family: "Arial", "Sans-Serif";
+    vertical-align: middle;
+    border: 1px solid #cccccc;
+    background: #cccccc;
+    border-radius: 3px;
+}
+
+input {
+	padding: 3px 0px 3px 0px;
+	margin: 3px 0px 3px 0px;
+}
+
+.button {
+	width: 40%;
+}

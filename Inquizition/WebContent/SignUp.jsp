@@ -5,14 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sign Up</title>
+<link rel = "stylesheet" type = "text/css" href = "Babdustyle2.css">
 </head>
 <body>
-<h1> <% out.print((String) request.getServletContext().getAttribute("header1")); %></h1>
-<h2> <% out.print((String) request.getServletContext().getAttribute("header2")); %></h2>
-<form action="SignUpRetry" method="post">
-	Username: <input type="text" name="username" required> <br>
-	Password: <input type="password" name="password" required>
-	<input type="submit" value="Login"> <br>
-</form>
+	<div class ="outer">
+		<div class ="middle">
+			<div class ="inner">
+				<h1> <% out.print((String) request.getServletContext().getAttribute("header1")); %> </h1>
+				<h2> <% out.print((String) request.getServletContext().getAttribute("header2")); %> </h2>
+				<form action="SignUpRetry" method="post">
+					Username: <input type="text" name="username" required> <br>
+					Password: <input type="password" name="password" required> <br>
+					<input class ="button" type="submit" value="Login"> <br>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
