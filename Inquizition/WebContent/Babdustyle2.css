@@ -21,6 +21,7 @@ body{
     display: block;
     padding-bottom: 5px;
     width: 40%;
+    min-width: 200px;
     text-align: center;
     font-family: "Arial", "Sans-Serif";
     vertical-align: middle;
