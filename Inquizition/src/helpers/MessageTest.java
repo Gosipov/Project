@@ -50,5 +50,10 @@ public class MessageTest {
 		assertEquals(0, MessageManager.countMessages(4));
 	}
 	
+	@Test
+	public void test3() {
+		
+	}
+	
 
 }

@@ -10,18 +10,14 @@ import com.mysql.jdbc.Statement;
 import db.DBConnection;
 
 public class Question {
-	private String text;
-	private ArrayList<String> answers;
-	private static DBConnection db;
-	private int quizID;
+	protected String text;
+	protected ArrayList<String> answers;
+	protected static DBConnection db;
+	protected int quizID;
 	
 	public Question(String text, int quizID) {
 		this.text = text;
 		this.quizID = quizID;
-	}
-	
-	public static void setDB(DBConnection connection) {
-		db = connection;
 	}
 	
 	public String getText() {
@@ -51,8 +47,8 @@ public class Question {
 			rs = stat.executeQuery("SELECT ID FROM questions ORDER BY ID DESC LIMIT 1");
 			rs.next();
 			String id = "\"" + rs.getString(1) + "\"";
-			for(Iterator<String> it = answers.iterator(); it.hasNext(); ) {
-				String add = "\"" + it.next() + "\"";
+			for(String ans : answers) {
+				String add = "\"" + ans + "\"";
 				stat.executeUpdate("INSERT INTO answers(answer, question_id) "
 						+ "VALUES(" + add + ", " + id + ")");
 			}
@@ -63,4 +59,5 @@ public class Question {
 			try{ if(rs != null) rs.close(); } catch(SQLException ignored){}
 		}
 	}
+
 }

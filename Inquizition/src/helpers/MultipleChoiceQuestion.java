@@ -1,6 +1,5 @@
 package helpers;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,6 +10,7 @@ public class MultipleChoiceQuestion extends Question {
 	
 	public MultipleChoiceQuestion(String text, int quizID) {
 		super(text, quizID);
+		wrongAnswers = new ArrayList<String>();
 	}
 
 	public ArrayList<String> getWrongAnswers() {
@@ -24,11 +24,17 @@ public class MultipleChoiceQuestion extends Question {
 	@Override
 	public void addToDB() {
 		super.addToDB();
-		Statement stat = (Statement) super.getDB().getStatement();
-		ResultSet rs = null;
-//		try{
-//			
-//		}
-//		catch(SQLException e) { e.printStackTrace(); }
+		Statement stat = (Statement) db.getStatement();
+		try{
+			for(String ans : wrongAnswers) {
+				String add = "\"" + ans + "\"";
+				stat.executeUpdate("INSERT INTO answers(answer, question_id) "
+						+ "VALUES(" + add + ", " + super.quizID + ")");
+			}
+		}
+		catch(SQLException e) { e.printStackTrace(); }
+		finally {
+			try{ stat.close(); } catch(SQLException ignored) {}
+		}
 	}
 }
