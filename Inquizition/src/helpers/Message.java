@@ -27,7 +27,11 @@ public class Message {
 		ResultSet rs = null;
 		try{
 			rs = stat.executeQuery("SELECT * FROM messages WHERE id=" + id);
-		}catch(SQLException e){}
+		}catch(SQLException e){ }
+		finally{
+			try{ stat.close(); } catch(SQLException ignored) {}
+			if(rs != null) try{ rs.close(); } catch(SQLException ignored) {}
+		}
 		MessageBuilder(rs);
 	}
 	
