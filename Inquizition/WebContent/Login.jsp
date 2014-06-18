@@ -10,8 +10,8 @@
 <h1> <% out.print((String) request.getServletContext().getAttribute("header1")); %></h1>
 <h2> <% out.print((String) request.getServletContext().getAttribute("header2")); %></h2>
 <form action="LoginRetry" method="post">
-	Username: <input type="text" name="username"> <br>
-	Password: <input type="password" name="password">
+	Username: <input type="text" name="username" required> <br>
+	Password: <input type="password" name="password" required>
 	<input type="submit" value="Login"> <br>
 </form>
 <a href="SignUpRetry">Register </a>

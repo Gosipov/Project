@@ -16,6 +16,8 @@ create table quizzes(
 	time_created datetime default now(),
 	creator_id int,
 	times_taken int default 0,
+	one_page boolean,
+	shuffle boolean,
 	foreign key(creator_id) 
 		references users(id)
 		on delete set null
@@ -34,6 +36,7 @@ create table answers(
 	id int not null auto_increment primary key,
 	answer text,
 	question_id int, 
+	yes boolean default true,
 	foreign key(question_id) 
 		references questions(id)
 		on delete cascade 
@@ -74,7 +77,7 @@ create table messages(
 	subject text,
 	message text,
 	dtime datetime default now(),
-	unread bool default true,
+	unread boolean default true,
 	foreign key(sender_id) 
 		references users(id)
 		on delete cascade,

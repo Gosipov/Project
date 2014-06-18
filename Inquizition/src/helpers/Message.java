@@ -22,11 +22,11 @@ public class Message {
 		MessageBuilder(rs);
 	}
 	
-	public Message(int userID) throws SQLException{
+	public Message(int id) throws SQLException{
 		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		try{
-			rs = stat.executeQuery("SELECT * FROM messages WHERE id=" + userID);
+			rs = stat.executeQuery("SELECT * FROM messages WHERE id=" + id);
 		}catch(SQLException e){}
 		MessageBuilder(rs);
 	}
