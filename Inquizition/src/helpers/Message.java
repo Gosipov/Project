@@ -23,7 +23,9 @@ public class Message {
 	}
 	
 	public Message(int id) throws SQLException{
-		Statement stat = db.getStatement();
+		//???
+		if(db == null) db = new DBConnection();
+		Statement stat = (Statement) db.getStatement();
 		ResultSet rs = null;
 		try{
 			rs = stat.executeQuery("SELECT * FROM messages WHERE id=" + id);
