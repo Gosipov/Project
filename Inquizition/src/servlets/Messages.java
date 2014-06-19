@@ -38,9 +38,9 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//User user = (User)request.getSession().getAttribute("user");
-		//ArrayList<Message> list = MessageManager.getMessages(user.getID());
-		ArrayList<Message> list = MessageManager.getMessages(1);
+		User user = (User)request.getSession().getAttribute("user");
+		ArrayList<Message> list = MessageManager.getMessages(user.getID());
+		//ArrayList<Message> list = MessageManager.getMessages(1);
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -91,11 +91,11 @@ public class Messages extends HttpServlet {
 			//the replying prompt:
 			out.println("<form id=\"form1\" name=\"form1\" "
 					+ "method=\"post\" action=\"SendMessage\">");
-			//passing the addressant and the subject through hidden fields
+			//passing the receiver and the subject through hidden fields
 			out.println("<input type=\"hidden\" name=\"to\" "
-					+ "id=\"to\" value =" + m.getSender() + "/>");
+					+ "id=\"to\" value =" + m.getSender() + ">");
 			out.println("<input type=\"hidden\" name=\"subject\" "
-					+ "id=\"subject\" value= \"Re:" + m.getSubject() + " \" />");
+					+ "id=\"subject\" value= \"Re:" + m.getSubject() + "\" />");
 			out.println("<textarea name=\"text\" "
 					+ "id=\"textarea\" cols=\"45\" rows=\"5\"></textarea>");
 			out.println("<input type=\"submit\" name=\"button\" "

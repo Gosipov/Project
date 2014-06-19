@@ -100,8 +100,8 @@ public class Message {
 				db = new DBConnection();
 			}
 			db.getStatement().executeUpdate("INSERT INTO messages(sender_id, receiver_id, subject, message) "
-					+ "VALUES(" + from_id + ", (SELECT id FROM USERS WHERE name=" + to_name + "), "
-							+ subject + ", " + text + ");");
+					+ "VALUES(" + from_id + ", (SELECT id FROM users WHERE name= '" + to_name + "'), '"
+							+ subject + "', '" + text + "');");
 			return true;
 		}
 		catch(SQLException e) { return false; }

@@ -38,12 +38,12 @@ public class SendMessage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String to = (String) request.getAttribute("to");
-		User user = (User)request.getSession().getAttribute("user");
-		int from = user.getID();
-		//int from = 2;
-		String subject = (String) request.getAttribute("subject");
-		String text = (String) request.getAttribute("text");
+		String to = (String) request.getParameter("to");
+		//User user = (User)request.getSession().getAttribute("user");
+		//int from = user.getID();
+		int from = 2;
+		String subject = (String) request.getParameter("subject");
+		String text = (String) request.getParameter("text");
 		String result = "Send Failed";
 		if(Message.sendMessage(from, to, subject, text))
 			result = "Send Successful";
