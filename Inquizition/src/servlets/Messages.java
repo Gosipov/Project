@@ -1,8 +1,8 @@
 package servlets;
 
-import helpers.Message;
-import helpers.MessageManager;
 import helpers.User;
+import helpers.messaging.Message;
+import helpers.messaging.MessageManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;

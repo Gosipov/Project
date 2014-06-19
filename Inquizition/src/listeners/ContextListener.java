@@ -1,11 +1,11 @@
 package listeners;
 
 import helpers.FriendManager;
-import helpers.Message;
-import helpers.MessageManager;
 import helpers.Quiz;
 import helpers.Sign;
 import helpers.User;
+import helpers.messaging.Message;
+import helpers.messaging.MessageManager;
 
 import java.security.MessageDigest;
 import java.sql.ResultSet;

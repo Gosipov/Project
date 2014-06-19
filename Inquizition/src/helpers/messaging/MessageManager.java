@@ -1,4 +1,4 @@
-package helpers;
+package helpers.messaging;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 //commenting out this import because two different Statement classes conflict otherwise.
 //import com.mysql.jdbc.Statement;
+
+
 
 
 import db.DBConnection;

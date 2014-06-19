@@ -1,6 +1,8 @@
 package helpers;
 
 import static org.junit.Assert.*;
+import helpers.messaging.Message;
+import helpers.messaging.MessageManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

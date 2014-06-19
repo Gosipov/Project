@@ -2,7 +2,7 @@ package servlets;
 
 
 import helpers.User;
-import helpers.Message;
+import helpers.messaging.Message;
 
 import java.io.IOException;
 import java.io.PrintWriter;

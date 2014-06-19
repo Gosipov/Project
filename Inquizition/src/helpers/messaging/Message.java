@@ -1,4 +1,4 @@
-package helpers;
+package helpers.messaging;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

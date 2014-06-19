@@ -2,10 +2,10 @@ package servlets;
 
 import helpers.Activity;
 import helpers.FriendManager;
-import helpers.MessageManager;
 import helpers.Quiz;
 import helpers.QuizManager;
 import helpers.User;
+import helpers.messaging.MessageManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
