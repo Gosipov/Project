@@ -69,6 +69,7 @@ create table history(
 	quiz_id int,
 	type enum('create', 'solve') default 'solve',
 	time_elapsed int, -- in milliseconds
+	score int,
 	tdate datetime default now(),
 	foreign key(user_id) 
 		references users(id)
