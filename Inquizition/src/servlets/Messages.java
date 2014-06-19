@@ -88,6 +88,18 @@ public class Messages extends HttpServlet {
 			out.println("<p><strong>Subject:</strong> " 
 			+ m.getSubject() + "</p>");
 			out.println("<p>" + m.getText() + "</p>");
+			//the replying prompt:
+			out.println("<form id=\"form1\" name=\"form1\" "
+					+ "method=\"post\" action=\"SendMessage\">");
+			//passing the addressant and the subject through hidden fields
+			out.println("<input type=\"hidden\" name=\"to\" "
+					+ "id=\"to\" value =" + m.getSender() + "/>");
+			out.println("<input type=\"hidden\" name=\"subject\" "
+					+ "id=\"subject\" value= \"Re:" + m.getSubject() + " \" />");
+			out.println("<textarea name=\"text\" "
+					+ "id=\"textarea\" cols=\"45\" rows=\"5\"></textarea>");
+			out.println("<input type=\"submit\" name=\"button\" "
+					+ "id=\"button\" value=\"Reply\" />");
 		}
 		catch(SQLException e){
 			out.println("<h3>ERROR</h3>");
