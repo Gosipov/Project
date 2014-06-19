@@ -58,8 +58,8 @@ public class Messages extends HttpServlet {
         //TODO: read/unread indicator
         for(Message m : list){
         	out.println("<tr>");				
-        	out.println("<td>From: " + m.getSender() + " </td>");
-			out.println("<td>Subject :" + m.getSubject() + " </td>");
+        	out.println("<td>" + m.getSender() + " </td>");
+			out.println("<td>" + m.getSubject() + " </td>");
 			out.println("<td> <form action=\"Messages\" method=\"post\"> "
 					+ "<input type=\"hidden\" name=\"id\" value=" + 
 			m.getID() + "> <input type=\"submit\" value=\"Read\"> </form> </td>");
@@ -83,9 +83,11 @@ public class Messages extends HttpServlet {
 			String idString = request.getParameter("id");
 			int mesID = Integer.parseInt(idString);
 			Message m = new Message(mesID);
-			out.println("From: " + m.getSender());
-			out.println("Subject: " + m.getSubject());
-			out.println(m.getText());
+			out.println("<p><strong>From:</strong> " 
+			+ m.getSender() + "</p>");
+			out.println("<p><strong>Subject:</strong> " 
+			+ m.getSubject() + "</p>");
+			out.println("<p>" + m.getText() + "</p>");
 		}
 		catch(SQLException e){
 			out.println("<h3>ERROR</h3>");

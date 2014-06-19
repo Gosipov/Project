@@ -41,6 +41,7 @@ public class SendMessage extends HttpServlet {
 		String to = (String) request.getAttribute("to");
 		User user = (User)request.getSession().getAttribute("user");
 		int from = user.getID();
+		//int from = 2;
 		String subject = (String) request.getAttribute("subject");
 		String text = (String) request.getAttribute("text");
 		String result = "Send Failed";
