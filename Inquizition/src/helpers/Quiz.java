@@ -2,6 +2,7 @@ package helpers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class Quiz {
 		QuizBuilder(name, descript, one_page, creator_id, shuffle);
 	}
 	
-	public Quiz(ResultSet rs){
+	public Quiz(ResultSet rs) throws SQLException {
 		QuizBuilder(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
 	}
 	
