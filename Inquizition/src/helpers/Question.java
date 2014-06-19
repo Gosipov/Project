@@ -14,39 +14,54 @@ public class Question {
 	protected ArrayList<String> answers;
 	protected static DBConnection db;
 	protected int quizID;
+	protected String type;
+	protected int id;
 	
 	public Question(String text, int quizID) {
+		answers = new ArrayList<>();
 		this.text = text;
 		this.quizID = quizID;
+		this.type = "qr";
+	}
+	
+	public void makeBlank() {
+		type = "blank";
+	}
+	
+	public void addAnswer(String answer) {
+		answers.add(answer);
 	}
 	
 	public String getText() {
 		return text;
 	}
 	
-	public ArrayList<String> getAnswers() {
-		return answers;
+	public Iterator<String> getAnswers() {
+		return answers.iterator();
 	}
 	
 	public int getQuizID() {
 		return quizID;
 	}
 	
-	public DBConnection getDB() {
-		return db;
+	public int getID() {
+		return id;
 	}
 	
 	public void addToDB() {
 		String question = "\"" + text + "\"";
 		String quiz_id = "\"" + quizID + "\"";
+		String qtype = "\"" + this.type + "\"";
+		// ???
+		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
 		ResultSet rs = null;
 		try{
-			stat.executeUpdate("INSERT INTO questions(question, quiz_id) VALUES("
-					+ question + ", " + quiz_id + ")");
-			rs = stat.executeQuery("SELECT ID FROM questions ORDER BY ID DESC LIMIT 1");
+			stat.executeUpdate("INSERT INTO questions(question, quiz_id, type) VALUES("
+					+ question + ", " + quiz_id + ", (SELECT id FROM question_types WHERE name=" + qtype + "))");
+			rs = stat.executeQuery("SELECT id FROM questions ORDER BY ID DESC LIMIT 1");
 			rs.next();
-			String id = "\"" + rs.getString(1) + "\"";
+			id = rs.getInt(1);
 			for(String ans : answers) {
 				String add = "\"" + ans + "\"";
 				stat.executeUpdate("INSERT INTO answers(answer, question_id) "

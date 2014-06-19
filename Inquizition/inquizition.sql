@@ -23,13 +23,22 @@ create table quizzes(
 		on delete set null
 );
 
+create table question_types(
+	id int not null auto_increment primary key,
+	name varchar(32)
+);
+
 create table questions(
 	id int not null auto_increment primary key,
 	question text,
 	quiz_id int,
+	type int, 
 	foreign key(quiz_id) 
 		references quizzes(id)
-		on delete cascade 
+		on delete cascade,
+	foreign key(type)
+		references question_types(id)
+		on delete cascade
 );
 
 create table answers(
@@ -96,6 +105,19 @@ create table wall(
 	dtime datetime default now()
 );
 
+insert into question_types(name)
+	value("qr");
+
+insert into question_types(name)
+	value("blank");
+
+insert into question_types(name)
+	value("mcq");
+
+insert into question_types(name)
+	value("prq");
+
+
 delimiter //
 create trigger upd_history after insert on history
 	for each row begin
@@ -113,3 +135,4 @@ create procedure add_quiz(qname varchar(64), qdescript text, creator int)
 		insert into history(user_id, quiz_id, type, tdate)
 			values(creator, (select id from quizzes order by id desc limit 1), 'create', now());  
 	end//
+

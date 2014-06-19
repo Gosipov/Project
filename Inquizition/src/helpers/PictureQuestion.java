@@ -5,6 +5,7 @@ public class PictureQuestion extends Question {
 
 	public PictureQuestion(String text, int quizID) {
 		super(text, quizID);
+		super.type = "prq";
 	}
 
 	public String getImageURL() {

@@ -60,7 +60,7 @@ public class MessageTest {
 		try {
 			m = new Message(1);
 		} catch (SQLException e) { }
-		assertFalse(m == null);
+		assertTrue(m != null);
 		assertTrue(m.getSender().equals("James"));
 		assertTrue(m.getSubject().equals("uhuuu"));
 		assertTrue(m.getText().equals("Song 2"));
