@@ -38,9 +38,9 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User)request.getSession().getAttribute("user");
-		ArrayList<Message> list = MessageManager.getMessages(user.getID());
-		//ArrayList<Message> list = MessageManager.getMessages(1);
+		//User user = (User)request.getSession().getAttribute("user");
+		//ArrayList<Message> list = MessageManager.getMessages(user.getID());
+		ArrayList<Message> list = MessageManager.getMessages(1);
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
