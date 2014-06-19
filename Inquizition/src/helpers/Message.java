@@ -28,20 +28,22 @@ public class Message {
 		Statement stat = (Statement) db.getStatement();
 		ResultSet rs = null;
 		try{
-			rs = stat.executeQuery("SELECT * FROM messages WHERE id=" + id);
+			rs = stat.executeQuery("SELECT * FROM messages "
+					+ "LEFT JOIN users ON messages.sender_id=users.id  WHERE messages.id=" + id);
+			rs.next();
+			MessageBuilder(rs);
 		}catch(SQLException e){ }
 		finally{
 			try{ stat.close(); } catch(SQLException ignored) {}
 			if(rs != null) try{ rs.close(); } catch(SQLException ignored) {}
 		}
-		MessageBuilder(rs);
 	}
 	
 	private void MessageBuilder(ResultSet rs) throws SQLException{
 		this.id = rs.getInt("id");
 		this.text = rs.getString("message");
 		this.datetime = rs.getString("dtime");
-		this.sender = rs.getString("name");
+		this.sender = rs.getString("users.name");
 		this.subject = rs.getString("subject");
 		this.type = rs.getString("type");
 		this.read = !rs.getBoolean("unread");
