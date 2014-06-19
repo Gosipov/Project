@@ -38,9 +38,9 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User)request.getSession().getAttribute("user");
-		ArrayList<Message> list = MessageManager.getMessages(user.getID());
-		//ArrayList<Message> list = MessageManager.getMessages(1);
+		//User user = (User)request.getSession().getAttribute("user");
+		//ArrayList<Message> list = MessageManager.getMessages(user.getID());
+		ArrayList<Message> list = MessageManager.getMessages(1);
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -60,7 +60,7 @@ public class Messages extends HttpServlet {
         	out.println("<tr>");				
         	out.println("<td>From: " + m.getSender() + " </td>");
 			out.println("<td>Subject :" + m.getSubject() + " </td>");
-			out.println("<td> <form action=\"Messages\" method=\"get\"> "
+			out.println("<td> <form action=\"Messages\" method=\"post\"> "
 					+ "<input type=\"hidden\" name=\"id\" value=" + 
 			m.getID() + "> <input type=\"submit\" value=\"Read\"> </form> </td>");
 			out.println("</tr>");
@@ -81,8 +81,8 @@ public class Messages extends HttpServlet {
 		out.println("<body>");
 		try{
 			String idString = request.getParameter("id");
-			int userID = Integer.parseInt(idString);
-			Message m = new Message(userID);
+			int mesID = Integer.parseInt(idString);
+			Message m = new Message(mesID);
 			out.println("From: " + m.getSender());
 			out.println("Subject: " + m.getSubject());
 			out.println(m.getText());
