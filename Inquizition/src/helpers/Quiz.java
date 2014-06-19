@@ -13,12 +13,10 @@ public class Quiz {
 	private String name;
 	private String descript;
 	private String creation_time;
-	private String creator;
 	private int creator_id;
-	private int times_taken;
 	private boolean one_page;
 	private boolean shuffle;
-	private static DBConnection db;
+	protected static DBConnection db;
 	
 	private ArrayList<QuestionHTML> questions;
 	
@@ -28,11 +26,18 @@ public class Quiz {
 	
 	// Constructor used while creating a new quiz
 	public Quiz(String name, String descript, boolean one_page, String creator, int creator_id, boolean shuffle) {
+		QuizBuilder(name, descript, one_page, creator_id, shuffle);
+	}
+	
+	public Quiz(ResultSet rs){
+		QuizBuilder(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+	}
+	
+	private void QuizBuilder(String name, String descript, boolean one_page, int creator_id, boolean shuffle){
 		questions = new ArrayList<QuestionHTML>();
 		this.name = name;
 		this.descript = descript;
 		this.one_page = one_page;
-		this.creator = creator;
 		this.creator_id = creator_id;
 		this.shuffle = shuffle;
 	}
@@ -82,20 +87,18 @@ public class Quiz {
 		return creation_time;
 	}
 	
-	public String getCreator() {
-		return creator;
-	}
 	
 	public boolean shuffle() {
 		return shuffle;
 	}
 	
+	
 	public boolean onePage() {
 		return one_page;
 	}
 	
-	public int getTimesTaken() {
-		return times_taken;
+	public int getCreatorID(){
+		return creator_id;
 	}
 	
 }

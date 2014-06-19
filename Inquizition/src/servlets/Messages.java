@@ -102,7 +102,7 @@ public class Messages extends HttpServlet {
 			out.println("<input type=\"submit\" name=\"button\" "
 					+ "id=\"button\" value=\"Reply\" />");
 		}
-		catch(SQLException e){
+		catch(Exception e){
 			out.println("<h3>ERROR</h3>");
 		}
 		finally{

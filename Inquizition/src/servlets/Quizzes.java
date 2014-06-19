@@ -30,7 +30,7 @@ public class Quizzes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Quiz> list = QuizManager.getAllQuizzes();
+		ArrayList<QuizEntry> list = QuizManager.getAllQuizEntries();
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -41,10 +41,16 @@ public class Quizzes extends HttpServlet {
 		out.println("<table>");
         out.println("<tr>");
         out.println("<th>Name</th>");
+        out.println("<th>Creator</th>");
+        out.println("<th>High Score</th>");
+        out.println("<th>Champion</th>");
         out.println("</tr>");
-        for(Quiz q : list){
+        for(QuizEntry q : list){
         	out.println("<tr>");				
         	out.println("<td>" + q.getName() + " </td>");
+        	out.println("<td>" + q.getCreator() + " </td>");
+        	out.println("<td>" + q.getBestScore() + " </td>");
+        	out.println("<td>" + q.getChampion() + " </td>");
         	//TODO: links
 			out.println("</tr>");
 		}

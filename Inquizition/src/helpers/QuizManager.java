@@ -14,17 +14,17 @@ public class QuizManager {
 		db = connection;
 	}
 	
-	public static ArrayList<Quiz> getAllQuizzes(){
+	public static ArrayList<QuizEntry> getAllQuizEntries(){
 		//purpose unclear, might delete later
 		if(db == null)
 			db = new DBConnection();
 		Statement stat = db.getStatement();
 		ResultSet rs = null;
-		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		ArrayList<QuizEntry> quizzes = new ArrayList<QuizEntry>();
 		try{
 			rs = stat.executeQuery("SELECT * FROM quizzes");
 			while(rs.next()){
-				quizzes.add(new Quiz(rs));
+				quizzes.add(new QuizEntry(rs));
 			}
 			return quizzes;
 		}
@@ -35,7 +35,6 @@ public class QuizManager {
 			try{ stat.close(); } catch(Exception e) { };
 			if(rs != null) try{ rs.close(); } catch(Exception e) { };
 		}
-		return null;
 	}
 	
 	public static ArrayList<Quiz> getTopQuizzes() {
@@ -53,5 +52,5 @@ public class QuizManager {
 	public static ArrayList<Activity> getLatestSolved(int id) {
 		return null;
 	}
-	
+
 }
