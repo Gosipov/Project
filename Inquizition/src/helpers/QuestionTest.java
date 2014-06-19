@@ -16,7 +16,6 @@ public class QuestionTest {
 		qu.addAnswer("ara");
 		qu.addAnswer("ki");
 		assertTrue(qu.getText().equals("kacia adamiani?"));
-		assertEquals(1, qu.getQuizID());
 		Iterator<String> it = qu.getAnswers();
 		assertTrue(it != null);
 		assertTrue(it.hasNext());
