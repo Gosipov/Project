@@ -9,6 +9,8 @@ import org.junit.Test;
 
 public class MessageTest {
 
+	boolean third = true;
+	
 	// Initially, database includes dummy-users 
 	// 1	John
 	// 2	James
@@ -17,7 +19,7 @@ public class MessageTest {
 	
 	@Test
 	public void test1() {
-		if(true)return;
+		if(third) return;
 		// Adding two messages to database
 		assertTrue(Message.sendMessage(1, "James", "testing", "testing messages"));
 		try { Thread.sleep(600); } catch (InterruptedException e) { }
@@ -42,7 +44,7 @@ public class MessageTest {
 	// Testing read/unread methods and message counter from MessageManager
 	@Test
 	public void test2() {
-		if(true)return;
+		if(third) return;
 		assertTrue(Message.sendMessage(1, "Paul", "readunread", "readunread"));
 		ArrayList<Message> al = MessageManager.getMessages(4);
 		assertEquals(1, al.size());
@@ -55,11 +57,10 @@ public class MessageTest {
 	
 	@Test
 	public void test3() {
+		if(!third) return;
 		// a dummy message is already in database
 		Message m = null;
-		try {
-			m = new Message(1);
-		} catch (SQLException e) { }
+		m = new Message(1);
 		assertTrue(m != null);
 		assertTrue(m.getSender().equals("James"));
 		assertTrue(m.getSubject().equals("uhuuu"));

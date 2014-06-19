@@ -22,7 +22,7 @@ public class Message {
 		MessageBuilder(rs);
 	}
 	
-	public Message(int id) throws SQLException{
+	public Message(int id) {
 		//???
 		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
