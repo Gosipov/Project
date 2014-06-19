@@ -38,9 +38,9 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//User user = (User)request.getSession().getAttribute("user");
-		//ArrayList<Message> list = MessageManager.getMessages(user.getID());
-		ArrayList<Message> list = MessageManager.getMessages(1);
+		User user = (User)request.getSession().getAttribute("user");
+		ArrayList<Message> list = MessageManager.getMessages(user.getID());
+		//ArrayList<Message> list = MessageManager.getMessages(2);
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -88,9 +88,10 @@ public class Messages extends HttpServlet {
 			out.println("<p><strong>Subject:</strong> " 
 			+ m.getSubject() + "</p>");
 			out.println("<p>" + m.getText() + "</p>");
+			
 			//the replying prompt:
 			out.println("<form id=\"form1\" name=\"form1\" "
-					+ "method=\"post\" action=\"SendMessage\">");
+					+ "method=\"post\" action=\"SendMessage\">");		
 			//passing the receiver and the subject through hidden fields
 			out.println("<input type=\"hidden\" name=\"to\" "
 					+ "id=\"to\" value =" + m.getSender() + ">");
