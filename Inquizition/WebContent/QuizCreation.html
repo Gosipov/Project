@@ -3,25 +3,48 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Creating new quiz</title>
+<link rel = "stylesheet" type = "text/css" href = "QuizCreateStyle.css">
 </head>
 <body>
-<h1>Creating a new quiz </h1>
-<form action="CreateQuiz" method="post">
-	Quiz Name: <input type="text" name="name" maxlength="64" required> <br><br>
-	Quiz Description <br>
-	<textarea rows="4" cols="50" name="descript"></textarea> <br><br>
-	Please choose whether to display whole quiz on one page or every question on a new page: <br>
-	<input checked type="radio" name="paging" value="one">One page<br>
-	<input type="radio" name="paging" value="many">Several pages<br><br>
-	Please choose quiz type: <br>
-	<input checked type="radio" name="type" value="qr">Question-Response<br>
-	<input type="radio" name="type" value="blank">Fill in the Blank<br>
-	<input type="radio" name="type" value="mc">Multiple Choice<br>
-	<input type="radio" name="type" value="prq">Picture-Response Questions<br><br>
-	Please choose whether to shuffle quiz questions every time or display in order of creation: <br>
-	<input checked type="radio" name="shuffle" value="yes">Shuffle<br>
-	<input type="radio" name="shuffle" value="no">Do not shuffle<br><br>
-	<input type="submit" value="Add a question">
-</form>
+	<div class="header">
+		<h1>CREATING A NEW QUIZ </h1>
+	</div>
+	<div class = "wrapper">
+		<form action="CreateQuiz" method="post">
+			<div class = "inner">
+				Quiz Name: <input type="text" name="name" maxlength="64" required> <br>
+			</div>
+			<div class = "inner">
+				Quiz Description <br>
+				<textarea rows="4" cols="50" name="descript"></textarea> <br>
+			</div>
+			<div class = "inner">
+				Please choose whether to display whole quiz on one page or every question on a new page: <br>
+				<input class = "radio" checked type="radio" name="paging" value="one">
+				<label for="one"> One page </label><br>
+				<input class = "radio" type="radio" name="paging" value="many">
+				<label for="many"> Several pages </label><br>
+			</div>
+			<div class = "inner">
+				Please choose quiz type: <br>
+				<input class = "radio" checked type="radio" name="type" value="qr">
+				<label for="qr">Question-Response</label><br>
+				<input class = "radio" type="radio" name="type" value="blank">
+				<label for="blank">Fill in the Blank</label><br>
+				<input class = "radio" type="radio" name="type" value="mc">
+				<label for="mc">Multiple Choice</label><br>
+				<input class = "radio" type="radio" name="type" value="prq">
+				<label for="prq">Picture-Response Questions</label><br>
+			</div>
+			<div class = "inner">
+				Please choose whether to shuffle quiz questions every time or display in order of creation: <br>
+				<input checked type="radio" name="shuffle" value="yes">
+				<label for="yes">Shuffle</label><br>
+				<input type="radio" name="shuffle" value="no">
+				<label for="no">Do not shuffle</label><br>
+				<input class="button" type="submit" value="Add a question">
+			</div>
+		</form>
+	</div>
 </body>
 </html>
