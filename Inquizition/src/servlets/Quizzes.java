@@ -42,6 +42,7 @@ public class Quizzes extends HttpServlet {
         out.println("<tr>");
         out.println("<th>Name</th>");
         out.println("<th>Creator</th>");
+        out.println("<th>Times Taken</th>");
         out.println("<th>High Score</th>");
         out.println("<th>Champion</th>");
         out.println("</tr>");
@@ -49,6 +50,7 @@ public class Quizzes extends HttpServlet {
         	out.println("<tr>");				
         	out.println("<td>" + q.getName() + " </td>");
         	out.println("<td>" + q.getCreator() + " </td>");
+        	out.println("<td>" + q.getTimesTaken() + " </td>");
         	out.println("<td>" + q.getBestScore() + " </td>");
         	out.println("<td>" + q.getChampion() + " </td>");
         	//TODO: links

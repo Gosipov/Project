@@ -64,7 +64,7 @@ public class QuizEntry extends Quiz {
 		return champion;
 	}
 	
-	public int timesTaken(){
+	public int getTimesTaken(){
 		return times_taken;
 	}
 }
