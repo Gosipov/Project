@@ -27,11 +27,11 @@ public class CreateFillInBlank extends HttpServlet {
 		Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
     	PrintWriter out = response.getWriter();
     	QuizCreationHTML.upperPart(out, quiz.getQuestionNum() + 1, "CreateFillInBlank");
-		out.println("Enter your question here. Mark the place where you want blank space to be with <> <br>");
-		out.println(QuizCreationHTML.question_html);
-		out.println("<br> Enter all possible answers here, terminating them by semicolon(;) <br>");
-		out.println(QuizCreationHTML.answer_simple_html);
-		out.println("<br>");
+		out.print("Enter your question here. Mark the place where you want blank space to be with <> <br>");
+		out.print(QuizCreationHTML.question_html);
+		out.print("<br> Enter all possible answers here, terminating them by semicolon(;) <br>");
+		out.print(QuizCreationHTML.answer_simple_html);
+		out.print("<br>");
 		QuizCreationHTML.middlePart(out, "CreateFillInBlank");
 		QuizCreationHTML.lowerPart(out);
 	}
