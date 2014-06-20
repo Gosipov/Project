@@ -31,7 +31,7 @@ public class CreateQuiz extends HttpServlet {
 		boolean shuffle = request.getParameter("shuffle") == "yes";
 		String type = request.getParameter("type");
 		
-		Quiz quiz = new Quiz(name, descript, one_page, creator.getUsername(), creator.getID(), shuffle);
+		Quiz quiz = new Quiz(name, descript, one_page, creator.getID(), shuffle);
 		quiz.addToDB();
 		request.getSession().setAttribute("quiz", quiz);
 		

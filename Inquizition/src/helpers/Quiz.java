@@ -1,5 +1,7 @@
 package helpers;
 
+import helpers.questions.QuestionHTML;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;

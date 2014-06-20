@@ -9,7 +9,7 @@ public class QuizTest {
 	// testing quiz addition to database
 	@Test
 	public void test() {
-		Quiz quiz = new Quiz("name", "descript", false, "James", 2, false);
+		Quiz quiz = new Quiz("name", "descript", false, 2, false);
 		assertTrue(quiz.addToDB());
 	}
 
