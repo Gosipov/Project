@@ -46,7 +46,7 @@ create table answers(
 	id int not null auto_increment primary key,
 	answer text,
 	question_id int, 
-	yes boolean default true,
+	ind int default -1,
 	foreign key(question_id) 
 		references questions(id)
 		on delete cascade 
