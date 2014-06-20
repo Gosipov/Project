@@ -24,9 +24,15 @@ public class QuizEntry extends Quiz {
 		Statement stat = (Statement) db.getStatement();
 		ResultSet rs = null;
 		try{
-			rs = stat.executeQuery("SELECT * FROM users WHERE id = " + super.getCreatorID());
-			creator = rs.getString("user");
-			rs = stat.executeQuery("");
+			//getting creator's name
+			rs = stat.executeQuery("SELECT * FROM users WHERE id = " + creator_id +";");
+			creator = rs.getString("name");
+			//getting the best score
+			rs = stat.executeQuery("Select * FROM history WHERE id = (SELECT best_entry_id "
+					+ "from best_score WHERE quiz_id = " + id +");");
+			best_score = rs.getInt("score");
+			rs = stat.executeQuery("Select * FROM users WHERE id = " + rs.getInt("user_id") + ";");
+			champion = rs.getString("name");
 		}catch(SQLException e){ }
 		finally{
 			try{ stat.close(); } catch(SQLException ignored) {}
@@ -44,5 +50,9 @@ public class QuizEntry extends Quiz {
 	
 	public String getChampion(){
 		return champion;
+	}
+	
+	public int timesTaken(){
+		return times_taken;
 	}
 }

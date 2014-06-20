@@ -10,13 +10,13 @@ import db.DBConnection;
 
 public class Quiz {
 	
-	private int id;
-	private String name;
-	private String descript;
-	private String creation_time;
-	private int creator_id;
-	private boolean one_page;
-	private boolean shuffle;
+	protected int id;
+	protected String name;
+	protected String descript;
+	protected String creation_time;
+	protected int creator_id;
+	protected boolean one_page;
+	protected boolean shuffle;
 	protected static DBConnection db;
 	
 	private ArrayList<QuestionHTML> questions;
