@@ -31,6 +31,7 @@ create table question_types(
 create table questions(
 	id int not null auto_increment primary key,
 	question text,
+	imageurl varchar(128),
 	quiz_id int,
 	type int, 
 	foreign key(quiz_id) 
@@ -76,6 +77,17 @@ create table history(
 		on delete cascade,
 	foreign key(quiz_id) 
 		references quizzes(id)
+		on delete cascade
+);
+
+create table best_score(
+	quiz_id int,
+	entry_id int,
+	foreign key(quiz_id)
+		references quizzes(id)
+		on delete cascade,
+	foreign key(entry_id)
+		references history(id)
 		on delete cascade
 );
 
