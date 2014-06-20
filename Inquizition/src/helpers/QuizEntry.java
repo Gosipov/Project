@@ -29,7 +29,7 @@ public class QuizEntry extends Quiz {
 			rs = stat.executeQuery("SELECT * FROM users WHERE id = " + creator_id +";");
 			rs.next();
 			creator = rs.getString("name");
-			System.out.println(creator);
+			System.out.println(id);
 			//getting the best score & the champion
 			rs = stat.executeQuery("Select * FROM history WHERE id = (SELECT entry_id "
 					+ "from best_score WHERE quiz_id = " + id +");");
@@ -37,6 +37,7 @@ public class QuizEntry extends Quiz {
 				rs.next();
 				best_score = rs.getInt("score");
 				rs = stat.executeQuery("Select * FROM users WHERE id = " + rs.getInt("user_id") + ";");
+				rs.next();
 				champion = rs.getString("name");
 			}else{
 				best_score = 0;

@@ -39,6 +39,7 @@ public class Quiz {
 	
 	public Quiz(ResultSet rs) throws SQLException {
 		this(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+		this.id = rs.getInt("id");
 	}
 	
 	public boolean addToDB() {
@@ -74,6 +75,7 @@ public class Quiz {
 		return name;
 	}
 	
+	//defined only for objects created with the RS constructor
 	public int getID() { 
 		return id;
 	}
