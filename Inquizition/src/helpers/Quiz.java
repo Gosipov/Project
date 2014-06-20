@@ -26,15 +26,7 @@ public class Quiz {
 	}
 	
 	// Constructor used while creating a new quiz
-	public Quiz(String name, String descript, boolean one_page, String creator, int creator_id, boolean shuffle) {
-		QuizBuilder(name, descript, one_page, creator_id, shuffle);
-	}
-	
-	public Quiz(ResultSet rs) throws SQLException {
-		QuizBuilder(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
-	}
-	
-	private void QuizBuilder(String name, String descript, boolean one_page, int creator_id, boolean shuffle){
+	public Quiz(String name, String descript, boolean one_page, int creator_id, boolean shuffle) {
 		questions = new ArrayList<QuestionHTML>();
 		this.name = name;
 		this.descript = descript;
@@ -42,7 +34,11 @@ public class Quiz {
 		this.creator_id = creator_id;
 		this.shuffle = shuffle;
 	}
-
+	
+	public Quiz(ResultSet rs) throws SQLException {
+		this(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+	}
+	
 	public boolean addToDB() {
 		// ???
 		if(db == null) db = new DBConnection();
