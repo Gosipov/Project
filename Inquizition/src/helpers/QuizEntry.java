@@ -25,15 +25,27 @@ public class QuizEntry extends Quiz {
 		ResultSet rs = null;
 		try{
 			//getting creator's name
+			System.out.println(creator_id);
 			rs = stat.executeQuery("SELECT * FROM users WHERE id = " + creator_id +";");
+			rs.next();
 			creator = rs.getString("name");
-			//getting the best score
-			rs = stat.executeQuery("Select * FROM history WHERE id = (SELECT best_entry_id "
+			System.out.println(id);
+			//getting the best score & the champion
+			rs = stat.executeQuery("Select * FROM history WHERE id = (SELECT entry_id "
 					+ "from best_score WHERE quiz_id = " + id +");");
-			best_score = rs.getInt("score");
-			rs = stat.executeQuery("Select * FROM users WHERE id = " + rs.getInt("user_id") + ";");
-			champion = rs.getString("name");
-		}catch(SQLException e){ }
+			if(rs.isBeforeFirst()){
+				rs.next();
+				best_score = rs.getInt("score");
+				rs = stat.executeQuery("Select * FROM users WHERE id = " + rs.getInt("user_id") + ";");
+				rs.next();
+				champion = rs.getString("name");
+			}else{
+				best_score = 0;
+				champion = "-";
+			}
+		}catch(SQLException e){ 
+			e.printStackTrace();
+		}
 		finally{
 			try{ stat.close(); } catch(SQLException ignored) {}
 			if(rs != null) try{ rs.close(); } catch(SQLException ignored) {}
