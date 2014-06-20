@@ -1,6 +1,8 @@
 package helpers;
 
 import static org.junit.Assert.*;
+import helpers.questions.MultipleChoiceQuestion;
+import helpers.questions.Question;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -16,13 +16,16 @@ public final class QuizCreationHTML {
 		out.print("<h1>");
 		out.print("Adding #" + num + " question");
 		out.print("</h1>");
+		// addition form
 		out.print("<form action=\"" + caller + "Add" + "\" method=\"post\">");
 	}
 	
 	public static void middlePart(PrintWriter out, String caller) {
+		// end of question addition form
 		out.print("<input type=\"submit\" value=\"Add question\">");
 		out.print("</form>");
 		out.print("<br>");
+		// submit form
 		out.print("<form action=\"" + caller + "Add" + "\" method=\"get\">");
 		out.print("<input type=\"submit\" value=\"Submit Quiz\"> <br>");
 		out.print("If you submit, this question will not be added to quiz");

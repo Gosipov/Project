@@ -1,23 +1,20 @@
 package servlets.createQuiz;
 
-import helpers.Question;
-import helpers.QuestionHTML;
 import helpers.Quiz;
-import helpers.SimpleQuestionHTML;
+import helpers.questions.MultipleChoiceHTML;
+import helpers.questions.MultipleChoiceQuestion;
+import helpers.questions.Question;
+import helpers.questions.QuestionResponseHTML;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.Session;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 
 /**
  * Servlet implementation class CreateMultipleChoiceAdd
@@ -31,11 +28,35 @@ public class CreateMultipleChoiceAdd extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
+		dispatch.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
+		String question = request.getParameter("question");
+		int rightAnswer = Integer.parseInt(request.getParameter("answer"));
 		
+		int i = 0;
+		MultipleChoiceQuestion qu = new MultipleChoiceQuestion(question, quiz.getID());
+		
+		while(true){
+			String answer = request.getParameter("answer" + i++);
+			if(answer == null) break;
+			if(i == rightAnswer){
+				qu.addAnswer(answer);
+				qu.setRightIndex(rightAnswer);
+			}
+			else{
+				qu.addWrongAnswer(answer);
+			}
+		}
+		
+		qu.addToDB();
+		quiz.addQuestion(new MultipleChoiceHTML(qu));
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("/CreateMultipleChoice");
+		dispatch.forward(request, response);
 	}
 
 }
