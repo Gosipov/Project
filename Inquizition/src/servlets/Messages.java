@@ -53,13 +53,18 @@ public class Messages extends HttpServlet {
         out.println("<tr>");
         out.println("<th>From</th>");
         out.println("<th>Subject</th>");
-        out.println("<th>Read</th>");
+        out.println("<th>Status</th>");
+        out.println("<th>Action</th>");
         out.println("</tr>");
-        //TODO: read/unread indicator
+        String status;
         for(Message m : list){
         	out.println("<tr>");				
         	out.println("<td>" + m.getSender() + " </td>");
 			out.println("<td>" + m.getSubject() + " </td>");
+			//status (read/unread):
+			status = m.isRead() ? "opened" : "unopened";
+			out.println("<td>" + status + " </td>");
+			//the read button
 			out.println("<td> <form action=\"Messages\" method=\"post\"> "
 					+ "<input type=\"hidden\" name=\"id\" value=" + 
 			m.getID() + "> <input type=\"submit\" value=\"Read\"> </form> </td>");
@@ -83,6 +88,7 @@ public class Messages extends HttpServlet {
 			String idString = request.getParameter("id");
 			int mesID = Integer.parseInt(idString);
 			Message m = new Message(mesID);
+			m.markAsRead(); //since we're already here, the message has been read.
 			out.println("<p><strong>From:</strong> " 
 			+ m.getSender() + "</p>");
 			out.println("<p><strong>Subject:</strong> " 
