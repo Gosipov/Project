@@ -1,0 +1,67 @@
+@CHARSET "ISO-8859-1";
+
+.unread {
+	background: #e39786;
+}
+
+.read{
+	background: #eeeeee;
+}
+
+.unread:hover{
+	background: #d38a79;
+}
+
+.read:hover{
+	background: #dddddd;
+}
+
+table{
+	padding-top: 80px;
+	border-spacing: 0px;
+	width: 100%;
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#from{
+	width: 30%;
+}
+
+#subject{
+	width: 40%;
+}
+
+#status{
+	width: 15%;
+}
+
+#action{
+	width: 15%;
+}
+
+.centered{
+	text-align: center;
+}
+
+.header{
+	text-align: center;
+	position: fixed;
+	background: rgba(192, 192, 192, .8);
+	width: 100%;
+}
+
+body{
+	margin: 0px;
+	font-family: "Arial" "Sans-Serif";
+}
+
+input{
+	cursor: pointer;
+}

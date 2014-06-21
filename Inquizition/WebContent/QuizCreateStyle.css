@@ -33,7 +33,7 @@ textarea{
 }
 
 .header {
-	background: #cccccc;
+	background: rgba(192, 192, 192, .8);
 	display: block;
 	text-align: center;
 	position: fixed;

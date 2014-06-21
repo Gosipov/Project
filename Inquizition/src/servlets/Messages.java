@@ -46,29 +46,31 @@ public class Messages extends HttpServlet {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Messages</title>");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"MessagesStyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<h2>Messages</h2>");
+		out.println("<div class=\"header\"> <h1>MESSAGES</h1> </div>");
 		out.println("<table>");
         out.println("<tr>");
-        out.println("<th>From</th>");
-        out.println("<th>Subject</th>");
-        out.println("<th>Status</th>");
-        out.println("<th>Action</th>");
+        out.println("<th id=\"from\">From</th>");
+        out.println("<th id=\"subject\">Subject</th>");
+        out.println("<th id=\"status\">Status</th>");
+        out.println("<th id=\"action\">Action</th>");
         out.println("</tr>");
         String status;
         for(Message m : list){
-        	out.println("<tr>");				
+        	//status (read/unread):
+        	status = m.isRead() ? "read" : "unread";
+        	out.println("<tr class=\"" + status + "\">");
         	out.println("<td>" + m.getSender() + " </td>");
 			out.println("<td>" + m.getSubject() + " </td>");
-			//status (read/unread):
-			status = m.isRead() ? "opened" : "unopened";
-			out.println("<td>" + status + " </td>");
+			out.println("<td class=\"centered\">" + status + " </td>");
 			//the read button
-			out.println("<td> <form action=\"Messages\" method=\"post\"> "
+			out.println("<td class=\"centered\"> <form action=\"Messages\" method=\"post\"> "
 					+ "<input type=\"hidden\" name=\"id\" value=" + 
 			m.getID() + "> <input type=\"submit\" value=\"Read\"> </form> </td>");
 			out.println("</tr>");
+			out.println("</table>");
 		}
 		out.println("</body>");
 		out.println("</html>");

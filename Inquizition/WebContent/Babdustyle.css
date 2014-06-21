@@ -18,7 +18,7 @@ div.header {
 	position: fixed;
 	margin-left: auto;
    	margin-right: auto;
-	background: #44a4bb;
+	background: rgba(192, 192, 192, .8);
 	z-index:1;
 	width: 100%;
 }
