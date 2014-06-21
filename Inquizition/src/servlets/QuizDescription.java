@@ -1,9 +1,11 @@
 package servlets;
 
+import helpers.Activity;
 import helpers.QuizEntry;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,7 +50,17 @@ public class QuizDescription extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 	}
-
+	
+	private void box(ArrayList<Activity> ar, boolean isLink, PrintWriter out){
+		if(ar.size() > 0){
+			out.println("<div class = \"box\"> <ul>");
+			for(int i = 0; i < ar.size(); i++){
+				if(!isLink) out.println("<li>" + ar.get(i).toString() + "</li>");
+				else out.println("<li> <a href = \"" + "raghac linki" + "\">" + ar.get(i).toString() + "</a></li>");
+			}
+			out.println("</ul> </div>");
+		}
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
