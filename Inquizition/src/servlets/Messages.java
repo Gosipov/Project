@@ -56,19 +56,22 @@ public class Messages extends HttpServlet {
         out.println("<th id=\"subject\">Subject</th>");
         out.println("<th id=\"status\">Status</th>");
         out.println("<th id=\"action\">Action</th>");
+        out.println("<th id=\"date\">Date</th>");
         out.println("</tr>");
         String status;
+        String date;
         for(Message m : list){
         	//status (read/unread):
         	status = m.isRead() ? "read" : "unread";
         	out.println("<tr class=\"" + status + "\">");
         	out.println("<td>" + m.getSender() + " </td>");
 			out.println("<td>" + m.getSubject() + " </td>");
-			out.println("<td class=\"centered\">" + status + " </td>");
 			//the read button
 			out.println("<td class=\"centered\"> <form action=\"Messages\" method=\"post\"> "
 					+ "<input type=\"hidden\" name=\"id\" value=" + 
 			m.getID() + "> <input type=\"submit\" value=\"Read\"> </form> </td>");
+			date = m.getDateAndTime();
+			out.println("<td class=\"centered\">" + date + " </td>");
 			out.println("</tr>");
 			out.println("</table>");
 		}

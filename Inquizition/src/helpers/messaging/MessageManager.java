@@ -30,7 +30,7 @@ public class MessageManager {
 		ArrayList<Message> messages = new ArrayList<Message>();
 		try{
 			rs = stat.executeQuery("SELECT * FROM messages JOIN users ON messages.sender_id = users.id "
-					+ "WHERE receiver_id=" + id);
+					+ "WHERE receiver_id=" + id + "ORDER BY messages.dtime DESC");
 			while(rs.next()){
 				messages.add(new Message(rs));
 			}
