@@ -55,6 +55,8 @@ public class QuizView extends HttpServlet {
 		}
 		out.println("<input class=\"button\" type=\"submit\" value=\"Add a question\">");
 		out.println("</form>");
+		out.println("</body>");
+		out.println("</html>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
