@@ -130,22 +130,52 @@ insert into question_types(name)
 insert into question_types(name)
 	value("prq");
 
+create view best_results as
+	select best_score.quiz_id, score, time_elapsed
+	from best_score left join history on best_score.entry_id = history.id;
+	
 
 delimiter //
 create trigger upd_history after insert on history
 	for each row begin
+		declare highscore int;
+		declare timing int;
 		if new.type = 'solve' then
+			set highscore = (select score from best_results where new.quiz_id = best_results.quiz_id);
+			set timing = (select time_elapsed from best_results where new.quiz_id = best_results.quiz_id);
 			update quizzes 
 				set quizzes.times_taken = quizzes.times_taken + 1 
 				where new.quiz_id = quizzes.id;
+			if new.score > highscore or (new.score = highscore and new.time_elapsed < timing) then
+				update best_score
+					set entry_id = new.id
+					where best_score.quiz_id = new.quiz_id;
+			end if;	
 		end if;
 	end//
 
-create procedure add_quiz(qname varchar(64), qdescript text, creator int)
+create procedure add_quiz(qname varchar(64), qdescript text, creator int, single boolean, random boolean)
 	begin
-		insert into quizzes(name, descript, time_created, creator_id)
-			values(qname, qdescript, now(), creator);
-		insert into history(user_id, quiz_id, type, tdate)
-			values(creator, (select id from quizzes order by id desc limit 1), 'create', now());  
+		declare exit handler for sqlexception
+			begin	
+		-- ERROR
+			rollback;
+		end;
+
+		declare exit handler for sqlwarning
+			begin	
+		-- WARNING
+			rollback;
+		end;
+		start transaction;
+		insert into quizzes(name, descript, creator_id, one_page, shuffle)
+			values(qname, qdescript, creator, single, random);
+		insert into history(user_id, quiz_id, type, score)
+			values(creator, (select id from quizzes where creator_id=creator order by id desc limit 1), 'create', 0);
+		insert into best_score(quiz_id, entry_id)
+			values((select id from quizzes where creator_id=creator order by id desc limit 1), (select id from history order by id desc limit 1));
+		commit;
 	end//
+
+
 
