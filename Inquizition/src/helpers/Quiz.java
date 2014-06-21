@@ -29,17 +29,34 @@ public class Quiz {
 	
 	// Constructor used while creating a new quiz
 	public Quiz(String name, String descript, boolean one_page, int creator_id, boolean shuffle) {
+		initiate(name, descript, one_page, creator_id, shuffle);
+	}
+	
+	public Quiz(ResultSet rs) throws SQLException {
+		initiate(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+		this.id = rs.getInt("id");
+	}
+	
+	public Quiz(int id){
+		if(db == null) db = new DBConnection();
+		Statement stat = (Statement) db.getStatement();
+		ResultSet rs = null;
+		try {
+			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = \"" + id + "\"");
+			initiate(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+			this.id = rs.getInt("id");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void initiate(String name, String descript, boolean one_page, int creator_id, boolean shuffle){
 		questions = new ArrayList<QuestionHTML>();
 		this.name = name;
 		this.descript = descript;
 		this.one_page = one_page;
 		this.creator_id = creator_id;
 		this.shuffle = shuffle;
-	}
-	
-	public Quiz(ResultSet rs) throws SQLException {
-		this(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
-		this.id = rs.getInt("id");
 	}
 	
 	public boolean addToDB() {
@@ -69,6 +86,10 @@ public class Quiz {
 	
 	public int getQuestionNum() {
 		return questions.size();
+	}
+	
+	public ArrayList<QuestionHTML> getQuestions() {
+		return questions;
 	}
 	
 	public String getName() {
