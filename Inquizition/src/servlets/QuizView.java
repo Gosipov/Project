@@ -49,11 +49,12 @@ public class QuizView extends HttpServlet {
 		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizStyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
+		out.println("<h1>" + quiz.getName() + "</h1>");
 		out.println("<form action=\"QuizView\" method=\"post\">");
 		for(int i = 0; i < n; i++){
 			questions.get(i).generateHTML(out);
 		}
-		out.println("<input class=\"button\" type=\"submit\" value=\"Add a question\">");
+		out.println("<input class=\"button\" type=\"submit\" value=\"Submit\">");
 		out.println("</form>");
 		out.println("</body>");
 		out.println("</html>");
