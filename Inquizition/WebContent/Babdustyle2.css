@@ -28,6 +28,11 @@ body{
     border: 1px solid #cccccc;
     background: #cccccc;
     border-radius: 3px;
+    box-shadow:
+    	3px 3px 10px grey, 
+		-3px -3px 10px grey,
+		-3px 3px 10px grey, 
+		3px -3px 10px grey;
 }
 
 input {
