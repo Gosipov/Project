@@ -19,13 +19,30 @@ public class QuizEntry extends Quiz {
 		
 	}
 	
+	public QuizEntry(int id){
+		super(id);
+		if(db == null) db = new DBConnection();
+		Statement stat = (Statement) db.getStatement();
+		ResultSet rs = null;
+		try{
+			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = " + id +";");
+			times_taken = rs.getInt(times_taken);
+		}catch(SQLException e){ 
+			e.printStackTrace();
+		}
+		finally{
+			try{ stat.close(); } catch(SQLException ignored) {}
+			if(rs != null) try{ rs.close(); } catch(SQLException ignored) {}
+		}
+		setInfo();
+	}
+	
 	private void setInfo(){
 		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
 		ResultSet rs = null;
 		try{
 			//getting creator's name
-			System.out.println(creator_id);
 			rs = stat.executeQuery("SELECT * FROM users WHERE id = " + creator_id +";");
 			rs.next();
 			creator = rs.getString("name");
