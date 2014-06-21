@@ -1,8 +1,8 @@
 package servlets.createQuiz;
 
-import helpers.Question;
 import helpers.Quiz;
-import helpers.SimpleQuestionHTML;
+import helpers.questions.BlankQuestionHTML;
+import helpers.questions.Question;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -42,7 +42,7 @@ public class CreateFillInBlankAdd extends HttpServlet {
 			qu.addAnswer(tk.nextToken().trim());
 		}
 		qu.addToDB();
-		quiz.addQuestion(new SimpleQuestionHTML(qu));
+		quiz.addQuestion(new BlankQuestionHTML(qu));
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("/CreateFillInBlank");
 		dispatch.forward(request, response);

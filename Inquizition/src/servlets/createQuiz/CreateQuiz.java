@@ -34,7 +34,7 @@ public class CreateQuiz extends HttpServlet {
 		Quiz quiz = new Quiz(name, descript, one_page, creator.getID(), shuffle);
 		quiz.addToDB();
 		request.getSession().setAttribute("quiz", quiz);
-		
+
 		RequestDispatcher dispatch = request.getRequestDispatcher(getServletByType(type));
 		dispatch.forward(request, response);
 	}
