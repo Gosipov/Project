@@ -50,6 +50,7 @@ public class Messages extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<div class=\"header\"> <h1>MESSAGES</h1> </div>");
+		out.println("<div class=\"compose\"> <a href = \"NewMessage.html\">Compose a New Message</a> </div>");
 		out.println("<table>");
         out.println("<tr>");
         out.println("<th id=\"from\">From</th>");
@@ -76,7 +77,7 @@ public class Messages extends HttpServlet {
         out.println("</table>");
 		out.println("</body>");
 		out.println("</html>");
-		out.println("<a href = \"NewMessage.html\">Compose a New Message</a>"); //TODO: move this to the top
+		 //TODO: move this to the top
 	}
 
 	/**

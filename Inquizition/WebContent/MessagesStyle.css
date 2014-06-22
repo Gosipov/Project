@@ -69,3 +69,23 @@ body{
 input{
 	cursor: pointer;
 }
+
+.compose{
+	position: fixed;
+	margin-top: 52px;
+	background: #d84020;
+	margin-left: 50px;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.compose:hover{
+	background: #c83b1e;
+	font-weight: bold;
+	margin-left: 47px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
