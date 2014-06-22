@@ -12,6 +12,7 @@ public class Activity {
 	private String type;
 	private int time_elapsed;
 	private String dtime;
+	private int score;
 	
 	public Activity(ResultSet rs) throws SQLException {
 		this.quiz = rs.getString("quizzes.name");
@@ -21,6 +22,7 @@ public class Activity {
 		this.type = rs.getString("history.type");
 		this.time_elapsed = rs.getInt("history.time_elapsed");
 		this.dtime = rs.getString("history.tdate");
+		this.score = rs.getInt("history.score");
 	}
 	
 	public int getUserID() {
@@ -49,6 +51,10 @@ public class Activity {
 	
 	public String getDateTime() {
 		return dtime;
+	}
+	
+	public int getScore(){
+		return score;
 	}
 	
 }
