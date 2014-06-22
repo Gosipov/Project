@@ -54,7 +54,6 @@ public class Messages extends HttpServlet {
         out.println("<tr>");
         out.println("<th id=\"from\">From</th>");
         out.println("<th id=\"subject\">Subject</th>");
-        out.println("<th id=\"status\">Status</th>");
         out.println("<th id=\"action\">Action</th>");
         out.println("<th id=\"date\">Date</th>");
         out.println("</tr>");
@@ -73,8 +72,8 @@ public class Messages extends HttpServlet {
 			date = m.getDateAndTime();
 			out.println("<td class=\"centered\">" + date + " </td>");
 			out.println("</tr>");
-			out.println("</table>");
 		}
+        out.println("</table>");
 		out.println("</body>");
 		out.println("</html>");
 	}
