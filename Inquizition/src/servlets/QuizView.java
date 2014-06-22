@@ -6,6 +6,7 @@ import helpers.questions.QuestionHTML;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -30,27 +31,32 @@ public class QuizView extends HttpServlet {
 		Quiz quiz = new Quiz(id);
 		int n = quiz.getQuestionNum();
 		quiz.shuffle(); // shuffles if needed
-		ArrayList<QuestionHTML> questions = quiz.getQuestions();
-		
-		response.setContentType("text/html; charset=UTF-8"); 
-		PrintWriter out = response.getWriter(); 
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<meta charset=\"ISO-8859-1\">");
-		out.println("<title>Welcome</title>");
-		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizStyle.css\">");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<h1>" + quiz.getName() + "</h1>");
-		out.println("<form action=\"QuizView\" method=\"post\">");
-		for(int i = 0; i < n; i++){
-			questions.get(i).generateHTML(out);
+		Iterator<QuestionHTML> questions = quiz.getQuestions();
+		boolean onePage = quiz.onePage();
+		if(onePage){
+			response.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter out = response.getWriter();
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<meta charset=\"ISO-8859-1\">");
+			out.println("<title>Welcome</title>");
+			out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizStyle.css\">");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h1>" + quiz.getName() + "</h1>");
+			out.println("<form action=\"QuizView\" method=\"post\">");
+			while(questions.hasNext()){
+				questions.next().generateHTML(out);
+			}
+			out.println("<input class=\"button\" type=\"submit\" value=\"Submit\">");
+			out.println("</form>");
+			out.println("</body>");
+			out.println("</html>");
 		}
-		out.println("<input class=\"button\" type=\"submit\" value=\"Submit\">");
-		out.println("</form>");
-		out.println("</body>");
-		out.println("</html>");
+		else{
+			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

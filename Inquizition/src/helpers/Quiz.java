@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import db.DBConnection;
@@ -121,8 +122,8 @@ public class Quiz {
 		}
 	}
 	
-	public ArrayList<QuestionHTML> getQuestions() {
-		return questions;
+	public Iterator<QuestionHTML> getQuestions() {
+		return questions.iterator();
 	}
 	
 	public String getName() {
