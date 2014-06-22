@@ -79,16 +79,6 @@ public class QuizDescription extends HttpServlet {
         out.println("</table>");
 	}
 	
-	private void box(ArrayList<Activity> ar, boolean isLink, PrintWriter out){
-		if(ar.size() > 0){
-			out.println("<div class = \"box\"> <ul>");
-			for(int i = 0; i < ar.size(); i++){
-				if(!isLink) out.println("<li>" + ar.get(i).toString() + "</li>");
-				else out.println("<li> <a href = \"" + "raghac linki" + "\">" + ar.get(i).toString() + "</a></li>");
-			}
-			out.println("</ul> </div>");
-		}
-	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
