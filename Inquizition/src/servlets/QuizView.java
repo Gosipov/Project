@@ -38,17 +38,11 @@ public class QuizView extends HttpServlet {
 		request.getSession().setAttribute("quiz_name", quiz.getName());
 		request.getSession().setAttribute("question_num", new Integer(n));
 		request.getSession().setAttribute("score", new Integer(0));
-		boolean onePage = quiz.onePage();
 		long startTime = System.currentTimeMillis();
 		request.getSession().setAttribute("time", new Long(startTime));
-		if(onePage){
-			RequestDispatcher dispatch = request.getRequestDispatcher("QuizViewOnePage.java");
-			dispatch.forward(request, response);
-		}
-		else{
-			RequestDispatcher dispatch = request.getRequestDispatcher("QuizViewManyPages.java");
-			dispatch.forward(request, response);
-		}
+		String redirect = quiz.onePage() ? "QuizViewOnePage.java": "QuizViewManyPages.java";
+		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
+		dispatch.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
