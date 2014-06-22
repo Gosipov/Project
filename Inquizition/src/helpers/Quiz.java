@@ -27,13 +27,13 @@ public class Quiz {
 		db = connection;
 	}
 	
-	// Constructor used while creating a new quiz
+	// Constructor used while creating a new quiz by user
 	public Quiz(String name, String descript, boolean one_page, int creator_id, boolean shuffle) {
-		initiate(name, descript, one_page, creator_id, shuffle);
+		init(name, descript, one_page, creator_id, shuffle);
 	}
 	
 	public Quiz(ResultSet rs) throws SQLException {
-		initiate(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+		init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
 		this.id = rs.getInt("id");
 	}
 	
@@ -43,14 +43,14 @@ public class Quiz {
 		ResultSet rs = null;
 		try {
 			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = \"" + id + "\"");
-			initiate(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
+			init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
 			this.id = rs.getInt("id");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void initiate(String name, String descript, boolean one_page, int creator_id, boolean shuffle){
+	private void init(String name, String descript, boolean one_page, int creator_id, boolean shuffle){
 		questions = new ArrayList<QuestionHTML>();
 		this.name = name;
 		this.descript = descript;
