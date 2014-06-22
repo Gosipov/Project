@@ -45,8 +45,31 @@ public class Quiz {
 			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = \"" + id + "\"");
 			init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
 			this.id = rs.getInt("id");
+			getQuestionsFromDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		finally{
+			try{ stat.close(); } catch(SQLException ignored) {}
+		}
+	}
+	
+	private void getQuestionsFromDB() {
+		// fill in question array list with questionHTMLs
+		if(db == null) db = new DBConnection();
+		Statement stat = (Statement) db.getStatement();
+		ResultSet rs = null;
+		try {
+			rs = stat.executeQuery("SELECT * FROM questions JOIN question_types "
+					+ "ON questions.type=question_types.id WHERE questions.quiz_id=" + this.id);
+			while(rs.next()) {
+				questions.add(QuestionHTML.wrap(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{ stat.close(); } catch(SQLException ignored) {}
 		}
 	}
 	
@@ -76,7 +99,6 @@ public class Quiz {
 		}catch(SQLException e){ return false; }
 		finally{
 			try{ stat.close(); } catch(SQLException ignored) {}
-			if(rs != null) try{ rs.close(); } catch(SQLException ignored) {}
 		}
 	}
 

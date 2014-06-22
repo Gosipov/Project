@@ -33,7 +33,6 @@ public class QuizManager {
 		}
 		finally{
 			try{ stat.close(); } catch(Exception e) { };
-			if(rs != null) try{ rs.close(); } catch(Exception e) { };
 		}
 	}
 	

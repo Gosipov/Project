@@ -63,10 +63,6 @@ public class User {
 				this.admin = rs.getBoolean("admin");
 			}
 		} catch (NumberFormatException | SQLException e) { e.printStackTrace(); }
-		
-		finally{
-			if(rs != null) try{ rs.close(); } catch(Exception e) { };
-		}
 	}
 	
 	public String getUsername() {

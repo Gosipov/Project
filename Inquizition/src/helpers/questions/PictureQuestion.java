@@ -1,5 +1,6 @@
 package helpers.questions;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Statement;
@@ -11,6 +12,10 @@ public class PictureQuestion extends Question {
 		super(text, quizID);
 		super.type = "prq";
 		this.imageURL = imageURL;
+	}
+
+	public PictureQuestion(ResultSet rs) {
+		super(rs);
 	}
 
 	public String getImageURL() {

@@ -37,7 +37,6 @@ public class FriendManager {
 		}
 		finally{
 			if(stat != null) try{ stat.close(); } catch(Exception e) { };
-			if(rs != null) try{ rs.close(); } catch(Exception e) { };
 		}
 	}
 	
@@ -58,7 +57,6 @@ public class FriendManager {
 		}
 		finally{
 			if(stat != null) try{ stat.close(); } catch(Exception e) { };
-			if(rs != null) try{ rs.close(); } catch(Exception e) { };
 		}
 	}
 	

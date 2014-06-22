@@ -1,5 +1,6 @@
 package helpers.questions;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +17,10 @@ public class MultipleChoiceQuestion extends Question {
 		wrongAnswers = new ArrayList<String>();
 	}
 
+	public MultipleChoiceQuestion(ResultSet rs) {
+		super(rs);
+	}
+
 	public Iterator<String> getWrongAnswers() {
 		return wrongAnswers.iterator();
 	}
@@ -26,6 +31,10 @@ public class MultipleChoiceQuestion extends Question {
 	
 	public void setRightIndex(int index) {
 		this.index = index;
+	}
+	
+	public int getRightIndex() {
+		return index;
 	}
 	
 	@Override

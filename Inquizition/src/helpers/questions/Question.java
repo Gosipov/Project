@@ -24,6 +24,11 @@ public class Question {
 		this.type = "qr";
 	}
 	
+	// retrieving information from database
+	public Question(ResultSet rs) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void makeBlank() {
 		this.type = "blank";
 	}
@@ -67,7 +72,6 @@ public class Question {
 		catch(SQLException e){ e.printStackTrace(); }
 		finally{
 			try{ stat.close(); } catch(SQLException ignored){}
-			try{ if(rs != null) rs.close(); } catch(SQLException ignored){}
 		}
 	}
 
