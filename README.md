@@ -11,7 +11,7 @@ Feature list:
  * Messaging system (done!)
  * Homepage (done-ish!)
  * Quiz listing system (done!)
- * Quiz creation system
+ * Quiz creation system (done!)
  * Quiz complition system
  * Achievements
  * Admin Control Panel
