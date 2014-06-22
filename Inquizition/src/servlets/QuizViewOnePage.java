@@ -37,9 +37,14 @@ public class QuizViewOnePage extends HttpServlet {
 		out.println("<h1>" + quizName + "</h1>");
 		Iterator<QuestionHTML> questions = (Iterator<QuestionHTML>) request.getSession().getAttribute("questions");
 		while(questions.hasNext()){
-			QuestionHTML questionHtml = questions.next();
-			questionHtml.generateHTML(out);
+			questions.next().generateHTML(out);
 		}
+		out.println("<br>");
+		out.print("<form action='QuizSummary' method='post'>");
+		out.println("<input type='hidden' name='result'>");
+		out.println("<button type='button' onclick='endQuiz(this.form)'> </button>");
+		out.println("</form>");
+		out.println("<script src='submit.js'> </script>");
 		out.println("</body>");
 		out.println("</html>");
 	}
