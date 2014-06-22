@@ -29,16 +29,9 @@ public class QuizView extends HttpServlet {
 		int id = (int) request.getSession().getAttribute("quiz_id");
 		Quiz quiz = new Quiz(id);
 		int n = quiz.getQuestionNum();
+		quiz.shuffle(); // shuffles if needed
 		ArrayList<QuestionHTML> questions = quiz.getQuestions();
-		Random rgen = new Random();
-		if(quiz.shuffle()){
-			for(int i = 0; i < n; i++){
-				int rand = rgen.nextInt(n);
-				QuestionHTML temp = questions.get(i);
-				questions.add(i, questions.get(rand));
-				questions.add(rand, temp);
-			}
-		}
+		
 		response.setContentType("text/html; charset=UTF-8"); 
 		PrintWriter out = response.getWriter(); 
 		out.println("<!DOCTYPE html>");

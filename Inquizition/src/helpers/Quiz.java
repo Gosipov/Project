@@ -4,9 +4,9 @@ import helpers.questions.QuestionHTML;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 import db.DBConnection;
 
@@ -88,6 +88,17 @@ public class Quiz {
 		return questions.size();
 	}
 	
+	public void shuffle() {
+		if(!shuffle) return;
+		Random rgen = new Random();
+		for(int i = 0; i < questions.size(); i++){
+			int rand = rgen.nextInt(questions.size());
+			QuestionHTML temp = questions.get(rand);
+			questions.set(rand, questions.get(i));
+			questions.set(i, temp);
+		}
+	}
+	
 	public ArrayList<QuestionHTML> getQuestions() {
 		return questions;
 	}
@@ -108,12 +119,6 @@ public class Quiz {
 	public String getCreationTime() {
 		return creation_time;
 	}
-	
-	
-	public boolean shuffle() {
-		return shuffle;
-	}
-	
 	
 	public boolean onePage() {
 		return one_page;
