@@ -1,5 +1,5 @@
 Nobody expected the freeuni
-# In_quiz_ition
+# Inquizition
 
 * fun, quizzes and RSA password storage for the whole family
 
