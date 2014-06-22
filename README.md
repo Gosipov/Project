@@ -1,4 +1,4 @@
-Nobody expected the freeuni
+<sub>Nobody expected the freeuni<sub>
 # Inquizition
 
 * fun, quizzes and RSA password storage for the whole family
