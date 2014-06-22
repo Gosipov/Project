@@ -1,5 +1,5 @@
 <sub>*Nobody expected the freeuni*<sub>
-# Inquizition
+# Inquizition!
 
 * fun, quizzes and RSA password storage for the whole family
 
