@@ -51,5 +51,25 @@ public class QuizManager {
 	public static ArrayList<Activity> getLatestSolved(int id) {
 		return null;
 	}
+	
+	//return a given user's all quiz complitions
+	public static ArrayList<Activity> getUsersQuizHistory(int user_id, int quiz_id){
+		return null;
+	}
+	
+	//get a quiz's latest five takers
+	public static ArrayList<Activity> getLatestFive(int quiz_id){
+		return null;
+	}
+	
+	//get a quiz's all time top five takers
+	public static ArrayList<Activity> getAllTimeTopFive(int quiz_id){
+		return null;
+	}
+	
+	//get a quiz's daily top five takers
+	public static ArrayList<Activity> getDailyTopFive(int quiz_id){
+		return null;
+	}
 
 }
