@@ -22,5 +22,9 @@ public abstract class QuestionHTML {
 		case 4: ret = new PictureQuestionHTML(new PictureQuestion(rs)); break;
 		}
 		return ret;
-	} 
+	}
+	
+	public Question getQuestion(){
+		return question;
+	}
 }

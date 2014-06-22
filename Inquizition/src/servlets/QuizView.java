@@ -1,6 +1,7 @@
 package servlets;
 
 import helpers.Quiz;
+import helpers.questions.Question;
 import helpers.questions.QuestionHTML;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,30 +34,20 @@ public class QuizView extends HttpServlet {
 		int n = quiz.getQuestionNum();
 		quiz.shuffle(); // shuffles if needed
 		Iterator<QuestionHTML> questions = quiz.getQuestions();
+		request.getSession().setAttribute("questions", questions);
+		request.getSession().setAttribute("quiz_name", quiz.getName());
+		request.getSession().setAttribute("question_num", new Integer(n));
+		request.getSession().setAttribute("score", new Integer(0));
 		boolean onePage = quiz.onePage();
+		long startTime = System.currentTimeMillis();
+		request.getSession().setAttribute("time", new Long(startTime));
 		if(onePage){
-			response.setContentType("text/html; charset=UTF-8"); 
-			PrintWriter out = response.getWriter();
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<meta charset=\"ISO-8859-1\">");
-			out.println("<title>Welcome</title>");
-			out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizStyle.css\">");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>" + quiz.getName() + "</h1>");
-			out.println("<form action=\"QuizView\" method=\"post\">");
-			while(questions.hasNext()){
-				questions.next().generateHTML(out);
-			}
-			out.println("<input class=\"button\" type=\"submit\" value=\"Submit\">");
-			out.println("</form>");
-			out.println("</body>");
-			out.println("</html>");
+			RequestDispatcher dispatch = request.getRequestDispatcher("QuizViewOnePage.java");
+			dispatch.forward(request, response);
 		}
 		else{
-			
+			RequestDispatcher dispatch = request.getRequestDispatcher("QuizViewManyPages.java");
+			dispatch.forward(request, response);
 		}
 	}
 
