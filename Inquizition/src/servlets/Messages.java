@@ -76,6 +76,7 @@ public class Messages extends HttpServlet {
         out.println("</table>");
 		out.println("</body>");
 		out.println("</html>");
+		out.println("<a href = \"NewMessage.html\">Compose a New Message</a>"); //TODO: move this to the top
 	}
 
 	/**
