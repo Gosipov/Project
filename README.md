@@ -8,8 +8,9 @@
 Feature list:
 
  * Login system (done!)
- * Homepage (done-ish!)
  * Messaging system (done!)
+ * Homepage (done-ish!)
+ * Quiz listing system (done!)
  * Quiz creation system
  * Quiz complition system
  * Achievements
