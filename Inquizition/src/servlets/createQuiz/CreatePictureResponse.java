@@ -33,7 +33,7 @@ public class CreatePictureResponse extends HttpServlet {
     	QuizCreationHTML.upperPart(out, quiz.getQuestionNum() + 1, "CreatePictureResponse");
     	out.print("<form>");
 		out.print("Enter picture URL here <br>");
-		out.print("<textarea id=\"imageurl\" rows=\"1\" cols=\"50\" name=\"url\"></textarea> <br>");
+		out.print("<input type='url' maxlength='128' id='imageurl' name='url'> <br>");
 		out.print("<input type=\"button\" id=\"btn\" value=\"Preview\"");
 		out.print("</form> <br>");
 		out.print("If you want to add text, enter it here <br>");
