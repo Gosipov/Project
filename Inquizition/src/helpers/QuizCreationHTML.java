@@ -11,12 +11,16 @@ public final class QuizCreationHTML {
 		out.print("<html>");
 		out.print("<head>");
 		out.print("<title>Adding a question to quiz</title>");
+		out.print("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizCreateStyle.css\">");
 		out.print("</head>");
 		out.print("<body>");
+		out.print("<div class=\"header\">");
 		out.print("<h1>");
 		out.print("Adding #" + num + " question");
 		out.print("</h1>");
+		out.print("</div>");
 		// addition form
+		out.print("<div class = \"wrapper\">");
 		out.print("<form action=\"" + caller + "Add" + "\" method=\"post\">");
 	}
 	
@@ -33,6 +37,7 @@ public final class QuizCreationHTML {
 	}
 	
 	public static void lowerPart(PrintWriter out) {
+		out.print("</div>");
 		out.print("</body>");
 		out.print("</html>");
 	}
