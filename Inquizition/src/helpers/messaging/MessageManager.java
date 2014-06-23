@@ -4,15 +4,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//commenting out this import because two different Statement classes conflict otherwise.
-//import com.mysql.jdbc.Statement;
-
-
-
 
 import db.DBConnection;
 
 public class MessageManager {
+	
+	public final static int MESSAGE = 1;
+	public final static int REQUEST = 2;
+	public final static int CHALLANGE = 3;
 	
 	private static DBConnection db;
 	

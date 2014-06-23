@@ -107,11 +107,13 @@ public class Messages extends HttpServlet {
 			//the replying prompt:
 			out.println("<form id=\"form1\" name=\"form1\" "
 					+ "method=\"post\" action=\"SendMessage\">");		
-			//passing the receiver and the subject through hidden fields
+			//passing the receiver, the subject and the request type through hidden fields
 			out.println("<input type=\"hidden\" name=\"to\" "
 					+ "id=\"to\" value =" + m.getSender() + ">");
 			out.println("<input type=\"hidden\" name=\"subject\" "
 					+ "id=\"subject\" value= \"Re:" + m.getSubject() + "\" >");
+			out.println("<input type=\"hidden\" name=\"type\" "
+					+ "id=\"type\" value =\"" + MessageManager.MESSAGE + "\">");
 			out.println("<textarea name=\"text\" "
 					+ "id=\"textarea\" cols=\"45\" rows=\"5\"></textarea>");
 			out.println("<input type=\"submit\" name=\"button\" "
