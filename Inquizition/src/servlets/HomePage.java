@@ -37,27 +37,27 @@ public class HomePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-//		User user;
-//		DBConnection db = new DBConnection();
-//		Statement stat = db.getStatement();
-//		ResultSet rs = null;
-//		String username = "";
-//		int id = 0;
-//			try {
-//				rs = stat.executeQuery("SELECT name FROM users WHERE id = 1"); 
-//				rs.next();
-//				username = rs.getString("name");
-//				user = new User(username);
-//				id = user.getID();
-//				request.getSession().setAttribute("user", user);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+		User user;
+		DBConnection db = new DBConnection();
+		Statement stat = db.getStatement();
+		ResultSet rs = null;
+		String username = "";
+		int id = 0;
+			try {
+				rs = stat.executeQuery("SELECT name FROM users WHERE id = 1"); 
+				rs.next();
+				username = rs.getString("name");
+				user = new User(username);
+				id = user.getID();
+				request.getSession().setAttribute("user", user);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-		User user = (User) request.getSession().getAttribute("user");	// HomePage-s dasatestad
-		String username = user.getUsername();							// es sami xazi daakomentare 
-		int id = user.getID();											// da zedebi ganakomentare
+//		User user = (User) request.getSession().getAttribute("user");	// HomePage-s dasatestad
+//		String username = user.getUsername();							// es sami xazi daakomentare 
+//		int id = user.getID();											// da zedebi ganakomentare
 		//AchievementManeger AM = new AchievementManeger();
 		ArrayList<User> friends = FriendManager.getFriends(id);
 		ArrayList<Activity> friendActivity = FriendManager.getFriendActivity(id);

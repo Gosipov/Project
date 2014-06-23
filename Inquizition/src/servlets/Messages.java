@@ -38,9 +38,9 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//User user = (User)request.getSession().getAttribute("user");
-		//ArrayList<Message> list = MessageManager.getMessages(user.getID());
-		ArrayList<Message> list = MessageManager.getMessages(2);
+		User user = (User)request.getSession().getAttribute("user");
+		ArrayList<Message> list = MessageManager.getMessages(user.getID());
+		//ArrayList<Message> list = MessageManager.getMessages(3);
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -62,6 +62,7 @@ public class Messages extends HttpServlet {
         String date;
         for(Message m : list){
         	//status (read/unread):
+        	System.out.println("aaaaaaaaaa");
         	status = m.isRead() ? "read" : "unread";
         	out.println("<tr class=\"" + status + "\">");
         	out.println("<td>" + m.getSender() + " </td>");
