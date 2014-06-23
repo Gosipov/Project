@@ -35,9 +35,26 @@ public class HomePage extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User) request.getSession().getAttribute("user");
-		String username = user.getUsername();
-		int id = user.getID();
+		User user; //= (User) request.getSession().getAttribute("user");
+		
+		DBConnection db = new DBConnection();
+		Statement stat = db.getStatement();
+		ResultSet rs = null;
+		String username = "";
+		int id = 0;
+			try {
+				rs = stat.executeQuery("SELECT name FROM users WHERE id = 3"); 
+				rs.next();
+				username = rs.getString("name");
+				user = new User(username);
+				id = user.getID();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		//String username = user.getUsername();
+		//int id = user.getID();
 		//AchievementManeger AM = new AchievementManeger();
 		ArrayList<User> friends = FriendManager.getFriends(id);
 		ArrayList<Activity> friendActivity = FriendManager.getFriendActivity(id);
@@ -58,7 +75,7 @@ public class HomePage extends HttpServlet {
 		out.println("<head>");
 		out.println("<meta charset=\"ISO-8859-1\">");
 		out.println("<title>Welcome</title>");
-		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"babdustyle.css\">");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"Babdustyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<div class = \"header\">");
@@ -95,8 +112,8 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildQuizLists(ArrayList<Quiz> list, String name, PrintWriter out){
-		out.println("<div class=\"box\">");
 		out.println("<h6>" + name + "</h6>");
+		out.println("<div class=\"box\">");
 		out.println("<table>");
         for(Quiz a : list){
         	out.println("<tr>");
@@ -108,8 +125,8 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildFriendLists(ArrayList<User> list, String name, PrintWriter out){
-		out.println("<div class=\"box\">");
 		out.println("<h6>" + name + "</h6>");
+		out.println("<div class=\"box\">");
 		out.println("<table>");
         for(User a : list){
         	out.println("<tr>");
@@ -121,8 +138,8 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildActivityLists(ArrayList<Activity> list, String name, PrintWriter out){
-		out.println("<div class=\"box\">");
 		out.println("<h6>" + name + "</h6>");
+		out.println("<div class=\"box\">");
 		out.println("<table>");
         out.println("<tr>");
         out.println("<th>User</th>");
@@ -143,12 +160,12 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void button(String str, int n, PrintWriter out){
-		String classs = "active block";
-		if(n == 0) classs = "inactive block";
+		String classs = "active";
+		if(n == 0) classs = "inactive";
 		else str = str + " " + n;
-		out.println("<div class = \"" + classs + "\">");
+		out.println("<div class = \"block\">");
 		out.println("<form action = \"Messages\" method = \"post\">");
-		out.println("<input type = \"button\" value = \"" + str + "\">");
+		out.println("<input type = \"button\" class=\"" + classs + "\" value = \"" + str + "\">");
 		out.println("</form>");
 		out.println("</div>");
 	}

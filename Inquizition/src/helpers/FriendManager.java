@@ -61,12 +61,12 @@ public class FriendManager {
 	}
 	
 	private static String activityQuery(int id) {
-		return "SELECT users.name, users.id, quizzes.name, quizzes.id, history.type, " + 
-				"history.time_elapsed, history.tdate FROM friendship " +
+		return "SELECT * FROM friendship " +
 				"JOIN users ON friendship.second_id = users.id " + 
 				"JOIN history ON history.user_id = users.id " + 
 				"JOIN quizzes ON quizzes.id = history.quiz_id " + 
-				"WHERE friendship.first_id = " + id + " " + 
+				"WHERE friendship.first_id = " + id + " " +
+				"AND history.type = \"solve\"" +
 				"ORDER BY history.tdate DESC " +
 				"LIMIT " + MAX_ACTIVITIES;
 	}

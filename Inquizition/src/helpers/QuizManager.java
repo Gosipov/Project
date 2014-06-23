@@ -91,7 +91,7 @@ public class QuizManager {
 
 	public static ArrayList<Quiz> getLatestSolved(int id) {
 		return executeQuiz("SELECT * FROM quizzes JOIN history ON quizzes.id = history.quiz_id "
-				+ "WHERE history.user_id = \"" + id + "\" ORDER BY history.tdate DESC LIMIT " + limit);
+				+ "WHERE history.user_id = \"" + id + "\" AND history.type = \"solve\" ORDER BY history.tdate DESC LIMIT " + limit);
 	}
 	
 	//return a given user's all quiz complitions

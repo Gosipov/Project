@@ -35,7 +35,7 @@ public class Quiz {
 	
 	public Quiz(ResultSet rs) throws SQLException {
 		init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
-		this.id = rs.getInt("id");
+		this.id = rs.getInt("quizzes.id");
 	}
 	
 	public Quiz(int id){

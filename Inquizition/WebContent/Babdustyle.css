@@ -2,16 +2,15 @@
 
 div.block {
 	height: 30px;
-	margin: 2px 2px 2px 2px;
+	margin: 23px 2px 23px 2px;
 	padding: 2px 2px 2px 2px;
 	float: left;
-	background: #338899;
 	/*display: inline-block;*/
 	vertical-align: middle;
 }
 
-div.active{
-	background: #cc5566;
+.active{
+	background: #d84020;
 }
 
 div.header {
@@ -21,14 +20,19 @@ div.header {
 	background: rgba(192, 192, 192, .8);
 	z-index:1;
 	width: 100%;
+	box-shadow: 0px 3px 6px #999999;
 }
 
-div.content {
-	position: relative;
-	display: block;
-	max-width: 960px;
+.content {
+	padding-top: 82px;
+	border-spacing: 0px;
+	width: 100%;
+	max-width: 1024px;
 	margin-left: auto;
 	margin-right: auto;
+	background: #eeeeee;
+	box-shadow: 5px 0px 10px grey, 
+ 		-5px 0px 10px grey;
 }
 
 #username {
@@ -38,9 +42,8 @@ div.content {
 }
 
 div.column {
-	float: left;
-	width: 33%;
-	margin-top: 38px;
+	display: inline-block;
+	text-align: center;
 }
 
 div.box {
@@ -49,16 +52,16 @@ div.box {
 	padding: 2px 2px 2px 2px;
 	overflow: auto;
 	max-height: inherit;
-	background: #dde8ee;
+	background: #ffffff;
 }
 
 #left {
-	width: 20%;
+	width: 30%;
 	max-height: 150px;
 }
 
 #wall {
-	width: 50%;
+	width: 30%;
 	height: auto;
 }
 
@@ -67,10 +70,11 @@ div.box {
 	max-height: 120px;
 }
 
-div.topbar{
+#topbar{
 	/*position: inherit;*/
 	margin-left: auto;
    	margin-right: auto;
+
 	background: #44a4bb;
 	/*z-index:1;*/
 	max-width: 610px;
@@ -80,4 +84,20 @@ ul {
 	list-style-type: none;
 	margin: 0px 0px 0px 0px;
 	padding: 0px;
+}
+
+table{
+	width: 100%;
+	text-align: center;
+}
+
+h6{
+	-webkit-margin-before: 0.33em;
+	-webkit-margin-after: 0.33em;
+	font-size: 1em;
+}
+
+body{
+	margin: 0px;
+	font-family: "Arial" "Sans-Serif"
 }
