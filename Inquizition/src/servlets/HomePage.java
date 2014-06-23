@@ -34,9 +34,7 @@ public class HomePage extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user;
 		DBConnection db = new DBConnection();
 		Statement stat = db.getStatement();
@@ -176,7 +174,4 @@ public class HomePage extends HttpServlet {
 		out.println("</div>");
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
 }
