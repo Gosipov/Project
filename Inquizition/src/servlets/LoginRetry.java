@@ -59,8 +59,8 @@ public class LoginRetry extends HttpServlet {
 			break;
 		case Sign.SUCCESS:
 			request.getSession().setAttribute("user", new User(username));
-			redirect = "HomePage.java";
-			//redirect = "HomePage";
+			redirect = "HomePage";
+			//redirect = "HomePage"; 
 			break;
 		}
 		
