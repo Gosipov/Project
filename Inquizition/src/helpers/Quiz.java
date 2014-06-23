@@ -44,6 +44,7 @@ public class Quiz {
 		ResultSet rs = null;
 		try {
 			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = \"" + id + "\"");
+			rs.next();
 			init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
 			this.id = rs.getInt("id");
 			getQuestionsFromDB();
