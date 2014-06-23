@@ -1,14 +1,10 @@
 package servlets;
 
 import helpers.Quiz;
-import helpers.questions.Question;
 import helpers.questions.QuestionHTML;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +25,7 @@ public class QuizView extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = (int) request.getSession().getAttribute("quiz_id");
+		int id = 1;//(int) request.getSession().getAttribute("quiz_id");
 		Quiz quiz = new Quiz(id);
 		int n = quiz.getQuestionNum();
 		quiz.shuffle(); // shuffles if needed
@@ -40,7 +36,7 @@ public class QuizView extends HttpServlet {
 		request.getSession().setAttribute("score", new Integer(0));
 		long startTime = System.currentTimeMillis();
 		request.getSession().setAttribute("time", new Long(startTime));
-		String redirect = quiz.onePage() ? "QuizViewOnePage.java": "QuizViewManyPages.java";
+		String redirect = quiz.onePage() ? "QuizViewOnePage": "QuizViewManyPages";
 		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 		dispatch.forward(request, response);
 	}

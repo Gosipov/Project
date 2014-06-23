@@ -32,11 +32,11 @@ public abstract class QuestionHTML {
 	protected void addHiddenAnswers(PrintWriter out) {
 		Iterator<String> it = question.getAnswers();
 		while(it.hasNext()){
-			out.println("<input type='hiiden' id='answers' "
+			out.println("<input type='hidden' id='answers' "
 					+ "value=\"" + it.next() + "\">");
 		}
 		// adding submit button
 		out.println("<button type='button' id='button' "
-				+ "onclick='myFunction(this.form)'> Submit </button>");
+				+ "onclick='submitAnswer(this.form)'> Submit </button>");
 	}
 }

@@ -35,6 +35,7 @@ public class QuizTest {
 		assertTrue(quiz.getDescription().equals(res.getDescription()));
 		assertTrue(quiz.getName().equals(res.getName()));
 		
+		assertEquals(1, quiz.getQuestionNum());
 		assertEquals(quiz.getQuestionNum(), res.getQuestionNum());
 		Iterator<QuestionHTML> it1 = quiz.getQuestions();
 		Iterator<QuestionHTML> it2 = res.getQuestions();

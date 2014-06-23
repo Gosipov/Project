@@ -27,7 +27,7 @@ public class Question {
 	// retrieving information from database
 	public Question(ResultSet rs) throws SQLException {
 		this(rs.getString("question"), rs.getInt("quiz_id"));
-		this.type = "qr";
+		id = rs.getInt("questions.id");
 		getAnswersFromDB();
 	}
 
@@ -35,12 +35,12 @@ public class Question {
 		/// ???
 		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
-		ResultSet rs;
 		try{
-			rs = stat.executeQuery("SELECT * FROM answers WHERE question_id=" + this.id);
+			ResultSet rs = stat.executeQuery("SELECT * FROM answers WHERE question_id=" + id);
 			while(rs.next()){
-				if(rs.getInt("ind") == -1)
+				if(rs.getInt("ind") == -1){
 					answers.add(rs.getString("answer"));
+				}
 			}
 		}
 		catch(SQLException e){ e.printStackTrace(); }

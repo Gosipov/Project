@@ -3,8 +3,8 @@ var all = 0;
 
 function submitAnswer(form) {
 	check(form);
-	score();
-}
+	updateScore();
+};
 
 function check(form) {
    all++;
@@ -28,7 +28,7 @@ function check(form) {
 };
 
 function updateScore() {
-	document.getElementById("sum").innerHTML = cnt+"/"+all;
+	document.getElementById('sum').innerHTML = cnt+"/"+all;
 };
 
 updateScore();

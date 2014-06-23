@@ -27,8 +27,8 @@ public class CreateQuiz extends HttpServlet {
 	   	User creator = new User("John");
 	   	String name = request.getParameter("name");
 		String descript = request.getParameter("descript");
-		boolean one_page = request.getParameter("paging") == "one";
-		boolean shuffle = request.getParameter("shuffle") == "yes";
+		boolean one_page = request.getParameter("paging").equals("one");
+		boolean shuffle = request.getParameter("shuffle").equals("yes");
 		String type = request.getParameter("type");
 		
 		Quiz quiz = new Quiz(name, descript, one_page, creator.getID(), shuffle);

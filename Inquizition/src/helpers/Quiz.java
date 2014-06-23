@@ -39,6 +39,7 @@ public class Quiz {
 	}
 	
 	public Quiz(int id){
+		this.id = id;
 		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
 		ResultSet rs = null;
@@ -46,7 +47,6 @@ public class Quiz {
 			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = \"" + id + "\"");
 			rs.next();
 			init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
-			this.id = rs.getInt("id");
 			getQuestionsFromDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
