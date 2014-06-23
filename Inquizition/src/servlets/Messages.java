@@ -89,7 +89,10 @@ public class Messages extends HttpServlet {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Message</title>");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"MessageStyle.css\">");
 		out.println("<body>");
+		out.println("<div class=\"header\"> <h1>MESSAGE</h1> </div>");
+		out.println("<div class=\"content\">");
 		try{
 			String idString = request.getParameter("id");
 			int mesID = Integer.parseInt(idString);
@@ -108,16 +111,18 @@ public class Messages extends HttpServlet {
 			out.println("<input type=\"hidden\" name=\"to\" "
 					+ "id=\"to\" value =" + m.getSender() + ">");
 			out.println("<input type=\"hidden\" name=\"subject\" "
-					+ "id=\"subject\" value= \"Re:" + m.getSubject() + "\" />");
+					+ "id=\"subject\" value= \"Re:" + m.getSubject() + "\" >");
 			out.println("<textarea name=\"text\" "
 					+ "id=\"textarea\" cols=\"45\" rows=\"5\"></textarea>");
 			out.println("<input type=\"submit\" name=\"button\" "
-					+ "id=\"button\" value=\"Reply\" />");
+					+ "class=\"button\" value=\"Reply\" />");
+			out.println("</form>");
 		}
 		catch(Exception e){
 			out.println("<h3>ERROR</h3>");
 		}
 		finally{
+			out.println("</div>");
 			out.println("</body>");
 			out.println("</html>");
 		}

@@ -1,0 +1,44 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	margin: 0px;
+	font-family: "Arial" "Sans-Serif";
+}
+
+.header{
+	text-align: center;
+	position: fixed;
+	background: rgba(192, 192, 192, .8);
+	width: 100%;
+	box-shadow: 0px 3px 6px #999999;
+}
+
+p, form{
+	margin: 0px;
+	padding: 10px 5px 10px 5px;
+}
+
+.content{
+	padding-top: 82px;
+	border-spacing: 0px;
+	width: 100%;
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #eeeeee;
+	box-shadow:
+		5px 0px 10px grey, 
+		-5px 0px 10px grey;
+}
+
+textarea{
+	max-width: 1004px;
+}
+
+.button {
+	width: 10%;
+	border-radius: 3px;
+	background: #d84020;
+	min-width: 60px;
+	font-size: 1em;
+}
