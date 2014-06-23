@@ -39,9 +39,9 @@ public class SendMessage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String to = (String) request.getParameter("to");
-		//User user = (User)request.getSession().getAttribute("user");
-		//int from = user.getID();
-		int from = 2;
+		User user = (User)request.getSession().getAttribute("user");
+		int from = user.getID();
+		//int from = 2;
 		String subject = (String) request.getParameter("subject");
 		String text = (String) request.getParameter("text");
 		String result = "Send Failed";
