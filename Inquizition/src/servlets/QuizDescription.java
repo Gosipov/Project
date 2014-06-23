@@ -50,9 +50,9 @@ public class QuizDescription extends HttpServlet {
 		//TODO: hyperlink to quiz itself
 		
 		//Generate Tables:
-		ArrayList<Activity> personalHistory = QuizManager.getUsersQuizHistory(user.getID(), quizID);
-		if(!personalHistory.isEmpty())
-			buildLists(personalHistory, "Your History", out);
+//		ArrayList<Activity> personalHistory = QuizManager.getUsersQuizHistory(user.getID(), quizID);
+//		if(!personalHistory.isEmpty())
+//			buildLists(personalHistory, "Your History", out);
 		buildLists(QuizManager.getAllTimeTopFive(quizID), "Daily Top", out);
 		buildLists(QuizManager.getAllTimeTopFive(quizID), "All Time Top", out);
 		buildLists(QuizManager.getDailyTopFive(quizID), "Daily Top", out);

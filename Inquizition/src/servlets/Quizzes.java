@@ -45,6 +45,7 @@ public class Quizzes extends HttpServlet {
         out.println("<th>Times Taken</th>");
         out.println("<th>High Score</th>");
         out.println("<th>Champion</th>");
+        out.println("<th>Action</th>");
         out.println("</tr>");
         for(QuizEntry q : list){
         	out.println("<tr>");				
@@ -53,8 +54,16 @@ public class Quizzes extends HttpServlet {
         	out.println("<td>" + q.getTimesTaken() + " </td>");
         	out.println("<td>" + q.getBestScore() + " </td>");
         	out.println("<td>" + q.getChampion() + " </td>");
-        	//TODO: links
+        	//link:
+        	
+        	out.println("<td>");
+        	out.println("<form method=\"get\" action=\"QuizDescription/?id="+ q.getID() + "\">");
+        	out.println("<button type=\"submit\">View</button>");
+        	out.println("</form>");
+            out.println("</td>");
+            
 			out.println("</tr>");
+			out.println("</table");
 		}
 		out.println("</body>");
 		out.println("</html>");
