@@ -64,6 +64,7 @@ public class QuizDescription extends HttpServlet {
 	}
 	
 	private void buildLists(ArrayList<Activity> list, String name, PrintWriter out){
+		out.println("<div class=\"box\">");
 		out.println("<h6>" + name + "</h6>");
 		out.println("<table>");
         out.println("<tr>");
@@ -79,6 +80,7 @@ public class QuizDescription extends HttpServlet {
         	out.println("</tr>");
         }
         out.println("</table>");
+        out.println("</div>");
 	}
 	
 	/**

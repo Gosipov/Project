@@ -48,8 +48,8 @@ public class HomePage extends HttpServlet {
 		
 		ArrayList<Quiz> topQuizzes = QuizManager.getTopQuizzes();
 		ArrayList<Quiz> latestQuizzes = QuizManager.getLatestQuizzes();
-		ArrayList<Activity> latestCreated = QuizManager.getLatestCreated(id);
-		ArrayList<Activity> latestSolved = QuizManager.getLatestSolved(id);
+		ArrayList<Quiz> latestCreated = QuizManager.getLatestCreated(id);
+		ArrayList<Quiz> latestSolved = QuizManager.getLatestSolved(id);
 		//ArrayList<String> wall = MC.getWall();
 		response.setContentType("text/html; charset=UTF-8"); 
 		PrintWriter out = response.getWriter(); 
@@ -80,29 +80,66 @@ public class HomePage extends HttpServlet {
 		out.println("<div class = \"content\">");
 		out.println("<div class = \"column\" id = \"left\">");
 		//box(achievements, false, out);
-//		box(friends, true, out);
-		box(friendActivity, false, out);
+		buildFriendLists(friends, "Friends", out);
+		buildActivityLists(friendActivity, "Friend Activity", out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"wall\">");
 		//box(wall, false, out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"right\">");
-//		box(topQuizzes, true, out);
-//		box(latestQuizzes, true, out);
-		box(latestCreated, true, out);
-		box(latestSolved, true, out);
+		buildQuizLists(topQuizzes, "Top Quizzes", out);
+		buildQuizLists(latestQuizzes, "Latest Quizzes", out);
+		buildQuizLists(latestCreated, "My Latest Created", out);
+		buildQuizLists(latestSolved, "My Latest Solved", out);
 		out.println("</div> </div> </body> </html>");
 	}
 	
-	private void box(ArrayList<Activity> ar, boolean isLink, PrintWriter out){
-		if(ar.size() > 0){
-			out.println("<div class = \"box\"> <ul>");
-			for(int i = 0; i < ar.size(); i++){
-				if(!isLink) out.println("<li>" + ar.get(i).toString() + "</li>");
-				else out.println("<li> <a href = \"" + "raghac linki" + "\">" + ar.get(i).toString() + "</a></li>");
-			}
-			out.println("</ul> </div>");
-		}
+	private void buildQuizLists(ArrayList<Quiz> list, String name, PrintWriter out){
+		out.println("<div class=\"box\">");
+		out.println("<h6>" + name + "</h6>");
+		out.println("<table>");
+        for(Quiz a : list){
+        	out.println("<tr>");
+        	out.println("<td> <a href=\"QuizDescription/?id=\"" + a.getID() + "\"\" target=\"_blank\">" + a.getName() + "</a></td>");
+        	out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</div>");
+	}
+	
+	private void buildFriendLists(ArrayList<User> list, String name, PrintWriter out){
+		out.println("<div class=\"box\">");
+		out.println("<h6>" + name + "</h6>");
+		out.println("<table>");
+        for(User a : list){
+        	out.println("<tr>");
+        	out.println("<td> <a href=\"QuizDescription/?id=\"" + a.getID() + "\"\" target=\"_blank\">" + a.getUsername() + "</a></td>");
+        	out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</div>");
+	}
+	
+	private void buildActivityLists(ArrayList<Activity> list, String name, PrintWriter out){
+		out.println("<div class=\"box\">");
+		out.println("<h6>" + name + "</h6>");
+		out.println("<table>");
+        out.println("<tr>");
+        out.println("<th>User</th>");
+        out.println("<th>Quiz</th>");
+        out.println("<th>Score</th>");
+        out.println("<th>Time</th>");
+        out.println("</tr>");
+        for(Activity a : list){
+        	out.println("<tr>");
+        	out.println("<td> <a href=\"User/?id=\"" + a.getUserID() + "\"\" target=\"_blank\">" + a.getUserName() + "</a></td>");
+        	out.println("<td> <a href=\"QuizDescription/?id=\"" + a.getQuizID() + "\"\" target=\"_blank\">" + a.getQuizName() + "</a></td>");
+        	out.println("<td>" + a.getScore() + "</td>");
+        	out.println("<td>" + a.getTimeElapsed() + "</td>");
+        	out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</div>");
 	}
 	
 	private void button(String str, int n, PrintWriter out){
