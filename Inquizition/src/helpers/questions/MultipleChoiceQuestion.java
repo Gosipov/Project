@@ -7,6 +7,8 @@ import java.util.Iterator;
 
 import com.mysql.jdbc.Statement;
 
+import db.DBConnection;
+
 public class MultipleChoiceQuestion extends Question {
 	private ArrayList<String> wrongAnswers;
 	private int index;
@@ -17,8 +19,32 @@ public class MultipleChoiceQuestion extends Question {
 		wrongAnswers = new ArrayList<String>();
 	}
 
-	public MultipleChoiceQuestion(ResultSet rs) {
-		super(rs);
+	public MultipleChoiceQuestion(ResultSet rs) throws SQLException {
+		super(rs.getString("question"), rs.getInt("id"));
+		super.type = "mcq";
+		getAnswersFromDB();
+	}
+	
+	private void getAnswersFromDB() throws SQLException {
+		/// ???
+		if(db == null) db = new DBConnection();
+		Statement stat = (Statement) db.getStatement();
+		ResultSet rs;
+		try{
+			rs = stat.executeQuery("SELECT * FROM answers WHERE question_id=" + this.id + " ORDER BY id");
+			while(rs.next()){
+				if(rs.getInt("ind") == -1)
+					answers.add(rs.getString("answer"));
+				else{
+					index = rs.getInt("ind");
+					wrongAnswers.add(rs.getString("answer"));
+				}
+			}
+		}
+		catch(SQLException e){ e.printStackTrace(); }
+		finally{
+			try{ stat.close(); } catch(SQLException ignored){}
+		}
 	}
 
 	public Iterator<String> getWrongAnswers() {

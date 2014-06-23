@@ -14,8 +14,10 @@ public class PictureQuestion extends Question {
 		this.imageURL = imageURL;
 	}
 
-	public PictureQuestion(ResultSet rs) {
+	public PictureQuestion(ResultSet rs) throws SQLException {
 		super(rs);
+		super.type = "prq";
+		this.imageURL = rs.getString("imageurl");
 	}
 
 	public String getImageURL() {

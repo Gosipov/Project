@@ -25,8 +25,28 @@ public class Question {
 	}
 	
 	// retrieving information from database
-	public Question(ResultSet rs) {
-		// TODO Auto-generated constructor stub
+	public Question(ResultSet rs) throws SQLException {
+		this(rs.getString("question"), rs.getInt("quiz_id"));
+		this.type = "qr";
+		getAnswersFromDB();
+	}
+
+	private void getAnswersFromDB() throws SQLException {
+		/// ???
+		if(db == null) db = new DBConnection();
+		Statement stat = (Statement) db.getStatement();
+		ResultSet rs;
+		try{
+			rs = stat.executeQuery("SELECT * FROM answers WHERE question_id=" + this.id);
+			while(rs.next()){
+				if(rs.getInt("ind") == -1)
+					answers.add(rs.getString("answer"));
+			}
+		}
+		catch(SQLException e){ e.printStackTrace(); }
+		finally{
+			try{ stat.close(); } catch(SQLException ignored){}
+		}
 	}
 
 	public void makeBlank() {
