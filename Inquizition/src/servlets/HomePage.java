@@ -35,8 +35,9 @@ public class HomePage extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User) request.getSession().getAttribute("user");
 		
+		
+//		User user;
 //		DBConnection db = new DBConnection();
 //		Statement stat = db.getStatement();
 //		ResultSet rs = null;
@@ -54,8 +55,9 @@ public class HomePage extends HttpServlet {
 //				e.printStackTrace();
 //			}
 			
-		String username = user.getUsername();
-		int id = user.getID();
+		User user = (User) request.getSession().getAttribute("user");	// HomePage-s dasatestad
+		String username = user.getUsername();							// es sami xazi daakomentare 
+		int id = user.getID();											// da zedebi ganakomentare
 		//AchievementManeger AM = new AchievementManeger();
 		ArrayList<User> friends = FriendManager.getFriends(id);
 		ArrayList<Activity> friendActivity = FriendManager.getFriendActivity(id);
@@ -113,7 +115,7 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildQuizLists(ArrayList<Quiz> list, String name, PrintWriter out){
-		out.println("<h6>" + name + "</h6>");
+		out.println("<h6> <a href = \"Quizzes\">" + name + "</a> </h6>");
 		out.println("<div class=\"box\">");
 		out.println("<table>");
         for(Quiz a : list){

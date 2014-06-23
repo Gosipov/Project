@@ -64,8 +64,9 @@ public class Quizzes extends HttpServlet {
             out.println("</td>");
             
 			out.println("</tr>");
-			out.println("</table");
+			
 		}
+        out.println("</table");
 		out.println("</body>");
 		out.println("</html>");
 	}
