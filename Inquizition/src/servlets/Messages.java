@@ -104,6 +104,11 @@ public class Messages extends HttpServlet {
 			+ m.getSubject() + "</p>");
 			out.println("<p>" + m.getText() + "</p>");
 			
+			//to avoid attaching multiple re-s:
+			String re = "RE:";
+			if(m.getSubject().substring(0, 3).equals(re))
+				re = "";
+			
 			//the replying prompt:
 			out.println("<form id=\"form1\" name=\"form1\" "
 					+ "method=\"post\" action=\"SendMessage\">");		
@@ -111,7 +116,7 @@ public class Messages extends HttpServlet {
 			out.println("<input type=\"hidden\" name=\"to\" "
 					+ "id=\"to\" value =" + m.getSender() + ">");
 			out.println("<input type=\"hidden\" name=\"subject\" "
-					+ "id=\"subject\" value= \"Re:" + m.getSubject() + "\" >");
+					+ "id=\"subject\" value= \"" + re + m.getSubject() + "\" >");
 			out.println("<input type=\"hidden\" name=\"type\" "
 					+ "id=\"type\" value =\"" + MessageManager.MESSAGE + "\">");
 			out.println("<textarea name=\"text\" "
