@@ -72,9 +72,11 @@ public class QuizDescription extends HttpServlet {
         out.println("<th>Time</th>");
         out.println("</tr>");
         for(Activity a : list){
-        	out.println("<td>" + a.getUserName() + "</td"); 	//TODO: hyperlink
-        	out.println("<td>" + a.getScore() + "</td");
-        	out.println("<td>" + a.getTimeElapsed() + "</td");
+        	out.println("<tr>");
+        	out.println("<td>" + a.getUserName() + "</td>"); 	//TODO: hyperlink
+        	out.println("<td>" + a.getScore() + "</td>");
+        	out.println("<td>" + a.getTimeElapsed() + "</td>");
+        	out.println("</tr>");
         }
         out.println("</table>");
 	}
