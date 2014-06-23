@@ -94,7 +94,7 @@ public class QuizManager {
 	
 	//return a given user's all quiz complitions
 	public static ArrayList<Activity> getUsersQuizHistory(int user_id, int quiz_id){
-		return executeActivity("SELECT * FROM ");
+		return null;
 	}
 	
 	//get a quiz's latest five takers
