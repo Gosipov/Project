@@ -62,7 +62,6 @@ public class Messages extends HttpServlet {
         String date;
         for(Message m : list){
         	//status (read/unread):
-        	System.out.println("aaaaaaaaaa");
         	status = m.isRead() ? "read" : "unread";
         	out.println("<tr class=\"" + status + "\">");
         	out.println("<td>" + m.getSender() + " </td>");
