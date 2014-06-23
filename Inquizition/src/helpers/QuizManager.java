@@ -9,6 +9,7 @@ import db.DBConnection;
 public class QuizManager {
 	
 	private static DBConnection db;
+	private static final int limit = 20;
 	
 	public static void setDB(DBConnection connection) {
 		db = connection;
@@ -36,25 +37,64 @@ public class QuizManager {
 		}
 	}
 	
+	private static ArrayList<Quiz> executeQuiz(String query){
+		Statement stat = db.getStatement();
+		ResultSet rs = null;
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try{
+			rs = stat.executeQuery(query);
+			while(rs.next()){
+				quizzes.add(new Quiz(rs));
+			}
+			return quizzes;
+		}
+		catch(Exception ignored) {
+			return null;
+		}
+		finally{
+			try{ stat.close(); } catch(Exception e) { };
+		}
+	}
+	
+	private static ArrayList<Activity> executeActivity(String query){
+		Statement stat = db.getStatement();
+		ResultSet rs = null;
+		ArrayList<Activity> activities = new ArrayList<Activity>();
+		try{
+			rs = stat.executeQuery(query);
+			while(rs.next()){
+				activities.add(new Activity(rs));
+			}
+			return activities;
+		}
+		catch(Exception ignored) {
+			return null;
+		}
+		finally{
+			try{ stat.close(); } catch(Exception e) { };
+		}
+	}
+	
 	public static ArrayList<Quiz> getTopQuizzes() {
-		return null;
+		return executeQuiz("SELECT * FROM quizzes ORDER BY quizzes.times_taken DESC LIMIT " + limit);
 	}
 	
 	public static ArrayList<Quiz> getLatestQuizzes() {
-		return null;
+		return executeQuiz("SELECT * FROM quizzes ORDER BY quizzes.time_created DESC LIMIT " + limit);
 	}
 
-	public static ArrayList<Activity> getLatestCreated(int id) {
-		return null;
+	public static ArrayList<Quiz> getLatestCreated(int id) {
+		return executeQuiz("SELECT * FROM quizzes WHERE quizzes.creator_id = \"" + id + "\" ORDER BY quizzes.time_created DESC LIMIT " + limit);
 	}
 
-	public static ArrayList<Activity> getLatestSolved(int id) {
-		return null;
+	public static ArrayList<Quiz> getLatestSolved(int id) {
+		return executeQuiz("SELECT * FROM quizzes JOIN history ON quizzes.id = history.quiz_id "
+				+ "WHERE history.user_id = \"" + id + "\" ORDER BY history.tdate DESC LIMIT " + limit);
 	}
 	
 	//return a given user's all quiz complitions
 	public static ArrayList<Activity> getUsersQuizHistory(int user_id, int quiz_id){
-		return null;
+		return executeActivity("SELECT * FROM ");
 	}
 	
 	//get a quiz's latest five takers
