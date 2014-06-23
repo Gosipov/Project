@@ -37,7 +37,7 @@ public class MessageManager {
 			return messages;
 		}
 		catch(Exception ignored) {
-			return null;
+			return messages;
 		}
 		finally{
 			try{ stat.close(); } catch(Exception e) { };
