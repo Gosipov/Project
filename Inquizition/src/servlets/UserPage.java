@@ -36,7 +36,7 @@ public class UserPage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String other_user = "gate"; //request.getParameter("other_user");
+		String other_user = request.getParameter("other_user");
 		User user = new User(other_user);
 		String username = user.getUsername();						
 		int id = user.getID();
