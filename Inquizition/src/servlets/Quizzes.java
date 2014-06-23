@@ -36,19 +36,20 @@ public class Quizzes extends HttpServlet {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Quizzes</title>");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"MessagesStyle.css\">");
 		out.println("<body>");
-		out.println("<h2>Messages</h2>");
+		out.println("<div class=\"header\"> <h1>QUIZZES</h1> </div>");
 		out.println("<table>");
         out.println("<tr>");
-        out.println("<th>Name</th>");
-        out.println("<th>Creator</th>");
-        out.println("<th>Times Taken</th>");
-        out.println("<th>High Score</th>");
-        out.println("<th>Champion</th>");
-        out.println("<th>Action</th>");
+        out.println("<th id=\"name\">Name</th>");
+        out.println("<th id=\"creator\">Creator</th>");
+        out.println("<th id=\"times\">Times Taken</th>");
+        out.println("<th id=\"score\">High Score</th>");
+        out.println("<th id=\"champion\">Champion</th>");
+        out.println("<th id=\"action\">Action</th>");
         out.println("</tr>");
         for(QuizEntry q : list){
-        	out.println("<tr>");				
+        	out.println("<tr class=\"read\">");				
         	out.println("<td>" + q.getName() + " </td>");
         	out.println("<td>" + q.getCreator() + " </td>");
         	out.println("<td>" + q.getTimesTaken() + " </td>");
@@ -56,7 +57,7 @@ public class Quizzes extends HttpServlet {
         	out.println("<td>" + q.getChampion() + " </td>");
         	//link:
         	
-        	out.println("<td>");
+        	out.println("<td class=\"centered\">");
         	out.println("<form method=\"get\" action=\"QuizDescription/?id="+ q.getID() + "\">");
         	out.println("<button type=\"submit\">View</button>");
         	out.println("</form>");

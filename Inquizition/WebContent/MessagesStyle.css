@@ -33,7 +33,7 @@ td{
 	padding-right: 5px;
 }
 
-#from{
+#from {
 	width: 30%;
 }
 
@@ -41,12 +41,12 @@ td{
 	width: 40%;
 }
 
-#date{
+#date, #action, #times, #score, #champion{
 	width: 15%;
 }
 
-#action{
-	width: 15%;
+#name, #creator{
+	width: 20%;
 }
 
 .centered{
