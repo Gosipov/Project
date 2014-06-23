@@ -94,22 +94,24 @@ public class QuizManager {
 	
 	//return a given user's all quiz complitions
 	public static ArrayList<Activity> getUsersQuizHistory(int user_id, int quiz_id){
-		return null;
+		return executeActivity("SELECT * FROM history JOIN quizzes ON history.quiz_id = quizzes.id JOIN users ON history.user_id = users.id "
+				+ "WHERE users.id = \"" + user_id + "\" AND quizzes.id = \"" + quiz_id + "\"");
 	}
 	
 	//get a quiz's latest five takers
 	public static ArrayList<Activity> getLatestFive(int quiz_id){
-		return null;
+		return executeActivity("SELECT * FROM history JOIN quizzes ON history.quiz_id = quizzes.id JOIN users ON history.user_id = users.id "
+				+ "WHERE quizzes.id = \"" + quiz_id + "\" ORDER BY history.tdate DESC LIMIT " + limit);
 	}
 	
 	//get a quiz's all time top five takers
 	public static ArrayList<Activity> getAllTimeTopFive(int quiz_id){
-		return null;
+		return executeActivity("SELECT * FROM history JOIN quizzes ON history.quiz_id = quizzes.id JOIN users ON history.user_id = users.id "
+				+ "WHERE quizzes.id = \"" + quiz_id + "\" ORDER BY history.score DESC LIMIT " + limit);
 	}
 	
 	//get a quiz's daily top five takers
 	public static ArrayList<Activity> getDailyTopFive(int quiz_id){
-		return null;
+		return executeActivity(""); // au sasha tu dzma xar dghevandelobaze ar shemamocmebino raa :DDD
 	}
-
 }
