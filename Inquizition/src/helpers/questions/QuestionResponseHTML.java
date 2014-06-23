@@ -10,8 +10,11 @@ public class QuestionResponseHTML extends QuestionHTML {
 
 	@Override
 	public void generateHTML(PrintWriter out) {
-		// TODO Auto-generated method stub
-		
+		out.println("<form class=''>");
+		out.println("<p> " + question.getText() + " </p>");
+		out.println("<input type='text' id='answer'>");
+		addHiddenAnswers(out);
+		out.println("</form>");
 	}
 
 }
