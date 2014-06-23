@@ -26,6 +26,7 @@ public class QuizEntry extends Quiz {
 		ResultSet rs = null;
 		try{
 			rs = stat.executeQuery("SELECT * FROM quizzes WHERE id = " + id +";");
+			rs.next();
 			times_taken = rs.getInt(times_taken);
 		}catch(SQLException e){ 
 			e.printStackTrace();

@@ -38,6 +38,7 @@ public class QuizManager {
 	}
 	
 	private static ArrayList<Quiz> executeQuiz(String query){
+		if(db == null) db = new DBConnection();
 		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
@@ -57,6 +58,7 @@ public class QuizManager {
 	}
 	
 	private static ArrayList<Activity> executeActivity(String query){
+		if(db == null) db = new DBConnection();
 		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		ArrayList<Activity> activities = new ArrayList<Activity>();
