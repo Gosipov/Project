@@ -41,29 +41,36 @@ public class QuizDescription extends HttpServlet {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>" + q.getName() +"</title>");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"Babdustyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<p><strong>" + q.getName() + "</strong></p>");
+		out.println("<div class = \"header\">");
+		out.println("<h1>" + q.getName() + "</h1>");
+		out.println("</div>");
+		out.println("<div class=\"content\">");
+		out.println("<div class=\"oneColumn\">");
 		//TODO: hyperlink to creator's page
-		out.println("<p><em>" + q.getCreator() + "</em></p>"); 
+		out.println("<p><em> Creator: " + q.getCreator() + "</em></p>"); 
 		out.println("<p>" + q.getDescription() + "</p>");
+		out.println("<a href=\"QuizView/?id=" + quizID + "\" target=\"_blank\"> Go For It! </a>");
 		//TODO: hyperlink to quiz itself
 		
 		//Generate Tables:
-//		ArrayList<Activity> personalHistory = QuizManager.getUsersQuizHistory(user.getID(), quizID);
-//		if(!personalHistory.isEmpty())
-//			buildLists(personalHistory, "Your History", out);
+		buildLists(QuizManager.getUsersQuizHistory(user.getID(), quizID), "Your History", out);
 		buildLists(QuizManager.getAllTimeTopFive(quizID), "Daily Top", out);
 		buildLists(QuizManager.getAllTimeTopFive(quizID), "All Time Top", out);
-		buildLists(QuizManager.getDailyTopFive(quizID), "Daily Top", out);
+		//buildLists(QuizManager.getDailyTopFive(quizID), "Daily Top", out);
 		buildLists(QuizManager.getLatestFive(quizID), "Latest Activity", out);
         
 		//TODO: top & recent score tables
+		out.println("</div>");
+		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
 	}
 	
 	private void buildLists(ArrayList<Activity> list, String name, PrintWriter out){
+		if(list.isEmpty()) return;
 		out.println("<div class=\"box\">");
 		out.println("<h6>" + name + "</h6>");
 		out.println("<table>");

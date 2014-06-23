@@ -115,6 +115,7 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildQuizLists(ArrayList<Quiz> list, String name, PrintWriter out){
+		if(list.isEmpty()) return;
 		out.println("<h6> <a href = \"Quizzes\">" + name + "</a> </h6>");
 		out.println("<div class=\"box\">");
 		out.println("<table>");
@@ -128,6 +129,7 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildFriendLists(ArrayList<User> list, String name, PrintWriter out){
+		if(list.isEmpty()) return;
 		out.println("<h6>" + name + "</h6>");
 		out.println("<div class=\"box\">");
 		out.println("<table>");
@@ -141,6 +143,7 @@ public class HomePage extends HttpServlet {
 	}
 	
 	private void buildActivityLists(ArrayList<Activity> list, String name, PrintWriter out){
+		if(list.isEmpty()) return;
 		out.println("<h6>" + name + "</h6>");
 		out.println("<div class=\"box\">");
 		out.println("<table>");
