@@ -28,9 +28,6 @@ public class QuizViewManyPages extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Iterator<QuestionHTML> questions = (Iterator<QuestionHTML>) request.getSession().getAttribute("questions");
 		if(!questions.hasNext()){
-			long finishTime = System.currentTimeMillis();
-			long startTime = (long) request.getSession().getAttribute("time");
-			request.getSession().setAttribute("elapsed", finishTime-startTime);
 			RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
 			dispatch.forward(request, response);
 			return;
@@ -65,6 +62,12 @@ public class QuizViewManyPages extends HttpServlet {
 		Question question = (Question) request.getSession().getAttribute("question");
 		int score = (int) request.getSession().getAttribute("score");
 		String answer = (String) request.getParameter("answer").trim();
+		long finishTime = System.currentTimeMillis();
+		long startTime = (long) request.getSession().getAttribute("time");
+		long elapsed = (long) request.getSession().getAttribute("elapsed");
+		elapsed = elapsed + (finishTime - startTime);
+		request.getSession().setAttribute("elapsed", elapsed);
+		request.getSession().setAttribute("time", finishTime);
 		if(question.isRightAnswer(answer)){
 			score++;
 		}
