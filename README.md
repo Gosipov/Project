@@ -12,6 +12,4 @@ Feature list:
  * Homepage (done-ish!)
  * Quiz listing system (done!)
  * Quiz creation system (done!)
- * Quiz complition system
- * Achievements
- * Admin Control Panel
+ * Quiz complition system (done!)
