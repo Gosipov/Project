@@ -36,6 +36,7 @@ public class UserPage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User MainUser = (User)request.getSession().getAttribute("user");
 		int id = Integer.parseInt(request.getParameter("other_id"));
 		User user = new User(id);
 		String username = user.getUsername();						
@@ -62,7 +63,8 @@ public class UserPage extends HttpServlet {
 		out.println("<div class = \"block\">");
 		out.println("</div>");
 		//friend request
-		button("Send Friend Request", out, user);
+		if(FriendManager.areFriends(id, MainUser.getID()))
+			button("Send Friend Request", out, user);
 		out.println("</div>");
 		out.println("</div>");
 		out.println("<div class = \"content\">");
