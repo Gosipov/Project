@@ -81,7 +81,7 @@ public class HomePage extends HttpServlet {
 		out.println("<body>");
 		out.println("<div class = \"header\">");
 		out.println("<div id = \"topbar\">");
-		out.println("<div class = \"block\">");
+		out.println("<div class = \"block username\">");
 		out.println(username);
 		out.println("</div>");
 		out.println("<div class = \"block\">");
@@ -103,6 +103,7 @@ public class HomePage extends HttpServlet {
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"wall\">");
 		out.println("<h6> <a href = \"Quizzes\"> All Quizzes </a> </h6>");
+		out.println("<h6> <a href=\"QuizCreation.html\"> Create Your Own Quiz! </a> </h6>");
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"right\">");
 		buildQuizLists(topQuizzes, "Top Quizzes", out);
