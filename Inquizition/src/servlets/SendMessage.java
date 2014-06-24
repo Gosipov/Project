@@ -60,7 +60,7 @@ public class SendMessage extends HttpServlet {
 			case MessageManager.REQUEST:
 				BuildRequest(user, request);
 				break;
-			case MessageManager.CHALLANGE:
+			case MessageManager.CHALLENGE:
 				BuildChallenge(user, request);
 				break;
 		}

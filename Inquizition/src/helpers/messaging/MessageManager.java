@@ -11,7 +11,7 @@ public class MessageManager {
 	
 	public final static int MESSAGE = 1;
 	public final static int REQUEST = 2;
-	public final static int CHALLANGE = 3;
+	public final static int CHALLENGE = 3;
 	
 	private static DBConnection db;
 	

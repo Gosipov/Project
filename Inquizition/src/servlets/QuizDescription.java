@@ -1,9 +1,11 @@
 package servlets;
 
 import helpers.Activity;
+import helpers.Quiz;
 import helpers.QuizEntry;
 import helpers.QuizManager;
 import helpers.User;
+import helpers.messaging.MessageManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,8 +63,9 @@ public class QuizDescription extends HttpServlet {
 		buildLists(QuizManager.getAllTimeTopFive(quizID), "All Time Top", out);
 		//buildLists(QuizManager.getDailyTopFive(quizID), "Daily Top", out);
 		buildLists(QuizManager.getLatestFive(quizID), "Latest Activity", out);
-        
-		//TODO: top & recent score tables
+        	
+		//the challenge field:
+		buildChallenge(q.getID(), out);
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</body>");
@@ -88,6 +91,23 @@ public class QuizDescription extends HttpServlet {
         }
         out.println("</table>");
         out.println("</div>");
+	}
+	
+	private void buildChallenge(int qID, PrintWriter out){
+		out.println("<form id=\"form1\" name=\"form1\" "
+				+ "method=\"post\" action=\"SendMessage\">");		
+		//passing the receiver, the subject and the request type through hidden fields
+		out.println("User to Challenge: <input type=\"text\" name=\"to\" "
+				+ "id=\"to\"><br>");
+		out.println("<input type=\"hidden\" name=\"quizID\" "
+				+ "id=\"quizID\" value= \"" + qID + "\" >");
+		out.println("<input type=\"hidden\" name=\"type\" "
+				+ "id=\"type\" value =\"" + MessageManager.CHALLENGE + "\">");
+		out.println("<textarea name=\"text\" "
+				+ "id=\"textarea\" cols=\"45\" rows=\"5\"></textarea>");
+		out.println("<input type=\"submit\" name=\"button\" "
+				+ "class=\"button\" value=\"Reply\" />");
+		out.println("</form>");
 	}
 	
 	/**
