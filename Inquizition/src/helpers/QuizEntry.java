@@ -47,7 +47,6 @@ public class QuizEntry extends Quiz {
 			rs = stat.executeQuery("SELECT * FROM users WHERE id = " + creator_id +";");
 			rs.next();
 			creator = rs.getString("name");
-			System.out.println(id);
 			//getting the best score & the champion
 			rs = stat.executeQuery("Select * FROM history WHERE id = (SELECT entry_id "
 					+ "from best_score WHERE quiz_id = " + id +");");
