@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,10 @@ public class UserPage extends HttpServlet {
 		User MainUser = (User)request.getSession().getAttribute("user");
 		int id = Integer.parseInt(request.getParameter("other_id"));
 		User user = new User(id);
+		if(MainUser.getID() == id){
+			RequestDispatcher dispatch = request.getRequestDispatcher("HomePage");
+			dispatch.forward(request, response);
+		}
 		String username = user.getUsername();						
 		
 		ArrayList<User> friends = FriendManager.getFriends(id);
