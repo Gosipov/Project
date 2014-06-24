@@ -32,9 +32,11 @@ public class FriendUsers extends HttpServlet {
 		User u = (User)request.getSession().getAttribute("user");
 		int u2 = u.getID();
 		String result = "<h3>Something went wrong</h3>";
-		if(FriendManager.makeFriends(u1, u2) && FriendManager.makeFriends(u2, u1)){
-			result = "<strong>User succesfully friended!<strong><br> <a href = \"UserPage?other_id=" + u1
-					+ "\">Go to their profile</a>";
+		if(FriendManager.areFriends(u1, u2)){
+			if(FriendManager.makeFriends(u1, u2) && FriendManager.makeFriends(u2, u1)){
+				result = "<strong>User succesfully friended!<strong><br> <a href = \"UserPage?other_id=" + u1
+						+ "\">Go to their profile</a>";
+			}
 		}
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
