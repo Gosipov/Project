@@ -1,6 +1,7 @@
 package servlets;
 
 import helpers.FriendManager;
+import helpers.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +38,8 @@ public class FriendUsers extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		int u1 = Integer.parseInt(request.getParameter("from_id"));
-		int u2 = Integer.parseInt(request.getParameter("to_id"));
+		User u = (User)request.getSession().getAttribute("user");
+		int u2 = u.getID();
 		String result = "<h3>Something went wrong</h3>";
 		if(FriendManager.makeFriends(u1, u2) && FriendManager.makeFriends(u2, u1)){
 			result = "<strong>User succesfully friended!<strong><br> <a href = \\\"UserPage?other_id='" + u1
