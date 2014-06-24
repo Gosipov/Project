@@ -58,7 +58,7 @@ public class SendMessage extends HttpServlet {
 				BuildRequest(user, request);
 				break;
 			case 3:
-				BuildChallenge(); 	//stub
+				BuildChallenge(user, request);
 				break;
 		}
 		
@@ -91,7 +91,8 @@ public class SendMessage extends HttpServlet {
 		res = "Friend Request";
 	}
 	
-	private void BuildChallenge(){
+	private void BuildChallenge(User user, HttpServletRequest request){
+		subject = "Challenge from " + user.getUsername();	//TODO: add the quiz name
 		//TODO: this.
 	}
 

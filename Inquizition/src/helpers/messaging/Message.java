@@ -1,5 +1,7 @@
 package helpers.messaging;
 
+import helpers.User;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -90,7 +92,6 @@ public class Message {
 	}
 
 	public static boolean sendMessage(int from_id, String to_name, String subject, String text) {
-		to_name = "\"" + to_name + "\"";
 		subject = "\"" + subject + "\"";
 		text = "\"" + text + "\"";
 		try { 
@@ -99,8 +100,11 @@ public class Message {
 				System.out.println("DB WAS NULL");
 				db = new DBConnection();
 			}
-			db.getStatement().executeUpdate("INSERT INTO messages(sender_id, receiver_id, subject, message) "
-					+ "VALUES(" + from_id + ", (SELECT id FROM users WHERE name= " + to_name + "), "
+			Statement stat = db.getStatement();
+			if(!User.exists(to_name))
+				return false;
+			stat.executeUpdate("INSERT INTO messages(sender_id, receiver_id, subject, message) "
+					+ "VALUES(" + from_id + ", (SELECT id FROM users WHERE name= \"" + to_name + "\"), "
 							+ subject + ", " + text + ");");
 			return true;
 		}
