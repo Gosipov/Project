@@ -1,5 +1,6 @@
 package listeners;
 
+import helpers.Activity;
 import helpers.FriendManager;
 import helpers.Quiz;
 import helpers.Sign;
@@ -31,7 +32,6 @@ public class ContextListener implements ServletContextListener {
     
     public ContextListener() {
     	db = new DBConnection();
-    	System.out.println(db == null);
     }
 
     public void contextInitialized(ServletContextEvent arg0) {
@@ -42,6 +42,7 @@ public class ContextListener implements ServletContextListener {
         Sign.setDB(db);
         FriendManager.setDB(db);
         MessageManager.setDB(db);
+        Activity.setDB(db);
     }
 
     public void contextDestroyed(ServletContextEvent arg0) {

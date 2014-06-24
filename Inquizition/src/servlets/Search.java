@@ -21,7 +21,8 @@ public class Search extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
-		String redirect = User.exists(username) ? "UserPage?other_user=" + username : "Oops.htlm";
+		int i = User.exists(username);
+		String redirect = (i != 0) ? "UserPage?other_id=" + i : "Oops.htlm";
 		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 		dispatch.forward(request, response);
 	}

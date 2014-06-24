@@ -36,10 +36,10 @@ public class UserPage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String other_user = request.getParameter("other_user");
-		User user = new User(other_user);
+		int id = Integer.parseInt(request.getParameter("other_id"));
+		User user = new User(id);
 		String username = user.getUsername();						
-		int id = user.getID();
+		
 		ArrayList<User> friends = FriendManager.getFriends(id);
 		
 		ArrayList<Quiz> latestCreated = QuizManager.getLatestCreated(id);
