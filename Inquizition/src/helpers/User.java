@@ -19,19 +19,21 @@ public class User {
 	
 	
 	//determines whether a user exists
-	public static boolean exists(String name){
+	public static int exists(String name){
 		if(db == null) 
 			db = new DBConnection();
+		int id = 0;
 		try{
 		Statement stat = (Statement) db.getStatement();
 		ResultSet rs =  stat.executeQuery("SELECT * FROM users WHERE name = \"" + name + "\";");
 		if(!rs.isBeforeFirst())
-			return false;
+			return id;
+		rs.next();
+		id = rs.getInt("id");
 		}catch(SQLException e){
 			e.printStackTrace();
-			return false;
 		}
-		return true;
+		return id;
 	}
 	
 	// retrieving user info from database
