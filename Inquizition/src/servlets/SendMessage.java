@@ -3,6 +3,7 @@ package servlets;
 
 import helpers.User;
 import helpers.messaging.Message;
+import helpers.messaging.MessageManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,6 +25,7 @@ public class SendMessage extends HttpServlet {
 	private String subject;
 	private String text;
 	private String res;
+	private String typeName;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,20 +52,21 @@ public class SendMessage extends HttpServlet {
 		subject = "";
 		text = "";
 		res = "";
+		typeName = "";
 		switch(type){
-			case 1:
+			case MessageManager.MESSAGE:
 				BuildMessage(request);
 				break;
-			case 2:
+			case MessageManager.REQUEST:
 				BuildRequest(user, request);
 				break;
-			case 3:
+			case MessageManager.CHALLANGE:
 				BuildChallenge(user, request);
 				break;
 		}
 		
 		String result = res + " Failed";
-		if(Message.sendMessage(from, to, subject, text))
+		if(Message.sendMessage(from, to, subject, text, typeName))
 			result = res + " Sent";
 		
 		//depending on sendMessage's value, prints one of two statements
@@ -82,18 +85,21 @@ public class SendMessage extends HttpServlet {
 	private void BuildMessage(HttpServletRequest request){
 		subject = (String) request.getParameter("subject");
 		text = (String) request.getParameter("text");
-		res = "Message";		
+		res = "Message";	
+		typeName = "message";
 	}
 	
 	private void BuildRequest(User user, HttpServletRequest request){
 		subject = "Friend request from " + user.getUsername();
 		text = "linki aq iqneba"; 	//TODO: put a link to friend request here
 		res = "Friend Request";
+		typeName = "frequest";
 	}
 	
 	private void BuildChallenge(User user, HttpServletRequest request){
 		subject = "Challenge from " + user.getUsername();	//TODO: add the quiz name
 		//TODO: this.
+		typeName = "challenge";
 	}
 
 }

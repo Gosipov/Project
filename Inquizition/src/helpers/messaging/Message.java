@@ -91,9 +91,10 @@ public class Message {
 		catch(SQLException ignored) { }
 	}
 
-	public static boolean sendMessage(int from_id, String to_name, String subject, String text) {
+	public static boolean sendMessage(int from_id, String to_name, String subject, String text, String type) {
 		subject = "\"" + subject + "\"";
 		text = "\"" + text + "\"";
+		type = "\"" + type + "\"";
 		try { 
 			// ???
 			if(db == null) {
@@ -103,8 +104,8 @@ public class Message {
 			Statement stat = db.getStatement();
 			if(!User.exists(to_name))
 				return false;
-			stat.executeUpdate("INSERT INTO messages(sender_id, receiver_id, subject, message) "
-					+ "VALUES(" + from_id + ", (SELECT id FROM users WHERE name= \"" + to_name + "\"), "
+			stat.executeUpdate("INSERT INTO messages(type, sender_id, receiver_id, subject, message) "
+					+ "VALUES(" + type +", " + from_id + ", (SELECT id FROM users WHERE name= \"" + to_name + "\"), "
 							+ subject + ", " + text + ");");
 			return true;
 		}
