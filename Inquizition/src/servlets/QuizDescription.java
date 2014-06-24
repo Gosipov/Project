@@ -59,7 +59,6 @@ public class QuizDescription extends HttpServlet {
 		
 		//Generate Tables:
 		buildLists(QuizManager.getUsersQuizHistory(user.getID(), quizID), "Your History", out);
-		buildLists(QuizManager.getAllTimeTopFive(quizID), "Daily Top", out);
 		buildLists(QuizManager.getAllTimeTopFive(quizID), "All Time Top", out);
 		//buildLists(QuizManager.getDailyTopFive(quizID), "Daily Top", out);
 		buildLists(QuizManager.getLatestFive(quizID), "Latest Activity", out);
@@ -107,12 +106,4 @@ public class QuizDescription extends HttpServlet {
 				+ "class=\"button\" value=\"Challenge\" />");
 		out.println("</form>");
 	}
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
 }

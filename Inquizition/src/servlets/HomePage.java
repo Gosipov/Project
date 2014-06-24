@@ -85,7 +85,7 @@ public class HomePage extends HttpServlet {
 		out.println(username);
 		out.println("</div>");
 		out.println("<div class = \"block\">");
-		out.println("<form action = \"Search\" method = \"post\">");
+		out.println("<form action = \"Search\" method = \"get\">");
 		out.println("<input type = \"text\" name = \"friend\">");
 		out.println("<input type = \"submit\" value = \"Search\">");
 		out.println("</form>");

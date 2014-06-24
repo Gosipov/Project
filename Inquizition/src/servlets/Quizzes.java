@@ -58,8 +58,9 @@ public class Quizzes extends HttpServlet {
         	//link:
         	
         	out.println("<td class=\"centered\">");
-        	out.println("<form method=\"get\" action=\"QuizDescription/?id="+ q.getID() + "\">");
+        	out.println("<form method=\"get\" action='QuizDescription'>");
         	out.println("<button type=\"submit\">View</button>");
+        	out.println("<input type=hidden name='id' value= " + q.getID() +  ">");
         	out.println("</form>");
             out.println("</td>");
             
@@ -69,13 +70,6 @@ public class Quizzes extends HttpServlet {
         out.println("</table");
 		out.println("</body>");
 		out.println("</html>");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }
