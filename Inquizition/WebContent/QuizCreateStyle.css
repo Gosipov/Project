@@ -75,11 +75,11 @@ input[type="radio"]:hover+label{
 }
 
 .wrong{
-	background: red;
+	background: #cc8888;
 }
 
 .right{
-	background: green;
+	background: #88cc88;
 }
 
 .centered{
