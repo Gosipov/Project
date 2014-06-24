@@ -28,24 +28,11 @@ public class SendMessage extends HttpServlet {
 	private String res;
 	private String typeName;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public SendMessage() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		to = (String) request.getParameter("to");
 		int type = Integer.parseInt(request.getParameter("type"));
 		User user = (User)request.getSession().getAttribute("user");
@@ -66,7 +53,6 @@ public class SendMessage extends HttpServlet {
 				break;
 		}
 		
-		//System.out.println(from + " " + to + " " + subject + " " + text + " " + " " + typeName);
 		String result = res + " Failed";
 		if(Message.sendMessage(from, to, subject, text, typeName))
 			result = res + " Sent";
