@@ -136,3 +136,24 @@ a.new {
 	color: black;
 	text-decoration: none;
 }
+
+a:hover {
+	background: #e39786;
+}
+
+a:visited {
+	color: #2080d8;
+	text-weight: bold;
+}
+
+a {
+	color: #d84020;
+}
+
+.compose>a{
+	color: black;
+}
+
+.compose>a:hover{
+	background: inherit;
+}
