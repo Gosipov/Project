@@ -63,7 +63,7 @@ public class UserPage extends HttpServlet {
 		out.println("<div class = \"block\">");
 		out.println("</div>");
 		//friend request
-		if(FriendManager.areFriends(id, MainUser.getID()))
+		if(!FriendManager.areFriends(id, MainUser.getID()))
 			button("Send Friend Request", out, user);
 		out.println("</div>");
 		out.println("</div>");
