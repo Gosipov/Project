@@ -9,7 +9,7 @@ Feature list:
 
  * Login system (done!)
  * Messaging system (done!)
- * Homepage (done-ish!)
+ * Homepage (done)
  * Quiz listing system (done!)
  * Quiz creation system (done!)
  * Quiz complition system (done!)
