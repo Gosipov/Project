@@ -102,7 +102,7 @@ public class HomePage extends HttpServlet {
 		buildActivityLists(friendActivity, "Friend Activity", out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"wall\">");
-		//box(wall, false, out);
+		out.println("<h6> <a href = \"Quizzes\"> All Quizzes </a> </h6>");
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"right\">");
 		buildQuizLists(topQuizzes, "Top Quizzes", out);
@@ -119,7 +119,7 @@ public class HomePage extends HttpServlet {
 		out.println("<table>");
         for(Quiz a : list){
         	out.println("<tr>");
-        	out.println("<td> <a href=\"QuizDescription/?id=" + a.getID() + "\" target=\"_blank\">" + a.getName() + "</a></td>");
+        	out.println("<td> <a href=\"QuizDescription?id=" + a.getID() + "\" target=\"_blank\">" + a.getName() + "</a></td>");
         	out.println("</tr>");
         }
         out.println("</table>");
@@ -133,7 +133,7 @@ public class HomePage extends HttpServlet {
 		out.println("<table>");
         for(User a : list){
         	out.println("<tr>");
-        	out.println("<td> <a href=\"User/?id=" + a.getID() + "\" target=\"_blank\">" + a.getUsername() + "</a></td>");
+        	out.println("<td> <a href=\"UserPage?other_id=" + a.getID() + "\" target=\"_blank\">" + a.getUsername() + "</a></td>");
         	out.println("</tr>");
         }
         out.println("</table>");
@@ -153,8 +153,8 @@ public class HomePage extends HttpServlet {
         out.println("</tr>");
         for(Activity a : list){
         	out.println("<tr>");
-        	out.println("<td> <a href=\"User/?id=" + a.getUserID() + "\" target=\"_blank\">" + a.getUserName() + "</a></td>");
-        	out.println("<td> <a href=\"QuizDescription/?id=" + a.getQuizID() + "\" target=\"_blank\">" + a.getQuizName() + "</a></td>");
+        	out.println("<td> <a href=\"UserPage?other_id=" + a.getUserID() + "\" target=\"_blank\">" + a.getUserName() + "</a></td>");
+        	out.println("<td> <a href=\"QuizDescription?id=" + a.getQuizID() + "\" target=\"_blank\">" + a.getQuizName() + "</a></td>");
         	out.println("<td>" + a.getScore() + "</td>");
         	out.println("<td>" + a.getTimeElapsed() + "</td>");
         	out.println("</tr>");
