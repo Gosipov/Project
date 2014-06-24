@@ -52,7 +52,7 @@ public class QuizDescription extends HttpServlet {
 		out.println("<div class=\"content\">");
 		out.println("<div class=\"oneColumn\">");
 		//TODO: hyperlink to creator's page
-		out.println("<p><em> Creator: " + q.getCreator() + "</em></p>"); 
+		out.println("<p><em>Creator: <a href=\"UserPage?other_id=" + q.getCreatorID() + "\">" + q.getCreator() + "</a></em></p>"); 
 		out.println("<p>" + q.getDescription() + "</p>");
 		out.println("<a href=\"QuizView?id=" + quizID + "\" target=\"_blank\"> Go For It! </a>");
 		//TODO: hyperlink to quiz itself
