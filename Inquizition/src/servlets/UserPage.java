@@ -86,7 +86,7 @@ public class UserPage extends HttpServlet {
 		out.println("<table>");
         for(Quiz a : list){
         	out.println("<tr>");
-        	out.println("<td> <a href=\"QuizDescription/?id=" + a.getID() + "\" target=\"_blank\">" + a.getName() + "</a></td>");
+        	out.println("<td> <a href=\"QuizDescription?id=" + a.getID() + "\" target=\"_blank\">" + a.getName() + "</a></td>");
         	out.println("</tr>");
         }
         out.println("</table>");
@@ -100,7 +100,7 @@ public class UserPage extends HttpServlet {
 		out.println("<table>");
         for(User a : list){
         	out.println("<tr>");
-        	out.println("<td> <a href=\"User/?id=" + a.getID() + "\" target=\"_blank\">" + a.getUsername() + "</a></td>");
+        	out.println("<td> <a href=\"UserPage?other_id=" + a.getID() + "\" target=\"_blank\">" + a.getUsername() + "</a></td>");
         	out.println("</tr>");
         }
         out.println("</table>");
