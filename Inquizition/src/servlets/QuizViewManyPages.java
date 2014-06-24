@@ -43,15 +43,19 @@ public class QuizViewManyPages extends HttpServlet {
 		out.println("<head>");
 		out.println("<meta charset=\"ISO-8859-1\">");
 		out.println("<title>Welcome</title>");
-		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizStyle.css\">");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizCreateStyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
+		out.println("<div class=\"header\">");
 		out.println("<h1>" + quizName + "</h1>");
+		out.println("</div>");
+		out.println("<div class=\"wrapper\">");
 		request.getSession().setAttribute("questions", questions);
 		request.getSession().setAttribute("question", question.getQuestion());
 		question.generateHTML(out, false);
 		out.println("<button> Submit </button>");
 		out.println("</form>");
+		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
 	}
