@@ -24,7 +24,7 @@ function check(form) {
       }
       i++;
    }
-   form.style.color = 'wrong';
+   form.class = 'wrong';
 };
 
 function updateScore() {
