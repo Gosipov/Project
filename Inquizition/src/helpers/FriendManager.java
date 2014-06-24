@@ -83,4 +83,17 @@ public class FriendManager {
 		}
 		return true;
 	}
+	
+	public static boolean areFriends(int u1, int u2){
+		Statement stat = db.getStatement();
+		ResultSet rs = null;
+		try{
+			rs = stat.executeQuery("SELECT * FROM friends WHERE first_id=" + u1 + " AND second_id=" + u2 + ";");
+			if(!rs.isBeforeFirst())
+				return false;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return true;
+	}
 }
