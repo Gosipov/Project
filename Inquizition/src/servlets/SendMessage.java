@@ -66,7 +66,7 @@ public class SendMessage extends HttpServlet {
 				break;
 		}
 		
-		System.out.println(from + " " + to + " " + subject + " " + text + " " + " " + typeName);
+		//System.out.println(from + " " + to + " " + subject + " " + text + " " + " " + typeName);
 		String result = res + " Failed";
 		if(Message.sendMessage(from, to, subject, text, typeName))
 			result = res + " Sent";
