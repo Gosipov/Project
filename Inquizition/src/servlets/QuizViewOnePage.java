@@ -27,7 +27,8 @@ public class QuizViewOnePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String quizName = (String) request.getSession().getAttribute("quiz_name");
 		Iterator<QuestionHTML> questions = (Iterator<QuestionHTML>) request.getSession().getAttribute("questions");
-		
+		long startTime = System.currentTimeMillis();
+		request.getSession().setAttribute("time", new Long(startTime));
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -58,6 +59,9 @@ public class QuizViewOnePage extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		long finishTime = System.currentTimeMillis();
+		long startTime = (long) request.getSession().getAttribute("time");
+		request.getSession().setAttribute("elapsed", finishTime-startTime);
 		System.out.println((String) request.getParameter("result"));
 		RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
 		dispatch.forward(request, response);
