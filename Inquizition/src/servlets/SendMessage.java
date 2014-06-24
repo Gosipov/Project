@@ -101,6 +101,7 @@ public class SendMessage extends HttpServlet {
 		int qID = Integer.parseInt(request.getParameter("quizID"));
 		Quiz q = new Quiz(qID);
 		
+		System.out.println(qID + " " + q.getName() + " ");
 		subject = "New Quiz Challenge!";
 		text = "user " + user.getUsername() + " challenged you to play "
 				+ q.getName() +  ". Accept, if you dare!<br>";
