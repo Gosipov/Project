@@ -81,10 +81,15 @@ public class User {
 		try{
 			Statement stat = (Statement) db.getStatement();
 			ResultSet rs =  stat.executeQuery("SELECT * FROM users WHERE name = \"" + name + "\";");
-			if(!rs.isBeforeFirst())
+			if(rs.next()){
+				id = rs.getInt("id");
+				System.out.println(name);
+				System.out.println(id);
 				return id;
-			rs.next();
-			id = rs.getInt("id");
+			}
+			System.out.println(name);
+			System.out.println(id);
+			return id;
 		}
 		catch(SQLException ignored){ }
 		return id;

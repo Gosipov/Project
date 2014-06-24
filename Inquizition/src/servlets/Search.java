@@ -20,9 +20,9 @@ public class Search extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String username = request.getParameter("friend");
 		int i = User.exists(username);
-		String redirect = (i != 0) ? "UserPage?other_id=" + i : "Oops.htlm";
+		String redirect = (i != 0) ? "UserPage?other_id=" + i : "Oops.html";
 		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 		dispatch.forward(request, response);
 	}
