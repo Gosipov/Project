@@ -1,11 +1,13 @@
 package helpers;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 //commenting this out until tested, refer to MessageManager
 //import com.mysql.jdbc.Statement;
+
 
 
 import db.DBConnection;
@@ -71,4 +73,14 @@ public class FriendManager {
 				"LIMIT " + MAX_ACTIVITIES;
 	}
 	
+	public static boolean makeFriends(int u1, int u2){
+		Statement stat = db.getStatement();
+		try{
+			stat.executeUpdate("INSERT INTO friendship(first_id, second_id) VALUES(" + u1 + ", " + u2 +");");
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

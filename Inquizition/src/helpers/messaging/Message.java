@@ -102,7 +102,7 @@ public class Message {
 				db = new DBConnection();
 			}
 			Statement stat = db.getStatement();
-			if(!User.exists(to_name))
+			if(User.exists(to_name) == 0)
 				return false;
 			stat.executeUpdate("INSERT INTO messages(type, sender_id, receiver_id, subject, message) "
 					+ "VALUES(" + type +", " + from_id + ", (SELECT id FROM users WHERE name= \"" + to_name + "\"), "

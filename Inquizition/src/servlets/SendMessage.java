@@ -92,7 +92,13 @@ public class SendMessage extends HttpServlet {
 	
 	private void BuildRequest(User user, HttpServletRequest request){
 		subject = "Friend request from " + user.getUsername();
-		text = "linki aq iqneba"; 	//TODO: put a link to friend request here
+		text = user.getUsername() + "sent you a friend request.<br>"
+				+ "<form id=\\\"form1\\\" name=\\\"form1\\\" "
+					+ "method=\\\"post\\\" action=\\\"SendMessage\\\">"
+				+ "<input type=\\\"hidden\\\" name=\\\"from_id\\\" "
+					+ "id=\\\"from\\\" value =" + user.getID() + ">"
+					+"<input type=\\\"submit\\\" name=\\\"button\\\" "
+					+ "class=\\\"button\\\" value=\\\"Accept\\\" />";
 		res = "Friend Request";
 		typeName = "frequest";
 	}

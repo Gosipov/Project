@@ -77,7 +77,6 @@ public class Messages extends HttpServlet {
         out.println("</table>");
 		out.println("</body>");
 		out.println("</html>");
-		 //TODO: move this to the top
 	}
 
 	/**
