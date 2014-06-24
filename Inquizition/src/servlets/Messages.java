@@ -106,7 +106,8 @@ public class Messages extends HttpServlet {
 			
 			//to avoid attaching multiple re-s:
 			String re = "RE:";
-			if(m.getSubject().substring(0, 3).equals(re))
+			String sub = m.getSubject();
+			if(sub.length()>2 && sub.substring(0, 3).equals(re))
 				re = "";
 			
 			//the replying prompt:
@@ -126,6 +127,7 @@ public class Messages extends HttpServlet {
 			out.println("</form>");
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			out.println("<h3>ERROR</h3>");
 		}
 		finally{
