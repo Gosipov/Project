@@ -13,6 +13,11 @@ function check(form) {
          elements[i].disabled = true;
    }
    var ans = form.answer.value;
+   if(form.answers != null && form.answers.value == ans){
+	   cnt++;
+       form.className = 'right';
+       return;
+   }   
    var i = 0;
    while(true){
       var cur = form.answers[i];
