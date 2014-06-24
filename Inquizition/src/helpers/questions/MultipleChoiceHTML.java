@@ -11,14 +11,19 @@ public class MultipleChoiceHTML extends QuestionHTML {
 	}
 
 	@Override
-	public void generateHTML(PrintWriter out) {
-		out.println("<form class=''>");
+	public void generateHTML(PrintWriter out, boolean one_page) {
+		out.print("<form class=''");
+		if(!one_page) out.print(" action='QuizViewManyPages' method='post'");
+		out.println(">");
 		out.println("<p> " + question.getText() + " </p>");
 		for(String a : answers()){
-			out.println("<input type='radio' id='answer' value=\"" + a + "\">");
+			out.println("<input type='radio' name='answer' id='answer' value=\"" + a + "\"> " +  a + " <br>");
 		}
-		addHiddenAnswers(out);
-		out.println("</form>");
+		if(one_page){
+			addHiddenAnswers(out);
+			out.println("</form>");
+		}
+		
 	}
 	
 	private ArrayList<String> answers() {
@@ -30,7 +35,7 @@ public class MultipleChoiceHTML extends QuestionHTML {
 		while(wrong.hasNext()){
 			result.add(wrong.next());
 		}
-		result.set(rightIndex, right.next());
+		result.add(rightIndex, right.next());
 		
 		return result;
 	}

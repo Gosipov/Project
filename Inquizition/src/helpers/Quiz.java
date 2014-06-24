@@ -1,5 +1,6 @@
 package helpers;
 
+import helpers.questions.Question;
 import helpers.questions.QuestionHTML;
 
 import java.sql.CallableStatement;
@@ -49,8 +50,8 @@ public class Quiz {
 			rs.next();
 			init(rs.getString("name"), rs.getString("descript"), rs.getBoolean("one_page"), rs.getInt("creator_id"), rs.getBoolean("shuffle"));
 			getQuestionsFromDB();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ignored) {
+			
 		}
 		finally{
 			try{ stat.close(); } catch(SQLException ignored) {}
@@ -68,8 +69,8 @@ public class Quiz {
 			while(rs.next()) {
 				questions.add(QuestionHTML.wrap(rs));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ignored) {
+			
 		}
 		finally{
 			try{ stat.close(); } catch(SQLException ignored) {}
@@ -87,10 +88,9 @@ public class Quiz {
 	
 	public boolean addToDB() {
 		// ??? add_quiz(qname varchar(64), qdescript text, creator int, single boolean, random boolean)
-		// cs = this.con.prepareCall("{call GET_SUPPLIER_OF_COFFEE(?, ?)}");
 		if(db == null) db = new DBConnection();
-		CallableStatement cs = (CallableStatement) db.getCallableStatement("{call add_quiz(?, ?, ?, ?, ?)}");
-		
+		CallableStatement cs = db.getCallableStatement("{call add_quiz(?, ?, ?, ?, ?)}");
+		Statement stat = db.getStatement();
 		try{
 			cs.setString(1, name);
 			cs.setString(2, descript);
@@ -98,24 +98,18 @@ public class Quiz {
 			cs.setBoolean(4, one_page);
 			cs.setBoolean(5, shuffle);
 			cs.executeQuery();
+			ResultSet rs = stat.executeQuery("SELECT id FROM quizzes WHERE creator_id=" + creator_id +
+					" ORDER BY id DESC LIMIT 1;");
+			rs.next();
+			id = rs.getInt(1);
 			return true;
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
 			return false;
 		}
-//		try{
-//			stat.executeUpdate("INSERT INTO quizzes(name, descript, creator_id, one_page, shuffle) "
-//					+ "VALUES('" + name + "', '" + descript + "', " + creator_id + 
-//					", " + one_page + ", " + shuffle + ");");
-//			ResultSet rs = stat.executeQuery("SELECT id FROM quizzes WHERE creator_id=" + creator_id + 
-//					" ORDER BY id DESC LIMIT 1;");
-//			rs.next();
-//			id = rs.getInt(1);
-//			return true;
-//		}catch(SQLException e){ return false; }
 		finally{
 			try{ cs.close(); } catch(SQLException ignored) {}
+			try{ stat.close(); } catch(SQLException ignored) {}
 		}
 	}
 
@@ -165,6 +159,18 @@ public class Quiz {
 	
 	public int getCreatorID(){
 		return creator_id;
+	}
+
+	public void print() {
+		System.out.println("Printing quiz " + this.name);
+		for(int i = 0; i < questions.size(); i++){
+			Question q = questions.get(i).getQuestion();
+			System.out.println(q.getText());
+			Iterator<String> it = q.getAnswers();
+			while(it.hasNext())
+				System.out.println(it.next());
+			System.out.println();
+		}
 	}
 	
 }

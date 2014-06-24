@@ -12,7 +12,7 @@ public abstract class QuestionHTML {
 		this.question = qu;
 	}
 	
-	public abstract void generateHTML(PrintWriter out);
+	public abstract void generateHTML(PrintWriter out, boolean one_page);
 	
 	public static QuestionHTML wrap(ResultSet rs) throws SQLException {
 		QuestionHTML ret = null;

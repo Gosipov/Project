@@ -25,14 +25,13 @@ public class QuizView extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = 1;//(int) request.getSession().getAttribute("quiz_id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		Quiz quiz = new Quiz(id);
-		int n = quiz.getQuestionNum();
 		quiz.shuffle(); // shuffles if needed
+		//quiz.print();
 		Iterator<QuestionHTML> questions = quiz.getQuestions();
 		request.getSession().setAttribute("questions", questions);
 		request.getSession().setAttribute("quiz_name", quiz.getName());
-		request.getSession().setAttribute("question_num", new Integer(n));
 		request.getSession().setAttribute("score", new Integer(0));
 		long startTime = System.currentTimeMillis();
 		request.getSession().setAttribute("time", new Long(startTime));

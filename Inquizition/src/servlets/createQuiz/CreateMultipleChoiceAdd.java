@@ -3,11 +3,8 @@ package servlets.createQuiz;
 import helpers.Quiz;
 import helpers.questions.MultipleChoiceHTML;
 import helpers.questions.MultipleChoiceQuestion;
-import helpers.questions.Question;
-import helpers.questions.QuestionResponseHTML;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,11 +34,10 @@ public class CreateMultipleChoiceAdd extends HttpServlet {
 		String question = request.getParameter("question");
 		int rightAnswer = Integer.parseInt(request.getParameter("answer"));
 		
-		int i = 0;
 		MultipleChoiceQuestion qu = new MultipleChoiceQuestion(question, quiz.getID());
 		
-		while(true){
-			String answer = request.getParameter("answer" + i++);
+		for(int i = 0; ; i++){
+			String answer = request.getParameter("answer" + i);
 			if(answer == null) break;
 			if(i == rightAnswer){
 				qu.addAnswer(answer);

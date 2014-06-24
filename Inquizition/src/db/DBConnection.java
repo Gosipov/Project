@@ -43,6 +43,15 @@ public class DBConnection {
 		}
 	}
 	
+	public CallableStatement getCallableStatement(String procedure) {
+		try {
+			return con.prepareCall(procedure);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	// after program is over, statement and connection should be closed
 	public void close() {
 		try {

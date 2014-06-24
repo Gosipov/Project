@@ -20,8 +20,8 @@ public class MultipleChoiceQuestion extends Question {
 	}
 
 	public MultipleChoiceQuestion(ResultSet rs) throws SQLException {
-		super(rs.getString("question"), rs.getInt("id"));
-		super.type = "mcq";
+		this(rs.getString("question"), rs.getInt("quiz_id"));
+		id = rs.getInt("questions.id");
 		getAnswersFromDB();
 	}
 	
@@ -29,9 +29,8 @@ public class MultipleChoiceQuestion extends Question {
 		/// ???
 		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
-		ResultSet rs;
 		try{
-			rs = stat.executeQuery("SELECT * FROM answers WHERE question_id=" + this.id + " ORDER BY id");
+			ResultSet rs = stat.executeQuery("SELECT * FROM answers WHERE question_id=" + this.id + " ORDER BY id ASC");
 			while(rs.next()){
 				if(rs.getInt("ind") == -1)
 					answers.add(rs.getString("answer"));

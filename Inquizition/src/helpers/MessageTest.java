@@ -23,9 +23,9 @@ public class MessageTest {
 	public void test1() {
 		if(third) return;
 		// Adding two messages to database
-		assertTrue(Message.sendMessage(1, "James", "testing", "testing messages"));
+		assertTrue(Message.sendMessage(1, "James", "testing", "testing messages", "message"));
 		try { Thread.sleep(600); } catch (InterruptedException e) { }
-		assertTrue(Message.sendMessage(3, "James", "testing2", "double-testing"));
+		assertTrue(Message.sendMessage(3, "James", "testing2", "double-testing", "message"));
 		// Checking MessageManager::getMessages method
 		ArrayList<Message> al = MessageManager.getMessages(2);
 		assertEquals(2, al.size());
@@ -47,7 +47,7 @@ public class MessageTest {
 	@Test
 	public void test2() {
 		if(third) return;
-		assertTrue(Message.sendMessage(1, "Paul", "readunread", "readunread"));
+		assertTrue(Message.sendMessage(1, "Paul", "readunread", "readunread", "message"));
 		ArrayList<Message> al = MessageManager.getMessages(4);
 		assertEquals(1, al.size());
 		Message ms = al.get(0);

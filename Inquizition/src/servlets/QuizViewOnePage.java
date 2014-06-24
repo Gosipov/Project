@@ -39,7 +39,7 @@ public class QuizViewOnePage extends HttpServlet {
 		out.println("<body>");
 		out.println("<h1>" + quizName + "</h1>");
 		while(questions.hasNext()){
-			questions.next().generateHTML(out);
+			questions.next().generateHTML(out, true);
 		}
 		out.println("<br>");
 		out.print("<form action='QuizViewOnePage' method='post'>");

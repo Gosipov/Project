@@ -48,6 +48,13 @@ public class Question {
 			try{ stat.close(); } catch(SQLException ignored){}
 		}
 	}
+	
+	public boolean isRightAnswer(String answer) {
+		for(String a : answers){
+			if(a.equals(answer)) return true;
+		}
+		return false;
+	}
 
 	public void makeBlank() {
 		this.type = "blank";
