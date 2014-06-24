@@ -19,12 +19,12 @@ function check(form) {
       if(cur == null) break;
       if(form.answers[i].value == ans){
          cnt++;
-         form.class = 'right';
+         form.className = 'right';
          return;
       }
       i++;
    }
-   form.class = 'wrong';
+   form.className = 'wrong';
 };
 
 function updateScore() {
