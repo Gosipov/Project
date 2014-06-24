@@ -95,6 +95,7 @@ public class HomePage extends HttpServlet {
 		button("Friend Requests", newFriendRequests, out);
 		out.println("</div>");
 		out.println("</div>");
+		out.println("<div class=\"compose\"> <a class=\"new\" href = \"QuizCreation.html\">Create Your Own Quiz!</a> </div>");
 		out.println("<div class = \"content\">");
 		out.println("<div class = \"column\" id = \"left\">");
 		//box(achievements, false, out);
@@ -103,7 +104,7 @@ public class HomePage extends HttpServlet {
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"wall\">");
 		out.println("<h6> <a href = \"Quizzes\"> All Quizzes </a> </h6>");
-		out.println("<h6> <a href=\"QuizCreation.html\"> Create Your Own Quiz! </a> </h6>");
+		
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"right\">");
 		buildQuizLists(topQuizzes, "Top Quizzes", out);
