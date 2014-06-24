@@ -1,6 +1,7 @@
 package servlets;
 
 
+import helpers.Quiz;
 import helpers.User;
 import helpers.messaging.Message;
 import helpers.messaging.MessageManager;
@@ -97,8 +98,14 @@ public class SendMessage extends HttpServlet {
 	}
 	
 	private void BuildChallenge(User user, HttpServletRequest request){
-		subject = "Challenge from " + user.getUsername();	//TODO: add the quiz name
-		//TODO: this.
+		int qID = Integer.parseInt(request.getParameter("quizID"));
+		Quiz q = new Quiz(qID);
+		
+		subject = "New Quiz Challenge!";
+		text = "user " + user.getUsername() + " challenged you to play "
+				+ q.getName() +  ". Accept, if you dare!<br>";
+		text+= "<a href=\"QuizDescription?id='" + q.getID() +"'" + "\">Accept</a>";
+		res = "Challenge";
 		typeName = "challenge";
 	}
 
