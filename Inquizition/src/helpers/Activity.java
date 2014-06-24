@@ -43,15 +43,16 @@ public class Activity {
 		this.score = rs.getInt("history.score");
 	}
 	
-	public void addToDB() {
+	public boolean addToDB() {
 		// ???
 		if(db == null) db = new DBConnection();
 		Statement stat = (Statement) db.getStatement();
 		try{
 			stat.executeUpdate("insert into history(user_id, quiz_id, time_elapsed, score) "
 					+ "values(" + user_id + " ," + quiz_id + ", " + time_elapsed + ", " + score + ")");
+			return true;
 		}
-		catch(SQLException ignored){}
+		catch(SQLException ignored){ return false;}
 		finally{
 			try { stat.close(); } catch (SQLException e) {}
 		}

@@ -66,6 +66,9 @@ public class SendMessage extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<h2>" + result + "</h2>");
+		out.println("<br><br>");
+		out.println("<form action='HomePage' method='post'>");
+		out.println("<button> Return to Homepage </button> </form>");
 		out.println("</body>");
 		out.println("</html>");
 	}

@@ -33,8 +33,8 @@ public class Register extends HttpServlet {
 		long time_elapsed = (long) request.getSession().getAttribute("elapsed");
 		int score = (int) request.getSession().getAttribute("score");
 		Activity act = new Activity(u.getID(), qid, time_elapsed, score);
-		act.addToDB();
-		RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
+		System.out.println(act.addToDB());
+		RequestDispatcher dispatch = request.getRequestDispatcher("QuizDone.jsp");
 		dispatch.forward(request, response);
 	}
 
