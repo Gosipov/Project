@@ -88,7 +88,7 @@ public class FriendManager {
 		Statement stat = db.getStatement();
 		ResultSet rs = null;
 		try{
-			rs = stat.executeQuery("SELECT * FROM friends WHERE first_id=" + u1 + " AND second_id=" + u2 + ";");
+			rs = stat.executeQuery("SELECT * FROM friendship WHERE first_id=" + u1 + " AND second_id=" + u2 + ";");
 			if(!rs.isBeforeFirst())
 				return false;
 		}catch(SQLException e){
