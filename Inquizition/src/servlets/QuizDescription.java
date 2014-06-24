@@ -98,15 +98,13 @@ public class QuizDescription extends HttpServlet {
 				+ "method=\"post\" action=\"SendMessage\">");		
 		//passing the receiver, the subject and the request type through hidden fields
 		out.println("User to Challenge: <input type=\"text\" name=\"to\" "
-				+ "id=\"to\"><br>");
+				+ "id=\"to\">");
 		out.println("<input type=\"hidden\" name=\"quizID\" "
 				+ "id=\"quizID\" value= \"" + qID + "\" >");
 		out.println("<input type=\"hidden\" name=\"type\" "
 				+ "id=\"type\" value =\"" + MessageManager.CHALLENGE + "\">");
-		out.println("<textarea name=\"text\" "
-				+ "id=\"textarea\" cols=\"45\" rows=\"5\"></textarea>");
 		out.println("<input type=\"submit\" name=\"button\" "
-				+ "class=\"button\" value=\"Reply\" />");
+				+ "class=\"button\" value=\"Challenge\" />");
 		out.println("</form>");
 	}
 	
