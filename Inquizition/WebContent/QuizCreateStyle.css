@@ -73,3 +73,11 @@ input[type="radio"]:hover+label{
 	margin-bottom: 15px;
 	margin-top: 5px;
 }
+
+.wrong{
+	background: red;
+}
+
+.right{
+	background: green;
+}

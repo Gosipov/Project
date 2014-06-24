@@ -34,10 +34,13 @@ public class QuizViewOnePage extends HttpServlet {
 		out.println("<head>");
 		out.println("<meta charset=\"ISO-8859-1\">");
 		out.println("<title> " + quizName + " </title>");
-		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizStyle.css\">");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizCreateStyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
+		out.println("<div class=\"header\">");
 		out.println("<h1>" + quizName + "</h1>");
+		out.println("</div>");
+		out.println("<div class=\"wrapper\">");
 		while(questions.hasNext()){
 			questions.next().generateHTML(out, true);
 		}
@@ -48,6 +51,7 @@ public class QuizViewOnePage extends HttpServlet {
 		out.println("</form>");
 		out.println("<p id='sum'> </p>");
 		out.println("<script src='submit.js'> </script>");
+		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
 	}
