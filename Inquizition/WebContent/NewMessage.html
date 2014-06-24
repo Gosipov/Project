@@ -3,14 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Compose New Message</title>
+<link rel = "stylesheet" type = "text/css" href = "QuizCreateStyle.css">
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="SendMessage">
-To: <input type="text" name="to" id="to" /><br>
-Subject: <input type="text" name="subject" id="subject" /><br>
-<input type="hidden" name="type" id="type" value = "1"/>
-<textarea name="text" id="textarea" cols="45" rows="5"></textarea>
-<input type="submit" name="button" id="button" value="Send" />
-</form>
+	<div class="header">
+		<h1> Compose a New Message </h1>
+	</div>
+	<div class="wrapper centered">
+		<form id="form1" name="form1" method="post" action="SendMessage">
+		To: <input type="text" name="to" id="to" /><br>
+		Subject: <input type="text" name="subject" id="subject" /><br>
+		<input type="hidden" name="type" id="type" value = "1"/>
+		<textarea name="text" id="textarea" cols="45" rows="5"></textarea>
+		<input type="submit" name="button" id="button" value="Send" />
+		</form>
+	</div>
 </body>
 </html>

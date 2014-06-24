@@ -49,9 +49,14 @@ public class FriendUsers extends HttpServlet {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Friend Request</title>");
+		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"QuizCreateStyle.css\">");
 		out.println("</head>");
 		out.println("<body>");
+		out.println("<div class=\"header\">");
+		out.println("</div>");
+		out.println("<div class=\"wrapper\">");
 		out.println(result);
+		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
 	}
