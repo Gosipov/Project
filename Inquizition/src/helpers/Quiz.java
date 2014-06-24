@@ -2,6 +2,7 @@ package helpers;
 
 import helpers.questions.QuestionHTML;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -85,22 +86,36 @@ public class Quiz {
 	}
 	
 	public boolean addToDB() {
-		// ???
+		// ??? add_quiz(qname varchar(64), qdescript text, creator int, single boolean, random boolean)
+		// cs = this.con.prepareCall("{call GET_SUPPLIER_OF_COFFEE(?, ?)}");
 		if(db == null) db = new DBConnection();
-		Statement stat = (Statement) db.getStatement();
-		ResultSet rs = null;
+		CallableStatement cs = (CallableStatement) db.getCallableStatement("{call add_quiz(?, ?, ?, ?, ?)}");
+		
 		try{
-			stat.executeUpdate("INSERT INTO quizzes(name, descript, creator_id, one_page, shuffle) "
-					+ "VALUES('" + name + "', '" + descript + "', " + creator_id + 
-					", " + one_page + ", " + shuffle + ");");
-			rs = stat.executeQuery("SELECT id FROM quizzes WHERE creator_id=" + creator_id + 
-					" ORDER BY id DESC LIMIT 1;");
-			rs.next();
-			id = rs.getInt(1);
+			cs.setString(1, name);
+			cs.setString(2, descript);
+			cs.setInt(3, creator_id);
+			cs.setBoolean(4, one_page);
+			cs.setBoolean(5, shuffle);
+			cs.executeQuery();
 			return true;
-		}catch(SQLException e){ return false; }
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+//		try{
+//			stat.executeUpdate("INSERT INTO quizzes(name, descript, creator_id, one_page, shuffle) "
+//					+ "VALUES('" + name + "', '" + descript + "', " + creator_id + 
+//					", " + one_page + ", " + shuffle + ");");
+//			ResultSet rs = stat.executeQuery("SELECT id FROM quizzes WHERE creator_id=" + creator_id + 
+//					" ORDER BY id DESC LIMIT 1;");
+//			rs.next();
+//			id = rs.getInt(1);
+//			return true;
+//		}catch(SQLException e){ return false; }
 		finally{
-			try{ stat.close(); } catch(SQLException ignored) {}
+			try{ cs.close(); } catch(SQLException ignored) {}
 		}
 	}
 
