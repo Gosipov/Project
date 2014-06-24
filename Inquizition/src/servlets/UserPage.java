@@ -111,7 +111,7 @@ public class UserPage extends HttpServlet {
 		out.println("<div class = \"block\">");
 		out.println("<form action=\"SendMessage\" method=\"post\">");
 		out.println("<input type=\"hidden\" name=\"to\" "
-					+ "id=\"to\" value =" + user.getID() + ">");
+					+ "id=\"to\" value =" + user.getUsername() + ">");
 		out.println("<input type=\"hidden\" name=\"type\" "
 				+ "id=\"type\" value =" + MessageManager.REQUEST + ">");
 		out.println("<input type = \"submit\" value = \"" + str + "\">");
