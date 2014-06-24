@@ -14,7 +14,7 @@ public class Activity {
 	private String user;
 	private int user_id; 
 	private String type;
-	private int time_elapsed;
+	private long time_elapsed;
 	private String dtime;
 	private int score;
 	
@@ -24,7 +24,7 @@ public class Activity {
 		db = connection;
 	}
 	
-	public Activity(int user_id, int quiz_id, int time_elapsed, int score) {
+	public Activity(int user_id, int quiz_id, long time_elapsed, int score) {
 		this.user_id = user_id;
 		this.quiz_id = quiz_id;
 		this.time_elapsed = time_elapsed;
@@ -77,7 +77,7 @@ public class Activity {
 		return quiz;
 	}
 	
-	public int getTimeElapsed() {
+	public long getTimeElapsed() {
 		return time_elapsed;
 	}
 	

@@ -28,7 +28,7 @@ public class QuizViewManyPages extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Iterator<QuestionHTML> questions = (Iterator<QuestionHTML>) request.getSession().getAttribute("questions");
 		if(!questions.hasNext()){
-			RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
+			RequestDispatcher dispatch = request.getRequestDispatcher("Register");
 			dispatch.forward(request, response);
 			return;
 		}

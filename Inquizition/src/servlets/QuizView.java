@@ -28,13 +28,14 @@ public class QuizView extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Quiz quiz = new Quiz(id);
 		quiz.shuffle(); // shuffles if needed
-		//quiz.print();
 		Iterator<QuestionHTML> questions = quiz.getQuestions();
+		request.getSession().setAttribute("quiz_id", quiz.getID());
 		request.getSession().setAttribute("questions", questions);
 		request.getSession().setAttribute("quiz_name", quiz.getName());
 		request.getSession().setAttribute("score", new Integer(0));
 		long startTime = System.currentTimeMillis();
 		request.getSession().setAttribute("time", new Long(startTime));
+		request.getSession().setAttribute("elapsed", new Long(0));
 		String redirect = quiz.onePage() ? "QuizViewOnePage": "QuizViewManyPages";
 		RequestDispatcher dispatch = request.getRequestDispatcher(redirect);
 		dispatch.forward(request, response);

@@ -23,8 +23,7 @@ public class CreateQuiz extends HttpServlet {
     }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	//User creator = (User) request.getSession().getAttribute("user");	   
-	   	User creator = new User("John");
+    	User creator = (User) request.getSession().getAttribute("user");	   
 	   	String name = request.getParameter("name");
 		String descript = request.getParameter("descript");
 		boolean one_page = request.getParameter("paging").equals("one");

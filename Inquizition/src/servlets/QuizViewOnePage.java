@@ -60,8 +60,8 @@ public class QuizViewOnePage extends HttpServlet {
 		long finishTime = System.currentTimeMillis();
 		long startTime = (long) request.getSession().getAttribute("time");
 		request.getSession().setAttribute("elapsed", finishTime-startTime);
-		System.out.println((String) request.getParameter("result"));
-		RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
+		request.getSession().setAttribute("score", Integer.parseInt(request.getParameter("result")));
+		RequestDispatcher dispatch = request.getRequestDispatcher("Register");
 		dispatch.forward(request, response);
 	}
 
