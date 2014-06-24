@@ -17,30 +17,19 @@ public class User {
 		db = connection;
 	}
 	
-	
-	//determines whether a user exists
-	public static int exists(String name){
-		if(db == null) 
-			db = new DBConnection();
-		int id = 0;
-		try{
-		Statement stat = (Statement) db.getStatement();
-		ResultSet rs =  stat.executeQuery("SELECT * FROM users WHERE name = \"" + name + "\";");
-		if(!rs.isBeforeFirst())
-			return id;
-		rs.next();
-		id = rs.getInt("id");
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return id;
-	}
-	
 	// retrieving user info from database
 	public User(String username) {
 		this.name = username;
 		Statement stat = (Statement) db.getStatement();
-		selectFromDB(stat);
+		selectFromDB(stat, false);
+		if(stat != null) try{ stat.close(); } catch(Exception e) { };
+	}
+	
+	// retrieving user info from database 
+	public User(int id){
+		this.id = id;
+		Statement stat = (Statement) db.getStatement();
+		selectFromDB(stat, true);
 		if(stat != null) try{ stat.close(); } catch(Exception e) { };
 	}
 	
@@ -55,7 +44,7 @@ public class User {
 			// adding user to database
 			stat.executeUpdate("INSERT INTO users(name, password) VALUES(" + username + ", " + password + ")");
 			// retrieving information
-			selectFromDB(stat);
+			selectFromDB(stat, false);
 		} catch (SQLException e) { }
 		
 		finally{
@@ -71,18 +60,36 @@ public class User {
 		this.admin = admin;
 	}
 	
-	private void selectFromDB(Statement stat) {
-		String username = "\""+ name + "\"";
+	private void selectFromDB(Statement stat, boolean by_id) {
 		ResultSet rs = null;
 		
 		try {
-			rs = stat.executeQuery("SELECT * from users where name = " + username);
+			if(by_id) rs = stat.executeQuery("SELECT * FROM users WHERE id = " + id);
+			else rs = stat.executeQuery("SELECT * FROM users WHERE name = '" + name + "'");
 			if(rs.next()){
 				this.id = rs.getInt("id");
 				this.admin = rs.getBoolean("admin");
+				this.name = rs.getString("name");
 			}
 		} catch (NumberFormatException | SQLException e) { e.printStackTrace(); }
 	}
+	
+	//determines whether a user exists
+	public static int exists(String name){
+		if(db == null) db = new DBConnection();
+		int id = 0;
+		try{
+			Statement stat = (Statement) db.getStatement();
+			ResultSet rs =  stat.executeQuery("SELECT * FROM users WHERE name = \"" + name + "\";");
+			if(!rs.isBeforeFirst())
+				return id;
+			rs.next();
+			id = rs.getInt("id");
+		}
+		catch(SQLException ignored){ }
+		return id;
+	}
+		
 	
 	public String getUsername() {
 		return name;
