@@ -83,12 +83,8 @@ public class User {
 			ResultSet rs =  stat.executeQuery("SELECT * FROM users WHERE name = \"" + name + "\";");
 			if(rs.next()){
 				id = rs.getInt("id");
-				System.out.println(name);
-				System.out.println(id);
 				return id;
 			}
-			System.out.println(name);
-			System.out.println(id);
 			return id;
 		}
 		catch(SQLException ignored){ }
