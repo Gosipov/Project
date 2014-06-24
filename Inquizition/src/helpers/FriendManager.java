@@ -30,7 +30,7 @@ public class FriendManager {
 		try{
 			rs = stat.executeQuery(friendQuery + id);
 			while(rs.next()){
-				friends.add(new User(rs.getInt("id"), rs.getString("name"), rs.getBoolean("admin")));
+				friends.add(new User(rs.getInt("friendship.second_id"), rs.getString("name"), rs.getBoolean("admin")));
 			}
 			return friends;
 		}

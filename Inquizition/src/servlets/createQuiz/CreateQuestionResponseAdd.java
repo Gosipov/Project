@@ -26,7 +26,7 @@ public class CreateQuestionResponseAdd extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch = request.getRequestDispatcher("welcome.html");
+		RequestDispatcher dispatch = request.getRequestDispatcher("QuizCreated.html");
 		dispatch.forward(request, response);
 	}
 
