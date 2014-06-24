@@ -17,6 +17,21 @@ public class User {
 		db = connection;
 	}
 	
+	public static boolean exists(String name){
+		if(db == null) 
+			db = new DBConnection();
+		try{
+		Statement stat = (Statement) db.getStatement();
+		ResultSet rs =  stat.executeQuery("SELECT * FROM users WHERE name = " + name + ";");
+		if(!rs.isBeforeFirst())
+			return false;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	// retrieving user info from database
 	public User(String username) {
 		this.name = username;
@@ -76,6 +91,5 @@ public class User {
 	public boolean isAdmin() {
 		return admin;
 	}
-	
 		
 }
