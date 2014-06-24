@@ -66,6 +66,7 @@ public class SendMessage extends HttpServlet {
 				break;
 		}
 		
+		System.out.println(from + " " + to + " " + subject + " " + text + " " + " " + typeName);
 		String result = res + " Failed";
 		if(Message.sendMessage(from, to, subject, text, typeName))
 			result = res + " Sent";
@@ -92,13 +93,13 @@ public class SendMessage extends HttpServlet {
 	
 	private void BuildRequest(User user, HttpServletRequest request){
 		subject = "Friend request from " + user.getUsername();
-		text = user.getUsername() + "sent you a friend request.<br>"
-				+ "<form id=\\\"form1\\\" name=\\\"form1\\\" "
-					+ "method=\\\"post\\\" action=\\\"SendMessage\\\">"
+		text = user.getUsername() + " sent you a friend request.<br> \n"
+				+ "<form id=\\\"form2\\\" name=\\\"form2\\\" \\n"
+					+ "method=\\\"post\\\" action=\\\"FriendUsers\\\"> \n"
 				+ "<input type=\\\"hidden\\\" name=\\\"from_id\\\" "
-					+ "id=\\\"from\\\" value =" + user.getID() + ">"
-					+"<input type=\\\"submit\\\" name=\\\"button\\\" "
-					+ "class=\\\"button\\\" value=\\\"Accept\\\" />";
+					+ "id=\\\"from\\\" value =" + user.getID() + "> \n"
+					+"<input type=\\\"submit\\\" name=\\\"button\\\" \n"
+					+ "class=\\\"button\\\" value=\\\"Accept\\\" /></form>";
 		res = "Friend Request";
 		typeName = "frequest";
 	}
@@ -107,7 +108,6 @@ public class SendMessage extends HttpServlet {
 		int qID = Integer.parseInt(request.getParameter("quizID"));
 		Quiz q = new Quiz(qID);
 		
-		System.out.println(qID + " " + q.getName() + " ");
 		subject = "New Quiz Challenge!";
 		text = user.getUsername() + " has challenged you to play "
 				+ q.getName() +  ". Accept, if you dare!<br>";

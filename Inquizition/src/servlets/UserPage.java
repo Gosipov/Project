@@ -61,7 +61,8 @@ public class UserPage extends HttpServlet {
 		out.println("</div>");
 		out.println("<div class = \"block\">");
 		out.println("</div>");
-		button("Send Friend Request", out, user.getID());
+		//friend request
+		button("Send Friend Request", out, user);
 		out.println("</div>");
 		out.println("</div>");
 		out.println("<div class = \"content\">");
@@ -106,16 +107,19 @@ public class UserPage extends HttpServlet {
         out.println("</div>");
 	}
 	
-	private void button(String str, PrintWriter out, int id){
+	private void button(String str, PrintWriter out, User user){
 		out.println("<div class = \"block\">");
-		out.println("<form action = \"SendMessage\" method = \"post\">");
-		out.println("<input type = \"hidden\" name = \"request_to\" value = \"" + id + "\">");
+		out.println("<form action=\"SendMessage\" method=\"post\">");
+		out.println("<input type=\"hidden\" name=\"to\" "
+					+ "id=\"to\" value =" + user.getUsername() + ">");
+		out.println("<input type=\"hidden\" name=\"type\" "
+				+ "id=\"type\" value =" + MessageManager.REQUEST + ">");
 		out.println("<input type = \"submit\" value = \"" + str + "\">");
 		out.println("</form>");
 		out.println("</div>");
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 	}
 
 }
