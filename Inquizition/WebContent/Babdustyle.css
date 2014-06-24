@@ -81,7 +81,7 @@ div.box {
 
 	background: #44a4bb;
 	/*z-index:1;*/
-	max-width: 610px;
+	max-width: 760px;
 }
 
 ul {
@@ -108,4 +108,10 @@ body{
 
 h1{
 	text-align: center;
+}
+
+.username{
+	width: 200px;
+	text-align: center;
+	font-weight: bold;
 }

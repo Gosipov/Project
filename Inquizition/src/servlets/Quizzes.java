@@ -38,7 +38,10 @@ public class Quizzes extends HttpServlet {
 		out.println("<title>Quizzes</title>");
 		out.println("<link rel = \"stylesheet\" type = \"text/css\" href = \"MessagesStyle.css\">");
 		out.println("<body>");
-		out.println("<div class=\"header\"> <h1>QUIZZES</h1> </div>");
+		out.println("<div class=\"header\">");
+		out.println("<h1>QUIZZES</h1>");
+		out.println("</div>");
+		out.println("<div class=\"compose\"> <a href = \"QuizCreation.html\">Create Your Own Quiz!</a> </div>");
 		out.println("<table>");
         out.println("<tr>");
         out.println("<th id=\"name\">Name</th>");
