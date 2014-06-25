@@ -42,6 +42,7 @@ public class Quizzes extends HttpServlet {
 		out.println("<h1>QUIZZES</h1>");
 		out.println("</div>");
 		out.println("<div class=\"compose\"> <a href = \"QuizCreation.html\">Create Your Own Quiz!</a> </div>");
+		out.println("<div class=\"homepage\"> <a href = \"HomePage\">Return to HomePage</a> </div>");
 		out.println("<table>");
         out.println("<tr>");
         out.println("<th id=\"name\">Name</th>");
@@ -54,10 +55,10 @@ public class Quizzes extends HttpServlet {
         for(QuizEntry q : list){
         	out.println("<tr class=\"read\">");				
         	out.println("<td>" + q.getName() + " </td>");
-        	out.println("<td>" + q.getCreator() + " </td>");
+        	out.println("<td> <a href=\"UserPage?other_id=" + q.getCreatorID() + "\">" + q.getCreator() + " </td>");
         	out.println("<td>" + q.getTimesTaken() + " </td>");
         	out.println("<td>" + q.getBestScore() + " </td>");
-        	out.println("<td>" + q.getChampion() + " </td>");
+        	out.println("<td> <a href=\"UserPage?other_id=" + q.getChampionID() + "\">" + q.getChampion() + " </td>");
         	//link:
         	
         	out.println("<td class=\"centered\">");

@@ -51,6 +51,7 @@ public class Messages extends HttpServlet {
 		out.println("<body>");
 		out.println("<div class=\"header\"> <h1>MESSAGES</h1> </div>");
 		out.println("<div class=\"compose\"> <a href = \"NewMessage.html\">Compose a New Message</a> </div>");
+		out.println("<div class=\"homepage\"> <a href = \"HomePage\">Return to HomePage</a> </div>");
 		out.println("<table>");
         out.println("<tr>");
         out.println("<th id=\"from\">From</th>");

@@ -65,6 +65,7 @@ public class QuizDescription extends HttpServlet {
         	
 		//the challenge field:
 		buildChallenge(q.getID(), out);
+		out.println("<form action='HomePage' method='post'><button> Return to Homepage </button></form>");
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</body>");

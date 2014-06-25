@@ -85,3 +85,31 @@ input[type="radio"]:hover+label{
 .centered{
 	text-align: center;
 }
+
+.homepage:hover{
+	background: #888888;
+	font-weight: bold;
+	margin-left: 47px;
+}
+
+.homepage{
+	position: fixed;
+	margin-top: 52px;
+	background: #aaaaaa;
+	margin-left: 50px;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+a {
+	color: #d84020;
+	text-decoration: none;
+}
+
+.homepage>a{
+	color: black;
+}
+
+.homepage>a:hover{
+	background: inherit;
+}

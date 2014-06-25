@@ -78,6 +78,7 @@ public class UserPage extends HttpServlet {
 		buildFriendLists(friends, "Friends", out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"wall\">");
+		out.println("<form action='HomePage' method='post'><button> Return to Homepage </button></form>");
 		//box(wall, false, out);
 		out.println("</div>");
 		out.println("<div class = \"column\" id = \"right\">");
